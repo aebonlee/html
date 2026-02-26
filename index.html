@@ -1,1090 +1,278 @@
 <html>
   <body>
 <style>
+  @media (min-width: 768px) {
+    #aside-1 {
+      position: relative !important; width: 33.3333% !important; max-width: 24rem !important;
+    }
+    #div-1 {
+      padding: 2rem !important;
+    }
+    #div-2 {
+      padding: 2rem !important;
+    }
+    #h1-1 {
+      display: block !important;
+    }
+    #div-3 {
+      display: block !important;
+    }
+    #div-4 {
+      margin-top: 2rem !important;
+    }
+    #div-5 {
+      margin-top: 2rem !important;
+    }
+    #div-6 {
+      margin-top: 2rem !important;
+    }
+    #div-7 {
+      padding: 1.5rem !important;
+    }
+  }
   @media (min-width: 640px) {
     #div-1 {
-      padding-left: 1.5rem !important; padding-right: 1.5rem !important;
-    }
-    #main-1 {
-      padding-left: 1.5rem !important; padding-right: 1.5rem !important;
-    }
-    #div-2 {
-      grid-template-columns: repeat(3, minmax(0px, 1fr)) !important;
-    }
-  }
-  @media (min-width: 1024px) {
-    #div-1 {
-      padding-left: 2rem !important; padding-right: 2rem !important;
-    }
-    #main-1 {
-      padding-left: 2rem !important; padding-right: 2rem !important;
-    }
-    #div-2 {
-      grid-template-columns: repeat(5, minmax(0px, 1fr)) !important;
-    }
-  }
-  @media (min-width: 768px) {
-    #button-1 {
-      margin-right: 0 !important; margin-left: 1rem !important;
-    }
-    #div-2 {
-      grid-template-columns: repeat(4, minmax(0px, 1fr)) !important;
-    }
-  }
-  @media (min-width: 1280px) {
-    #div-2 {
-      grid-template-columns: repeat(6, minmax(0px, 1fr)) !important;
+      padding: 1.5rem !important;
     }
   }
 </style>
-<div style="font-size: 14px; background-color: rgb(248, 250, 252); color: rgb(30, 41, 59)">
-  <div style="min-height: 100vh">
-    <header style="background-color: rgba(255, 255, 255, 0.7); backdrop-filter: blur(16px); border-bottom-width: 2px; position: sticky; z-index: 10; border-color: rgb(226, 232, 240); border-style: solid">
-      <div style="padding-left: 1rem; padding-right: 1rem; max-width: 80rem; margin: auto" id="div-1">
-        <div style="align-items: center; justify-content: space-between; display: flex; height: 4rem">
-          <div>
-            <h1 style="color: rgb(0, 112, 74); font-size: 22px; font-weight: 700">Vibe Coding Glossary</h1>
-            <p style="color: rgb(100, 116, 139)">UI/UX 용어집</p>
-          </div>
-          <div style="align-items: center; display: flex; color: rgb(71, 85, 105)">
-            <button style="background-color: rgb(241, 245, 249); cursor: pointer; font-weight: 600; text-align: center; width: 30.3661px; height: 31.5px; border-radius: 6px; padding: 0.5rem">EN</button
-            ><button style="background-color: rgb(226, 232, 240); cursor: pointer; width: 35px; height: 35px; margin-left: 0.5rem; margin-right: 0; border-radius: 10000px; padding: 0.5rem" id="button-1">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" style="width: 1.5rem; height: 1.5rem"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" fill="none" stroke="#475569"></path></svg>
-            </button>
-          </div>
-        </div>
-        <div style="padding-bottom: 1rem; padding-top: 1rem">
-          <div style="position: relative">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" style="color: rgb(148, 163, 184); left: 0.75rem; position: absolute; top: 50%; width: 1.25rem; height: 1.25rem"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" fill="none" stroke="#94a3b8"></path></svg><input value="" type="text" placeholder="용어 검색..." style="background-color: rgb(255, 255, 255); cursor: text; padding-bottom: 0.5rem; padding-left: 2.5rem; padding-right: 1rem; padding-top: 0.5rem; display: inline-block; width: 100%; height: 36.1429px; border-width: 2px; border-color: rgb(209, 213, 219); border-style: solid; border-radius: 8px" />
-          </div>
-        </div>
-      </div>
-    </header>
-    <main style="padding-bottom: 2rem; padding-left: 1rem; padding-right: 1rem; padding-top: 2rem; max-width: 80rem; margin: auto" id="main-1">
-      <div style="text-align: center; margin-bottom: 2rem">
-        <h2 style="color: rgb(15, 23, 42); font-size: 28px; font-weight: 700">UI/UX 용어 시각적 탐색</h2>
-        <p style="color: rgb(71, 85, 105); font-size: 16px; margin-top: 0.5rem">카드를 클릭하여 자세한 내용을 확인하세요.</p>
-      </div>
-      <div style="grid-template-columns: repeat(2, minmax(0px, 1fr)); grid-template-rows: 183.143px 183.143px 183.143px 183.143px 183.143px 183.143px 183.143px 200.643px 183.143px 183.143px 200.643px 200.643px; display: grid; gap: 22px" id="div-2">
-        <button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="140" viewbox="0 0 180 140" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="none" stroke="currentColor">
-                  <rect x="20" y="20" height="30" rx="4" fill="none" stroke="#00704a" style="width: 140px; height: 30px"></rect>
-                  <text style="font-size: 12px">옵션 선택...</text>
-                  <path d="m 145 32 l 5 6 l 5 -6" fill="none" stroke="#00704a"></path>
-                  <rect x="20" y="55" height="75" rx="4" fill="rgb(255, 255, 255)" stroke="#00704a" style="width: 140px; height: 75px"></rect>
-                  <text style="font-size: 12px">옵션 1</text>
-                  <line x1="20" y1="90" x2="160" y2="90" fill="none" stroke="#00704a"></line>
-                  <text style="font-size: 12px">옵션 2</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">드롭다운 (Select / Dropdown)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="140" viewbox="0 0 180 140" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="none" stroke="currentColor">
-                  <rect x="20" y="20" height="30" rx="4" fill="none" stroke="#00704a" style="width: 140px; height: 30px"></rect>
-                  <text style="font-size: 12px">ko</text>
-                  <path d="M 50 25 v 20" stroke-dasharray="2 2" fill="none" stroke="#00704a"></path>
-                  <rect x="20" y="55" height="75" rx="4" fill="rgb(255, 255, 255)" stroke="#00704a" style="width: 140px; height: 75px"></rect>
-                  <text style="font-size: 12px">Korean</text>
-                  <line x1="20" y1="90" x2="160" y2="90" fill="none" stroke="#00704a"></line>
-                  <text style="font-size: 12px">Kotlin</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">자동완성 (Autocomplete)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="80" viewbox="0 0 140 80" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="none" stroke="currentColor">
-                  <rect x="10" y="15" height="20" rx="3" fill="none" stroke="#00704a" style="width: 20px; height: 20px"></rect>
-                  <text style="font-size: 12px">미선택</text>
-                  <rect x="10" y="45" height="20" rx="3" fill="rgb(0, 112, 74)" stroke="#00704a" style="width: 20px; height: 20px"></rect>
-                  <path d="m 15 55 l 5 5 l 10 -10" stroke="#ffffff" fill="none"></path>
-                  <text style="font-size: 12px">선택</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">체크박스 (Checkbox)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="80" viewbox="0 0 140 80" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g stroke="currentColor" fill="rgb(0, 0, 0)">
-                  <circle cx="20" cy="25" r="10" fill="none" stroke="#00704a"></circle>
-                  <text style="font-size: 12px">미선택</text>
-                  <circle cx="20" cy="55" r="10" fill="none" stroke="#00704a"></circle>
-                  <circle cx="20" cy="55" r="5" fill="rgb(0, 112, 74)" stroke="#00704a"></circle>
-                  <text style="font-size: 12px">선택</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">라디오 버튼 (Radio Button)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="80" viewbox="0 0 140 80" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="10" y="15" height="26" rx="13" fill="rgb(229, 231, 235)" style="width: 50px; height: 26px"></rect>
-                  <circle cx="23" cy="28" r="10" fill="rgb(255, 255, 255)"></circle>
-                  <text style="font-size: 12px">OFF</text>
-                  <rect x="10" y="45" height="26" rx="13" fill="rgb(0, 112, 74)" style="width: 50px; height: 26px"></rect>
-                  <circle cx="47" cy="58" r="10" fill="rgb(255, 255, 255)"></circle>
-                  <text style="font-size: 12px">ON</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">토글 스위치 (Toggle Switch)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="60" viewbox="0 0 180 60" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g stroke-linecap="round" fill="rgb(0, 0, 0)">
-                  <line x1="20" y1="30" x2="160" y2="30" stroke="#e5e7eb" fill="rgb(0, 0, 0)"></line>
-                  <line x1="20" y1="30" x2="100" y2="30" stroke="#00704a" fill="rgb(0, 0, 0)"></line>
-                  <circle cx="100" cy="30" r="8" fill="rgb(0, 112, 74)" stroke="#ffffff"></circle>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">슬라이더 (Range Slider)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g stroke="currentColor" fill="none">
-                  <rect x="10" y="10" height="80" rx="5" fill="none" stroke="#00704a" style="width: 140px; height: 80px"></rect>
-                  <line x1="10" y1="35" x2="150" y2="35" fill="none" stroke="#00704a"></line>
-                  <text style="font-size: 12px">2024년 5월</text>
-                  <rect x="65" y="55" height="15" rx="3" fill="rgb(0, 112, 74)" stroke="#00704a" style="width: 20px; height: 15px"></rect>
-                  <text style="font-size: 10px">13</text>
-                  <text style="font-size: 10px">14</text>
-                  <text style="font-size: 10px">15</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">날짜/시간 선택기 (Date/Time Picker)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 180 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g stroke="currentColor" fill="none">
-                  <rect x="10" y="10" height="80" rx="5" stroke-dasharray="5 5" fill="none" stroke="#00704a" style="width: 160px; height: 80px"></rect>
-                  <path d="M 80 40 l 10 -10 l 10 10" fill="none" stroke="#00704a"></path>
-                  <path d="M 90 30 v 30" fill="none" stroke="#00704a"></path>
-                  <text style="font-size: 12px">파일을 끌어다 놓으세요</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">파일 업로드 (File Upload)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="60" viewbox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g stroke="currentColor" fill="rgb(0, 0, 0)">
-                  <rect x="0" y="10" height="40" fill="none" stroke="#00704a" style="width: 200px; height: 40px"></rect>
-                  <text style="font-size: 12px; font-weight: 700">Logo</text>
-                  <text style="font-size: 12px">Home</text>
-                  <text style="font-size: 12px">About</text>
-                  <text style="font-size: 12px">Contact</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">내비게이션 바 (Navbar)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g stroke="currentColor" fill="none">
-                  <rect x="10" y="10" height="100" rx="5" fill="none" stroke="#00704a" style="width: 180px; height: 100px"></rect>
-                  <line x1="70" y1="10" x2="70" y2="110" fill="none" stroke="#00704a"></line>
-                  <rect x="20" y="25" height="10" fill="rgb(0, 112, 74)" opacity="0.2" stroke="#00704a" style="opacity: 0.2; width: 40px; height: 10px"></rect>
-                  <line x1="20" y1="50" x2="60" y2="50" fill="none" stroke="#00704a"></line>
-                  <line x1="20" y1="65" x2="60" y2="65" fill="none" stroke="#00704a"></line>
-                  <line x1="20" y1="80" x2="60" y2="80" fill="none" stroke="#00704a"></line>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">사이드바 (Sidebar)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem; font-size: 12px">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="40" viewbox="0 0 200 40" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <text>홈</text>
-                <text>&gt;</text>
-                <text>수업</text>
-                <text>&gt;</text>
-                <text style="font-weight: 700">2학년</text>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">브레드크럼 (Breadcrumb)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="none" stroke="currentColor">
-                  <rect x="10" y="40" height="50" rx="5" fill="none" stroke="#00704a" style="width: 180px; height: 50px"></rect>
-                  <line x1="10" y1="40" x2="190" y2="40" fill="none" stroke="#00704a"></line>
-                  <text style="font-size: 12px; font-weight: 700">정보</text>
-                  <path d="M 20 40 v -2" fill="none" stroke="#00704a"></path>
-                  <text style="font-size: 12px; opacity: 0.6">댓글</text>
-                  <text style="font-size: 12px; opacity: 0.6">활동기록</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">탭 (Tabs)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="140" viewbox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="none" stroke="currentColor">
-                  <rect x="10" y="10" height="30" rx="4" fill="none" stroke="#00704a" style="width: 180px; height: 30px"></rect>
-                  <text style="font-size: 12px">질문 1</text>
-                  <path d="m 175 22 l -6 5 l 6 5" fill="none" stroke="#00704a"></path>
-                  <rect x="10" y="45" height="50" rx="4" fill="rgb(0, 112, 74)" opacity="0.05" stroke="#00704a" style="opacity: 0.05; width: 180px; height: 50px"></rect>
-                  <text style="font-size: 10px">답변 내용이 여기에...</text>
-                  <rect x="10" y="100" height="30" rx="4" fill="none" stroke="#00704a" style="width: 180px; height: 30px"></rect>
-                  <text style="font-size: 12px">질문 2</text>
-                  <path d="m 175 112 l 5 6 l 5 -6" fill="none" stroke="#00704a"></path>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">아코디언/접이식 (Accordion/Collapsible)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem; font-size: 12px">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="50" viewbox="0 0 200 50" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g font-size="12" fill="rgb(0, 112, 74)">
-                  <text style="opacity: 0.5">&lt;</text>
-                  <rect x="50" y="15" height="20" rx="10" fill="rgb(0, 112, 74)" style="width: 20px; height: 20px"></rect>
-                  1
-                  <text>2</text>
-                  3
-                  <text>...</text>
-                  &gt;
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">페이지네이션 (Pagination)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="60" viewbox="0 0 220 60" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <circle cx="40" cy="30" r="10" fill="rgb(0, 112, 74)" stroke="#00704a"></circle>
-                  <path d="M 45 30 l 5 5 l 10 -10" stroke="#ffffff" fill="rgb(0, 0, 0)"></path>
-                  <line x1="50" y1="30" x2="100" y2="30" stroke="#00704a" fill="rgb(0, 0, 0)"></line>
-                  <circle cx="110" cy="30" r="10" stroke="#00704a" fill="rgb(0, 112, 74)"></circle>
-                  <text style="font-size: 12px">2</text>
-                  <line x1="120" y1="30" x2="170" y2="30" stroke="#d1d5db" fill="rgb(0, 0, 0)"></line>
-                  <circle cx="180" cy="30" r="10" stroke="#d1d5db" fill="none"></circle>
-                  <text style="font-size: 12px">3</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">단계 진행(마법사) (Stepper/Wizard)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="150" viewbox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <circle cx="120" cy="30" r="15" fill="rgb(209, 213, 219)"></circle>
-                  <rect x="60" y="50" height="90" rx="5" fill="rgb(255, 255, 255)" stroke="#00704a" style="width: 100px; height: 90px"></rect>
-                  <text style="font-size: 12px">내 정보</text>
-                  <line x1="60" y1="95" x2="160" y2="95" stroke="#00704a" fill="rgb(0, 0, 0)"></line>
-                  <text style="font-size: 12px">로그아웃</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">드롭다운 메뉴 (Dropdown Menu)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="150" viewbox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="20" y="20" height="50" fill="rgb(209, 213, 219)" style="width: 40px; height: 50px"></rect>
-                  <path d="M 60 45 L 80 55 L 60 65 z" fill="rgb(0, 112, 74)"></path>
-                  <rect x="85" y="40" height="90" rx="5" fill="rgb(255, 255, 255)" stroke="#00704a" style="width: 100px; height: 90px"></rect>
-                  <text style="font-size: 12px">복사</text>
-                  <text style="font-size: 12px">붙여넣기</text>
-                  <text style="font-size: 12px">삭제</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">컨텍스트 메뉴 (Context Menu)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="0" y="0" height="120" fill="rgb(0, 112, 74)" opacity="0.2" style="opacity: 0.2; width: 200px; height: 120px"></rect>
-                  <rect x="30" y="20" height="80" rx="5" fill="rgb(255, 255, 255)" stroke="#00704a" style="width: 140px; height: 80px"></rect>
-                  <text style="font-size: 12px">정말 삭제하시겠습니까?</text>
-                  <rect x="50" y="70" height="20" rx="3" fill="none" stroke="#00704a" style="width: 40px; height: 20px"></rect>
-                  <text style="font-size: 10px">취소</text>
-                  <rect x="110" y="70" height="20" rx="3" fill="rgb(0, 112, 74)" style="width: 40px; height: 20px"></rect>
-                  <text style="font-size: 10px">확인</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">모달 (Modal)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="10" y="10" height="100" rx="5" fill="none" stroke="#00704a" style="width: 180px; height: 100px"></rect>
-                  <rect x="80" y="10" height="100" rx="5" fill="rgb(255, 255, 255)" stroke="#00704a" style="width: 110px; height: 100px"></rect>
-                  <text style="font-size: 12px">장바구니</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">드로어/패널 (Drawer/Side Panel)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="90" viewbox="0 0 180 90" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <circle cx="40" cy="60" r="12" fill="rgb(0, 112, 74)"></circle>
-                  <text style="font-size: 12px; font-weight: 700">i</text>
-                  <rect x="60" y="20" height="30" rx="4" fill="rgb(51, 51, 51)" style="width: 100px; height: 30px"></rect>
-                  <path d="M 65 50 l -5 -8 h 10 z" fill="rgb(51, 51, 51)"></path>
-                  <text style="font-size: 10px">짧은 도움말</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">툴팁 (Tooltip)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 180 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="20" y="70" height="30" rx="4" fill="none" stroke="#00704a" style="width: 60px; height: 30px"></rect>
-                  <text style="font-size: 12px">클릭</text>
-                  <rect x="90" y="20" height="60" rx="4" fill="rgb(255, 255, 255)" stroke="#00704a" style="width: 80px; height: 60px"></rect>
-                  <path d="M 90 45 l -10 5 l 10 5 z" fill="rgb(255, 255, 255)" stroke="#00704a"></path>
-                  <text style="font-size: 12px">옵션</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">팝오버 (Popover)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="10" y="10" height="100" rx="5" fill="none" stroke="#00704a" opacity="0.5" style="opacity: 0.5; width: 180px; height: 100px"></rect>
-                  <rect x="20" y="80" height="30" rx="4" fill="rgb(51, 51, 51)" style="width: 160px; height: 30px"></rect>
-                  <text style="font-size: 12px">저장되었습니다.</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">스낵바/토스트 (Snackbar/Toast)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="80" viewbox="0 0 100 80" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <path d="M 20 50 a 10 10 0 0 1 20 0 v 5 a 5 5 0 0 0 10 0 v -5 a 20 20 0 0 0 -40 0 v 5 a 5 5 0 0 0 10 0 z" fill="none" stroke="#00704a"></path>
-                  <circle cx="55" cy="25" r="10" fill="rgb(255, 0, 0)"></circle>
-                  <text style="font-size: 12px">3</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">배지 (Badge)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="60" viewbox="0 0 180 60" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="20" y="25" height="10" rx="5" fill="rgb(229, 231, 235)" style="width: 140px; height: 10px"></rect>
-                  <rect x="20" y="25" height="10" rx="5" fill="rgb(0, 112, 74)" style="width: 90px; height: 10px"></rect>
-                  <text style="font-size: 10px">64%</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">진행바 (Progress Bar)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="80" viewbox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%"><path d="M 40 10 A 30 30 0 1 1 17.57 17.57" fill="none" stroke="#00704a" stroke-linecap="round"></path></svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">로딩 스피너 (Spinner/Loader)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(229, 231, 235)">
-                  <circle cx="40" cy="50" r="20" fill="rgb(229, 231, 235)"></circle>
-                  <rect x="70" y="35" height="10" rx="3" fill="rgb(229, 231, 235)" style="width: 100px; height: 10px"></rect>
-                  <rect x="70" y="55" height="10" rx="3" fill="rgb(229, 231, 235)" style="width: 70px; height: 10px"></rect>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">스켈레톤 (Skeleton)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="60" viewbox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="10" y="15" height="30" rx="5" fill="rgb(0, 112, 74)" opacity="0.1" style="opacity: 0.1; width: 180px; height: 30px"></rect>
-                  <path d="M 20 22 l 10 16 h -20 z" fill="rgb(0, 112, 74)" opacity="0.8" style="opacity: 0.8"></path>
-                  <text style="font-size: 12px">경고 메시지입니다.</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">알럿 (Alert)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="200" viewbox="0 0 160 200" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="10" y="10" height="180" rx="8" fill="none" stroke="#00704a" opacity="0.3" style="opacity: 0.3; width: 140px; height: 180px"></rect>
-                  <rect x="10" y="10" height="100" fill="rgb(229, 231, 235)" style="border-top-left-radius: 8px; border-top-right-radius: 8px; width: 140px; height: 100px"></rect>
-                  <rect x="25" y="125" height="12" rx="3" fill="rgb(0, 112, 74)" opacity="0.8" style="opacity: 0.8; width: 110px; height: 12px"></rect>
-                  <rect x="25" y="150" height="8" rx="2" fill="rgb(0, 112, 74)" opacity="0.4" style="opacity: 0.4; width: 80px; height: 8px"></rect>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">카드 (Card)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g stroke="currentColor" fill="none">
-                  <rect x="10" y="10" height="100" rx="4" fill="none" stroke="#00704a" style="width: 180px; height: 100px"></rect>
-                  <line x1="10" y1="40" x2="190" y2="40" fill="none" stroke="#00704a"></line>
-                  <line x1="10" y1="70" x2="190" y2="70" fill="none" stroke="#00704a"></line>
-                  <line x1="70" y1="10" x2="70" y2="110" fill="none" stroke="#00704a"></line>
-                  <line x1="130" y1="10" x2="130" y2="110" fill="none" stroke="#00704a"></line>
-                  <rect x="10" y="10" height="30" fill="rgb(0, 112, 74)" opacity="0.1" stroke="#00704a" style="opacity: 0.1; width: 180px; height: 30px"></rect>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">표 (Table)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="10" y="10" height="40" rx="4" fill="none" stroke="#00704a" opacity="0.3" style="opacity: 0.3; width: 180px; height: 40px"></rect>
-                  <circle cx="35" cy="30" r="10" fill="rgb(0, 112, 74)" opacity="0.3" style="opacity: 0.3"></circle>
-                  <rect x="55" y="25" height="10" rx="2" fill="rgb(0, 112, 74)" opacity="0.6" style="opacity: 0.6; width: 80px; height: 10px"></rect>
-                  <rect x="10" y="55" height="40" rx="4" fill="none" stroke="#00704a" opacity="0.3" style="opacity: 0.3; width: 180px; height: 40px"></rect>
-                  <circle cx="35" cy="75" r="10" fill="rgb(0, 112, 74)" opacity="0.3" style="opacity: 0.3"></circle>
-                  <rect x="55" y="70" height="10" rx="2" fill="rgb(0, 112, 74)" opacity="0.6" style="opacity: 0.6; width: 80px; height: 10px"></rect>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">리스트 아이템 (List Item)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 180 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(229, 231, 235)">
-                  <rect x="10" y="10" height="50" rx="4" fill="rgb(229, 231, 235)" style="width: 50px; height: 50px"></rect>
-                  <rect x="65" y="10" height="50" rx="4" fill="rgb(229, 231, 235)" style="width: 50px; height: 50px"></rect>
-                  <rect x="120" y="10" height="50" rx="4" fill="rgb(229, 231, 235)" style="width: 50px; height: 50px"></rect>
-                  <rect x="10" y="65" height="50" rx="4" fill="rgb(229, 231, 235)" style="width: 50px; height: 50px"></rect>
-                  <rect x="65" y="65" height="50" rx="4" fill="rgb(229, 231, 235)" style="width: 50px; height: 50px"></rect>
-                  <rect x="120" y="65" height="50" rx="4" fill="rgb(229, 231, 235)" style="width: 50px; height: 50px"></rect>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">그리드 (Grid)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="none" stroke="currentColor">
-                  <rect x="40" y="20" height="80" rx="5" fill="rgb(229, 231, 235)" stroke="#00704a" style="width: 120px; height: 80px"></rect>
-                  <path d="M 25 65 l -10 -10 l 10 -10" fill="none" stroke="#00704a"></path>
-                  <path d="M 175 55 l 10 10 l -10 10" fill="none" stroke="#00704a"></path>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">캐러셀/슬라이드 (Carousel)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem; font-size: 12px">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 112, 74)" font-size="12">
-                  컨텐츠 영역 1
-                  <line x1="20" y1="50" x2="180" y2="50" stroke="#00704a" opacity="0.3" fill="rgb(0, 112, 74)" style="opacity: 0.3"></line>
-                  컨텐츠 영역 2
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">구분선 (Divider)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="80" viewbox="0 0 100 80" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <circle cx="50" cy="40" r="25" fill="rgb(229, 231, 235)"></circle>
-                  <circle cx="50" cy="40" r="15" fill="none" stroke="#00704a" opacity="0.5" style="opacity: 0.5"></circle>
-                  <circle cx="68" cy="58" r="5" fill="rgb(34, 197, 94)" stroke="#ffffff"></circle>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">아바타 (Avatar)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem; font-size: 12px">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="60" viewbox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 112, 74)" font-size="12">
-                  <rect x="20" y="20" height="25" rx="12.5" fill-opacity="0.1" fill="rgb(0, 112, 74)" style="width: 60px; height: 25px"></rect>
-                  #영어
-                  <rect x="90" y="20" height="25" rx="12.5" fill-opacity="0.1" fill="rgb(0, 112, 74)" style="width: 70px; height: 25px"></rect>
-                  #대기중
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">칩/태그 (Chip/Tag)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="20" y="20" height="30" rx="4" fill="rgb(229, 231, 235)" style="width: 60px; height: 30px"></rect>
-                  <rect x="30" y="60" height="30" rx="4" fill="none" stroke="#00704a" style="width: 60px; height: 30px"></rect>
-                  <path d="M50 50 C 60 70, 100 70, 120 50" stroke="#00704a" fill="none" stroke-dasharray="4 4"></path>
-                  <rect x="120" y="20" height="30" rx="4" fill="rgb(229, 231, 235)" opacity="0.5" style="opacity: 0.5; width: 60px; height: 30px"></rect>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">드래그 앤 드롭 (Drag &amp; Drop)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="180" viewbox="0 0 120 180" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="10" y="10" height="160" rx="5" fill="none" stroke="#00704a" style="width: 100px; height: 160px"></rect>
-                  <rect x="20" y="20" height="40" rx="3" fill="rgb(229, 231, 235)" style="width: 80px; height: 40px"></rect>
-                  <rect x="20" y="70" height="40" rx="3" fill="rgb(229, 231, 235)" style="width: 80px; height: 40px"></rect>
-                  <rect x="20" y="120" height="40" rx="3" fill="rgb(229, 231, 235)" style="width: 80px; height: 40px"></rect>
-                  <path d="M 60 165 l -5 -5 l 5 -5" stroke="#00704a" fill="rgb(0, 0, 0)"></path>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">무한 스크롤 (Infinite Scroll)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="180" viewbox="0 0 120 180" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="10" y="10" height="160" rx="5" fill="none" stroke="#00704a" style="width: 100px; height: 160px"></rect>
-                  <path d="M 50 40 A 10 10 0 1 1 57.07 32.93" fill="none" stroke="#00704a" stroke-linecap="round"></path>
-                  <path d="M 60 60 l -10 -10 l -10 10" stroke="#00704a" fill="rgb(0, 0, 0)"></path>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">당겨서 새로고침 (Pull to Refresh)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="10" y="10" height="100" rx="5" fill="none" stroke="#00704a" style="width: 140px; height: 100px"></rect>
-                  <rect x="10" y="10" height="30" fill="rgb(255, 255, 255)" stroke="#00704a" style="width: 140px; height: 30px"></rect>
-                  <line x1="140" y1="50" x2="140" y2="80" stroke="#00704a" fill="rgb(0, 0, 0)"></line>
-                  <path d="M135 75 l5 5 l5-5" stroke="#00704a" fill="rgb(0, 0, 0)"></path>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">스티키 헤더 (Sticky Header)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem; font-size: 12px">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="80" viewbox="0 0 220 80" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g font-size="12" fill="rgb(0, 112, 74)">
-                  <rect x="10" y="30" height="30" rx="4" fill="none" stroke="#00704a" style="width: 60px; height: 30px"></rect>
-                  기본
-                  <rect x="80" y="30" height="30" rx="4" fill="rgb(0, 112, 74)" opacity="0.1" stroke="#00704a" style="opacity: 0.1; width: 60px; height: 30px"></rect>
-                  호버
-                  <rect x="150" y="30" height="30" rx="4" fill="rgb(0, 112, 74)" opacity="0.2" style="opacity: 0.2; width: 60px; height: 30px"></rect>
-                  <rect x="148" y="28" height="34" rx="6" fill="none" stroke="#00704a" stroke-dasharray="3 3" style="width: 64px; height: 34px"></rect>
-                  포커스
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">포커스/호버/액티브 (Focus/Hover/Active)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem; font-size: 12px">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="60" viewbox="0 0 150 60" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g font-size="12" fill="rgb(0, 0, 0)">
-                  <rect x="10" y="20" height="30" rx="4" fill="rgb(229, 231, 235)" style="width: 60px; height: 30px"></rect>
-                  비활성
-                  <rect x="80" y="20" height="30" rx="4" fill="rgb(0, 112, 74)" style="width: 60px; height: 30px"></rect>
-                  활성
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">비활성 (Disabled)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="80" viewbox="0 0 180 80" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <text style="font-size: 12px">이메일</text>
-                  <rect x="20" y="40" height="30" rx="4" fill="none" stroke="#00704a" style="width: 140px; height: 30px"></rect>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">레이블 (Label)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 200.643px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="60" viewbox="0 0 180 60" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="20" y="20" height="30" rx="4" fill="none" stroke="#00704a" style="width: 140px; height: 30px"></rect>
-                  <text style="font-size: 12px; opacity: 0.4">example@school.kr</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">플레이스홀더 (Placeholder)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 200.643px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="80" viewbox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="20" y="20" height="30" rx="4" fill="none" stroke="#00704a" style="width: 160px; height: 30px"></rect>
-                  <text style="font-size: 10px; opacity: 0.6">8~20자, 영문, 숫자를 포함해주세요.</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">도우미 문구 (Helper Text)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 200.643px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="80" viewbox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="20" y="20" height="30" rx="4" fill="none" stroke="#ff0000" style="width: 160px; height: 30px"></rect>
-                  <text style="font-size: 12px">test</text>
-                  <text style="font-size: 10px">올바른 이메일 형식이 아닙니다.</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">유효성 검사 (Validation)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 200.643px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="80" viewbox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="10" y="15" height="25" rx="5" fill="rgb(255, 0, 0)" opacity="0.1" style="opacity: 0.1; width: 180px; height: 25px"></rect>
-                  <text style="font-size: 12px">오류 메시지</text>
-                  <rect x="10" y="45" height="25" rx="5" fill="rgb(0, 128, 0)" opacity="0.1" style="opacity: 0.1; width: 180px; height: 25px"></rect>
-                  <text style="font-size: 12px">성공 메시지</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">오류/성공 메시지 (Error/Success Message)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 200.643px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="60" viewbox="0 0 180 60" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="20" y="20" height="30" rx="4" fill="none" stroke="#00704a" style="width: 140px; height: 30px"></rect>
-                  <text style="font-size: 12px">010-1234-••••</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">입력 마스크 (Input Mask)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 200.643px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g stroke="currentColor" fill="rgb(0, 0, 0)">
-                  <path d="M 20 30 h 20 M 20 40 h 20 M 20 50 h 20" stroke-linecap="round" fill="rgb(0, 0, 0)" stroke="#00704a"></path>
-                  <path d="M 50 40 l 10 -10 l 10 10" fill="rgb(0, 0, 0)" stroke="#00704a"></path>
-                  <rect x="80" y="10" height="80" rx="5" fill="none" stroke="#00704a" style="width: 70px; height: 80px"></rect>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">햄버거 메뉴 (Hamburger Menu)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="none" stroke="currentColor">
-                  <rect x="10" y="10" height="100" rx="5" fill="none" stroke="#00704a" style="width: 100px; height: 100px"></rect>
-                  <rect x="10" y="80" height="30" fill="rgb(0, 112, 74)" opacity="0.1" stroke="#00704a" style="opacity: 0.1; width: 100px; height: 30px"></rect>
-                  <circle cx="35" cy="95" r="5" fill="none" stroke="#00704a"></circle>
-                  <circle cx="60" cy="95" r="5" fill="none" stroke="#00704a"></circle>
-                  <circle cx="85" cy="95" r="5" fill="none" stroke="#00704a"></circle>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">탭 바 (Tab Bar / Bottom Navigation)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 180 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="10" y="10" height="70" rx="4" stroke="#00704a" fill="none" style="width: 50px; height: 70px"></rect>
-                  <rect x="15" y="15" height="30" fill="rgb(229, 231, 235)" style="width: 40px; height: 30px"></rect>
-                  <rect x="15" y="50" height="5" rx="2" fill="rgb(0, 112, 74)" opacity="0.5" style="opacity: 0.5; width: 40px; height: 5px"></rect>
-                  <rect x="70" y="10" height="70" rx="4" stroke="#00704a" fill="none" style="width: 50px; height: 70px"></rect>
-                  <rect x="75" y="15" height="30" fill="rgb(229, 231, 235)" style="width: 40px; height: 30px"></rect>
-                  <rect x="75" y="50" height="5" rx="2" fill="rgb(0, 112, 74)" opacity="0.5" style="opacity: 0.5; width: 40px; height: 5px"></rect>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">카드 레이아웃 (Card Layout)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="20" y="40" height="20" rx="5" fill="rgb(0, 112, 74)" style="width: 40px; height: 20px"></rect>
-                  <path d="M40 30 Q 80 10 120 30" stroke="#00704a" stroke-dasharray="3 3" fill="none"></path>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">모션 디자인 (Motion Design)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)"><path d="M 60 40 C 50 20, 20 30, 40 50 L 60 70 L 80 50 C 100 30, 70 20, 60 40 Z" fill="rgb(235, 165, 179)"></path></g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">마이크로인터랙션 (Microinteraction)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(229, 231, 235)">
-                  <rect x="20" y="20" height="15" rx="4" fill="rgb(229, 231, 235)" style="width: 160px; height: 15px"></rect>
-                  <rect x="20" y="45" height="10" rx="3" fill="rgb(229, 231, 235)" style="width: 120px; height: 10px"></rect>
-                  <rect x="20" y="65" height="10" rx="3" fill="rgb(229, 231, 235)" style="width: 140px; height: 10px"></rect>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">스켈레톤 스크린 (Skeleton Screen)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 112, 74)">
-                  <rect x="20" y="70" height="20" opacity="0.4" fill="rgb(0, 112, 74)" style="opacity: 0.4; width: 15px; height: 20px"></rect>
-                  <rect x="40" y="50" height="40" opacity="0.7" fill="rgb(0, 112, 74)" style="opacity: 0.7; width: 15px; height: 40px"></rect>
-                  <rect x="60" y="30" height="60" opacity="1.0" fill="rgb(0, 112, 74)" style="width: 15px; height: 60px"></rect>
-                  <circle cx="120" cy="60" r="30" stroke="#00704a" fill="none" stroke-dasharray="125.6 188.4" transform="rotate(-90 120 60)"></circle>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">차트 컴포넌트 (Chart Component)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="none">
-                  <circle cx="50" cy="50" r="40" stroke="#e5e7eb" fill="none"></circle>
-                  <path d="M 50 10 A 40 40 0 1 1 10 50" stroke="#00704a" stroke-linecap="round" fill="none"></path>
-                  <text style="font-weight: 700">75%</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">프로그레스 인디케이터 (Progress Indicator)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem; font-size: 12px">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 112, 74)" font-size="12">
-                  <rect x="10" y="15" height="40" rx="4" fill="none" stroke="#00704a" style="width: 180px; height: 40px"></rect>
-                  <rect x="20" y="25" height="20" rx="10" fill-opacity="0.1" fill="rgb(0, 112, 74)" style="width: 50px; height: 20px"></rect>
-                  영어
-                  <rect x="75" y="25" height="20" rx="10" fill-opacity="0.1" fill="rgb(0, 112, 74)" style="width: 50px; height: 20px"></rect>
-                  과학
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">멀티셀렉트 (Multi-select)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 180 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g stroke="currentColor" fill="rgb(0, 0, 0)">
-                  <rect x="20" y="10" height="20" rx="3" fill="rgb(229, 231, 235)" stroke="#00704a" style="width: 140px; height: 20px"></rect>
-                  <rect x="40" y="40" height="20" rx="3" fill="none" stroke="#00704a" style="width: 140px; height: 20px"></rect>
-                  <rect x="20" y="70" height="20" rx="3" fill="rgb(229, 231, 235)" stroke="#00704a" style="width: 140px; height: 20px"></rect>
-                  <path d="M110 30 v 30" stroke-dasharray="3 3" fill="rgb(0, 0, 0)" stroke="#00704a"></path>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">드래그 앤 드롭 정렬 (Drag &amp; Drop Sorting)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 180 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="10" y="20" height="80" rx="5" fill="none" stroke="#00704a" stroke-dasharray="4 4" style="width: 80px; height: 80px"></rect>
-                  <text style="font-size: 12px">업로드</text>
-                  <rect x="100" y="40" height="40" rx="3" fill="rgb(229, 231, 235)" style="width: 40px; height: 40px"></rect>
-                  <path d="M110 50 l5 10 l10 -15" fill="none" stroke="#00704a"></path>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">파일 업로드 미리보기 (File Upload Preview)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(229, 231, 235)">
-                  <rect x="10" y="20" height="80" rx="5" fill="rgb(229, 231, 235)" style="width: 80px; height: 80px"></rect>
-                  <rect x="110" y="40" height="60" rx="3" fill="rgb(229, 231, 235)" style="width: 30px; height: 60px"></rect>
-                  <rect x="115" y="45" height="10" rx="1" fill="rgb(229, 231, 235)" style="width: 20px; height: 10px"></rect>
-                  <rect x="115" y="60" height="10" rx="1" fill="rgb(229, 231, 235)" style="width: 20px; height: 10px"></rect>
-                  <rect x="115" y="75" height="10" rx="1" fill="rgb(229, 231, 235)" style="width: 20px; height: 10px"></rect>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">반응형 레이아웃 (Responsive Layout)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 183.143px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="none" stroke="currentColor" stroke-linecap="round">
-                  <path d="M 40 50 C 60 30, 80 30, 100 50" fill="none" stroke="#00704a"></path>
-                  <path d="M 90 40 l 10 10 l -10 10" fill="none" stroke="#00704a"></path>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">제스처 UI (Gesture UI)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 200.643px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="10" y="10" height="100" rx="5" fill="none" stroke="#00704a" opacity="0.5" style="opacity: 0.5; width: 140px; height: 100px"></rect>
-                  <circle cx="125" cy="85" r="20" fill="rgb(0, 112, 74)"></circle>
-                  <path d="M 125 75 v 20 M 115 85 h 20" stroke="#ffffff" stroke-linecap="round" fill="rgb(0, 0, 0)"></path>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">플로팅 액션 버튼 (Floating Action Button, FAB)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 200.643px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="10" y="10" height="100" rx="5" fill="none" stroke="#00704a" opacity="0.5" style="opacity: 0.5; width: 140px; height: 100px"></rect>
-                  <rect x="10" y="60" height="50" rx="5" fill="rgb(255, 255, 255)" stroke="#00704a" style="width: 140px; height: 50px"></rect>
-                  <line x1="60" y1="70" x2="100" y2="70" stroke-linecap="round" fill="rgb(0, 0, 0)"></line>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">바텀 시트 (Bottom Sheet)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 200.643px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="10" y="10" height="80" rx="5" fill="rgb(255, 255, 255)" stroke="#e5e7eb" style="width: 60px; height: 80px"></rect>
-                  <text style="font-size: 12px">Aa</text>
-                  <rect x="90" y="10" height="80" rx="5" fill="rgb(0, 0, 0)" stroke="#e5e7eb" style="width: 60px; height: 80px"></rect>
-                  <text style="font-size: 12px">Aa</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">고대비 모드 (High Contrast Mode)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 200.643px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="10" y="20" height="60" rx="5" fill="rgb(229, 231, 235)" style="width: 60px; height: 60px"></rect>
-                  <path d="M 20 70 l 15 -20 l 10 10 l 15 -20" fill="none" stroke="#00704a"></path>
-                  <circle cx="55" cy="35" r="5" fill="rgb(0, 112, 74)"></circle>
-                  <rect x="80" y="40" height="30" rx="4" fill="none" stroke="#00704a" style="width: 70px; height: 30px"></rect>
-                  <text style="font-size: 10px">Alt text...</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">대체 텍스트 (Alt Text)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 200.643px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 112, 74)">
-                  <rect x="20" y="40" height="20" rx="3" fill-opacity="0.1" fill="rgb(0, 112, 74)" style="width: 50px; height: 20px"></rect>
-                  <rect x="18" y="38" height="24" rx="5" stroke="#00704a" fill="none" style="width: 54px; height: 24px"></rect>
-                  <text style="font-size: 10px">버튼1</text>
-                  <rect x="90" y="40" height="20" rx="3" fill-opacity="0.1" fill="rgb(0, 112, 74)" style="width: 50px; height: 20px"></rect>
-                  <text style="font-size: 10px">버튼2</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">키보드 내비게이션 (Keyboard Navigation)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 200.643px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="80" viewbox="0 0 180 80" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <text style="font-size: 12px">이메일</text>
-                  <rect x="20" y="40" height="30" rx="4" fill="none" stroke="#00704a" style="width: 140px; height: 30px"></rect>
-                  <rect x="18" y="38" height="34" rx="6" fill="none" stroke="#3b82f6" style="width: 144px; height: 34px"></rect>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">포커스 표시 (Focus Indicator)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 200.643px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <defs fill="rgb(0, 0, 0)">
-                  <lineargradient x1="0%" y1="0%" x2="100%" y2="100%" fill="rgb(0, 0, 0)">
-                    <stop offset="0%" fill="rgb(0, 0, 0)"></stop>
-                    <stop offset="100%" fill="rgb(0, 0, 0)"></stop>
-                  </lineargradient>
-                </defs>
-                <rect x="10" y="10" height="80" fill="rgb(229, 231, 235)" rx="10" style="width: 100px; height: 80px"></rect>
-                <rect x="20" y="20" height="60" fill='url("#neumorphism")' rx="10" style="filter: drop-shadow(rgba(0, 0, 0, 0.1) 4px 4px 6px) drop-shadow(rgba(255, 255, 255, 0.7) -4px -4px 6px); width: 80px; height: 60px"></rect>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">네오모피즘 (Neumorphism)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 200.643px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <defs fill="rgb(0, 0, 0)">
-                  <filter id="blur" fill="rgb(0, 0, 0)"><fegaussianblur stddeviation="5" fill="rgb(0, 0, 0)"></fegaussianblur></filter>
-                  <lineargradient x1="0%" y1="0%" x2="100%" y2="100%" fill="rgb(0, 0, 0)">
-                    <stop offset="0%" stop-color="rgba(255, 255, 255, 0.5)" fill="rgb(0, 0, 0)"></stop>
-                    <stop offset="100%" stop-color="rgba(255, 255, 255, 0.2)" fill="rgb(0, 0, 0)"></stop>
-                  </lineargradient>
-                </defs>
-                <circle cx="40" cy="30" r="30" fill="rgb(129, 140, 248)" filter="url(#blur)" style='filter: url("#blur")'></circle>
-                <circle cx="120" cy="70" r="40" fill="rgb(244, 114, 182)" filter="url(#blur)" style='filter: url("#blur")'></circle>
-                <rect x="20" y="15" height="70" rx="10" fill='url("#glass")' stroke="#ffffff" style="width: 120px; height: 70px"></rect>
-                <text style="font-size: 12px">Glassmorphism</text>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">글래스모피즘 (Glassmorphism)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.839px; height: 200.643px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 0, 0)">
-                  <rect x="10" y="10" height="80" rx="5" fill="rgb(255, 255, 255)" stroke="#e5e7eb" style="width: 60px; height: 80px"></rect>
-                  <circle cx="40" cy="30" r="10" fill="rgb(229, 231, 235)"></circle>
-                  <rect x="20" y="50" height="5" rx="2" fill="rgb(229, 231, 235)" style="width: 40px; height: 5px"></rect>
-                  <rect x="90" y="10" height="80" rx="5" fill="rgb(30, 41, 59)" stroke="#334155" style="width: 60px; height: 80px"></rect>
-                  <circle cx="120" cy="30" r="10" fill="rgb(51, 65, 85)"></circle>
-                  <rect x="100" y="50" height="5" rx="2" fill="rgb(51, 65, 85)" style="width: 40px; height: 5px"></rect>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">다크 모드 (Dark Mode)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 200.643px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="120" viewbox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="none" stroke="currentColor">
-                  <rect x="10" y="10" height="100" rx="5" fill="none" stroke="#00704a" style="width: 100px; height: 100px"></rect>
-                  <path d="M 60 100 C 40 80, 80 80, 60 60" stroke-linecap="round" fill="none" stroke="#00704a"></path>
-                  <path d="M 50 70 l 10 -10 l 10 10" stroke-linecap="round" fill="none" stroke="#00704a"></path>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">모션 기반 내비게이션 (Motion-based Navigation)</h3></button
-        ><button style="background-color: rgb(255, 255, 255); align-items: center; cursor: pointer; flex-direction: column; justify-content: flex-start; text-align: center; display: flex; width: 159.83px; height: 200.643px; border-radius: 12px; padding: 0.75rem">
-          <div style="color: rgb(0, 112, 74); background-color: rgb(248, 250, 252); align-items: center; justify-content: center; display: flex; width: 100%; height: 8rem; border-radius: 8px; padding: 0.5rem">
-            <div style="align-items: center; justify-content: center; display: flex; width: 100%; height: 100%">
-              <svg height="100" viewbox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="width: 100%; height: auto; max-height: 100%">
-                <g fill="rgb(0, 112, 74)">
-                  <rect x="20" y="40" height="20" rx="5" fill="rgb(0, 112, 74)" style="opacity: 0.796266; width: 40px; height: 20px"></rect>
-                  <text style="font-size: 10px">Fade</text>
-                  <rect x="90" y="60" height="20" rx="5" fill="rgb(0, 112, 74)" style="width: 40px; height: 20px"></rect>
-                  <text style="font-size: 10px">Slide</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <h3 style="font-weight: 600; margin-top: 1rem">모션 프리셋 (Motion Preset)</h3>
-        </button>
-      </div>
-    </main>
-    <footer style="color: rgb(100, 116, 139); text-align: center; padding: 1.5rem">Designed by Junseong Hong</footer>
+<div style="box-sizing: border-box; font-size: 14px; height: 1068px; line-height: 22px; overflow-block: visible; overflow-inline: visible; width: 2196px; background-color: rgb(248, 250, 252)">
+  <div style="width: 2196px">
+    <div style="width: 2196px"><div style="bottom: 1068px; color: rgb(32, 33, 36); font-variant-ligatures: none; position: absolute; right: 2196px; z-index: 2147483647"></div></div>
   </div>
+  <div style="height: 1068px; width: 2196px">
+    <div style="color: rgb(30, 41, 59); height: 100vh; overflow-block: hidden; overflow-inline: hidden; position: relative; width: 2196px; display: flex; overflow: hidden">
+      <aside style="background-color: rgb(255, 255, 255); border-right-width: 2px; flex-direction: column; height: 100%; max-width: 24rem; overflow-block: visible; overflow-inline: visible; position: absolute; width: 100%; z-index: 30; display: flex; border-color: rgb(229, 231, 235); border-style: solid" id="aside-1">
+        <div style="border-bottom-width: 2px; height: 76px; width: 336px; border-color: rgb(229, 231, 235); border-style: solid; padding: 1rem">
+          <div style="align-items: center; height: 46px; justify-content: space-between; width: 308px; display: flex">
+            <div style="height: 46px; width: 216px">
+              <h1 style="color: rgb(0, 112, 74); font-size: 22px; font-weight: 700; height: 28px; line-height: 28px; width: 216px">Vibe Coding Glossary</h1>
+              <p style="color: rgb(100, 116, 139); height: 18px; line-height: 18px; width: 216px">UI/UX 용어집</p>
+            </div>
+            <button style="appearance: button; background-color: rgb(241, 245, 249); color: rgb(71, 85, 105); cursor: pointer; font-weight: 600; height: 32px; line-height: 18px; text-align: center; width: 32px; border-radius: 6px; padding: 0.5rem">EN</button>
+          </div>
+        </div>
+        <div style="height: 66px; width: 336px; padding: 1rem">
+          <div style="align-items: center; height: 38px; width: 308px; display: flex">
+            <button style="appearance: button; color: rgb(71, 85, 105); cursor: pointer; height: 36px; text-align: center; width: 36px; border-radius: 6px; padding: 0.5rem">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" style="height: 1.5rem; overflow-block: hidden; overflow-inline: hidden; width: 1.5rem; overflow: hidden"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" fill="none" stroke="#475569" style="overflow-block: visible; overflow-inline: visible"></path></svg>
+            </button>
+            <div style="flex-grow: 1; height: 38px; margin-left: 0.5rem; position: relative; width: 266px">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" style="bottom: 2px; color: rgb(148, 163, 184); height: 1.25rem; left: 0.75rem; overflow-block: hidden; overflow-inline: hidden; position: absolute; right: 238px; top: 50%; width: 1.25rem; overflow: hidden"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" fill="none" stroke="#94a3b8" style="overflow-block: visible; overflow-inline: visible"></path></svg><input value="" type="text" placeholder="용어 검색..." style="appearance: auto; background-color: rgb(248, 250, 252); cursor: text; height: 38px; overflow-block: clip; overflow-inline: clip; padding-bottom: 0.5rem; padding-left: 2.5rem; padding-right: 1rem; padding-top: 0.5rem; width: 100%; display: inline-block; border-width: 2px; border-color: rgb(209, 213, 219); border-style: solid; border-radius: 8px; overflow: clip" />
+            </div>
+          </div>
+        </div>
+        <div style="flex-grow: 1; height: 886px; padding-bottom: 1rem; width: 336px; overflow: auto">
+          <div style="height: 378px; padding-left: 1rem; padding-right: 1rem; padding-top: 0.5rem; width: 322px">
+            <h2 style="color: rgb(0, 112, 74); font-weight: 700; height: 36px; padding-bottom: 0.5rem; padding-top: 0.5rem; width: 294px">UI 기본 - 1) 입력·선택 컴포넌트</h2>
+            <ul style="height: 336px; width: 294px; list-style-type: none">
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; background-color: rgb(0, 112, 74); color: rgb(255, 255, 255); cursor: pointer; font-weight: 600; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">드롭다운 (Select / Dropdown)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">자동완성 (Autocomplete)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">체크박스 (Checkbox)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">라디오 버튼 (Radio Button)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">토글 스위치 (Toggle Switch)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">슬라이더 (Range Slider)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">날짜/시간 선택기 (Date/Time Picker)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">파일 업로드 (File Upload)</button></li>
+            </ul>
+          </div>
+          <div style="border-top-width: 2px; height: 428px; padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; width: 322px; border-color: rgb(226, 232, 240); border-style: solid">
+            <h2 style="color: rgb(0, 112, 74); font-weight: 700; height: 36px; padding-bottom: 0.5rem; padding-top: 0.5rem; width: 294px">UI 기본 - 2) 내비게이션·구조</h2>
+            <ul style="height: 378px; width: 294px; list-style-type: none">
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">내비게이션 바 (Navbar)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">사이드바 (Sidebar)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">브레드크럼 (Breadcrumb)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">탭 (Tabs)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">아코디언/접이식 (Accordion/Collapsible)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">페이지네이션 (Pagination)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">단계 진행(마법사) (Stepper/Wizard)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">드롭다운 메뉴 (Dropdown Menu)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">컨텍스트 메뉴 (Context Menu)</button></li>
+            </ul>
+          </div>
+          <div style="border-top-width: 2px; height: 470px; padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; width: 322px; border-color: rgb(226, 232, 240); border-style: solid">
+            <h2 style="color: rgb(0, 112, 74); font-weight: 700; height: 36px; padding-bottom: 0.5rem; padding-top: 0.5rem; width: 294px">UI 기본 - 3) 피드백·상태 표시</h2>
+            <ul style="height: 420px; width: 294px; list-style-type: none">
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">모달 (Modal)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">드로어/패널 (Drawer/Side Panel)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">툴팁 (Tooltip)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">팝오버 (Popover)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">스낵바/토스트 (Snackbar/Toast)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">배지 (Badge)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">진행바 (Progress Bar)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">로딩 스피너 (Spinner/Loader)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">스켈레톤 (Skeleton)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">알럿 (Alert)</button></li>
+            </ul>
+          </div>
+          <div style="border-top-width: 2px; height: 386px; padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; width: 322px; border-color: rgb(226, 232, 240); border-style: solid">
+            <h2 style="color: rgb(0, 112, 74); font-weight: 700; height: 36px; padding-bottom: 0.5rem; padding-top: 0.5rem; width: 294px">UI 기본 - 4) 레이아웃·표시 컴포넌트</h2>
+            <ul style="height: 336px; width: 294px; list-style-type: none">
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">카드 (Card)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">표 (Table)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">리스트 아이템 (List Item)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">그리드 (Grid)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">캐러셀/슬라이드 (Carousel)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">구분선 (Divider)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">아바타 (Avatar)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">칩/태그 (Chip/Tag)</button></li>
+            </ul>
+          </div>
+          <div style="border-top-width: 2px; height: 302px; padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; width: 322px; border-color: rgb(226, 232, 240); border-style: solid">
+            <h2 style="color: rgb(0, 112, 74); font-weight: 700; height: 36px; padding-bottom: 0.5rem; padding-top: 0.5rem; width: 294px">UI 기본 - 5) 상호작용 패턴·상태</h2>
+            <ul style="height: 252px; width: 294px; list-style-type: none">
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">드래그 앤 드롭 (Drag &amp; Drop)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">무한 스크롤 (Infinite Scroll)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">당겨서 새로고침 (Pull to Refresh)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">스티키 헤더 (Sticky Header)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">포커스/호버/액티브 (Focus/Hover/Active)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">비활성 (Disabled)</button></li>
+            </ul>
+          </div>
+          <div style="border-top-width: 2px; height: 302px; padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; width: 322px; border-color: rgb(226, 232, 240); border-style: solid">
+            <h2 style="color: rgb(0, 112, 74); font-weight: 700; height: 36px; padding-bottom: 0.5rem; padding-top: 0.5rem; width: 294px">UI 기본 - 6) 폼 도움 요소</h2>
+            <ul style="height: 252px; width: 294px; list-style-type: none">
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">레이블 (Label)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">플레이스홀더 (Placeholder)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">도우미 문구 (Helper Text)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">유효성 검사 (Validation)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">오류/성공 메시지 (Error/Success Message)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">입력 마스크 (Input Mask)</button></li>
+            </ul>
+          </div>
+          <div style="border-top-width: 2px; height: 176px; padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; width: 322px; border-color: rgb(226, 232, 240); border-style: solid">
+            <h2 style="color: rgb(0, 112, 74); font-weight: 700; height: 36px; padding-bottom: 0.5rem; padding-top: 0.5rem; width: 294px">UI 심화 - 1) 내비게이션 &amp; 레이아웃</h2>
+            <ul style="height: 126px; width: 294px; list-style-type: none">
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">햄버거 메뉴 (Hamburger Menu)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">탭 바 (Tab Bar / Bottom Navigation)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">카드 레이아웃 (Card Layout)</button></li>
+            </ul>
+          </div>
+          <div style="border-top-width: 2px; height: 176px; padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; width: 322px; border-color: rgb(226, 232, 240); border-style: solid">
+            <h2 style="color: rgb(0, 112, 74); font-weight: 700; height: 36px; padding-bottom: 0.5rem; padding-top: 0.5rem; width: 294px">UI 심화 - 2) 상호작용 &amp; 피드백</h2>
+            <ul style="height: 126px; width: 294px; list-style-type: none">
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">모션 디자인 (Motion Design)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">마이크로인터랙션 (Microinteraction)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">스켈레톤 스크린 (Skeleton Screen)</button></li>
+            </ul>
+          </div>
+          <div style="border-top-width: 2px; height: 156px; padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; width: 322px; border-color: rgb(226, 232, 240); border-style: solid">
+            <h2 style="color: rgb(0, 112, 74); font-weight: 700; height: 36px; padding-bottom: 0.5rem; padding-top: 0.5rem; width: 294px">UI 심화 - 3) 데이터 표현 &amp; 시각화</h2>
+            <ul style="height: 106px; width: 294px; list-style-type: none">
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">차트 컴포넌트 (Chart Component)</button></li>
+              <li style="height: 64px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 64px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">프로그레스 인디케이터 (Progress Indicator)</button></li>
+            </ul>
+          </div>
+          <div style="border-top-width: 2px; height: 218px; padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; width: 322px; border-color: rgb(226, 232, 240); border-style: solid">
+            <h2 style="color: rgb(0, 112, 74); font-weight: 700; height: 36px; padding-bottom: 0.5rem; padding-top: 0.5rem; width: 294px">UI 심화 - 4) 고급 입력 컴포넌트</h2>
+            <ul style="height: 168px; width: 294px; list-style-type: none">
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">멀티셀렉트 (Multi-select)</button></li>
+              <li style="height: 64px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 64px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">드래그 앤 드롭 정렬 (Drag &amp; Drop Sorting)</button></li>
+              <li style="height: 64px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 64px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">파일 업로드 미리보기 (File Upload Preview)</button></li>
+            </ul>
+          </div>
+          <div style="border-top-width: 2px; height: 240px; padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; width: 322px; border-color: rgb(226, 232, 240); border-style: solid">
+            <h2 style="color: rgb(0, 112, 74); font-weight: 700; height: 36px; padding-bottom: 0.5rem; padding-top: 0.5rem; width: 294px">UI 심화 확장 - 1) 모바일 최적화 UI</h2>
+            <ul style="height: 190px; width: 294px; list-style-type: none">
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">반응형 레이아웃 (Responsive Layout)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">제스처 UI (Gesture UI)</button></li>
+              <li style="height: 64px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 64px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">플로팅 액션 버튼 (Floating Action Button, FAB)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">바텀 시트 (Bottom Sheet)</button></li>
+            </ul>
+          </div>
+          <div style="border-top-width: 2px; height: 218px; padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; width: 322px; border-color: rgb(226, 232, 240); border-style: solid">
+            <h2 style="color: rgb(0, 112, 74); font-weight: 700; height: 36px; padding-bottom: 0.5rem; padding-top: 0.5rem; width: 294px">UI 심화 확장 - 2) 접근성 관련 UI</h2>
+            <ul style="height: 168px; width: 294px; list-style-type: none">
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">고대비 모드 (High Contrast Mode)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">대체 텍스트 (Alt Text)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">키보드 내비게이션 (Keyboard Navigation)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">포커스 표시 (Focus Indicator)</button></li>
+            </ul>
+          </div>
+          <div style="border-top-width: 2px; height: 282px; padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; width: 322px; border-color: rgb(226, 232, 240); border-style: solid">
+            <h2 style="color: rgb(0, 112, 74); font-weight: 700; height: 36px; padding-bottom: 0.5rem; padding-top: 0.5rem; width: 294px">UI 심화 확장 - 3) 최신 UI 패턴</h2>
+            <ul style="height: 232px; width: 294px; list-style-type: none">
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">네오모피즘 (Neumorphism)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">글래스모피즘 (Glassmorphism)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">다크 모드 (Dark Mode)</button></li>
+              <li style="height: 64px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 64px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">모션 기반 내비게이션 (Motion-based Navigation)</button></li>
+              <li style="height: 42px; width: 294px; display: list-item"><button style="appearance: button; color: rgb(51, 65, 85); cursor: pointer; height: 42px; width: 100%; display: inline-block; border-radius: 6px; padding: 0.75rem">모션 프리셋 (Motion Preset)</button></li>
+            </ul>
+          </div>
+        </div>
+        <div style="border-top-width: 2px; color: rgb(148, 163, 184); font-size: 12px; height: 44px; line-height: 14px; text-align: center; width: 336px; border-color: rgb(229, 231, 235); border-style: solid; padding: 1rem"><p style="height: 14px; width: 308px">Designed by Junseong Hong</p></div>
+      </aside>
+      <main style="flex-grow: 1; height: 1068px; width: 1860px; overflow: auto">
+        <div style="height: 724px; max-width: 56rem; overflow-block: visible; overflow-inline: visible; width: 784px; margin: auto; padding: 1rem" id="div-1">
+          <div style="background-color: rgb(255, 255, 255); height: 668px; width: 728px; border-radius: 12px; padding: 1.5rem" id="div-2">
+            <header style="align-items: center; height: 36px; justify-content: space-between; margin-bottom: 1.5rem; width: 672px; display: flex">
+              <button style="align-items: center; appearance: button; background-color: rgb(240, 247, 245); cursor: pointer; height: 36px; padding-bottom: 0.5rem; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.5rem; text-align: center; width: 88px; display: flex; border-radius: 8px">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" style="color: rgb(0, 112, 74); height: 1.25rem; overflow-block: hidden; overflow-inline: hidden; width: 1.25rem; overflow: hidden"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" fill="none" stroke="#00704a" style="overflow-block: visible; overflow-inline: visible"></path></svg><span style="color: rgb(0, 112, 74); font-weight: 600; height: 22px; margin-left: 0.5rem; width: 42px">홈으로</span>
+              </button>
+              <h1 style="color: rgb(15, 23, 42); flex-grow: 1; font-size: 28px; font-weight: 700; height: 32px; letter-spacing: 0px; line-height: 32px; padding-left: 1rem; padding-right: 1rem; text-align: center; width: 550px; display: none" id="h1-1">글래스모피즘 (Glassmorphism)</h1>
+              <div style="align-items: center; height: 36px; width: 36px; display: flex">
+                <div style="height: 36px; width: 36px; display: none" id="div-3">
+                  <button style="appearance: button; background-color: rgb(226, 232, 240); color: rgb(71, 85, 105); cursor: pointer; height: 36px; text-align: center; width: 36px; display: inline-block; border-radius: 10000px; padding: 0.5rem">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" style="height: 1.5rem; overflow-block: hidden; overflow-inline: hidden; width: 1.5rem; overflow: hidden"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" fill="none" stroke="#475569" style="overflow-block: visible; overflow-inline: visible"></path></svg>
+                  </button>
+                </div>
+              </div>
+            </header>
+            <div style="height: 74px; margin-top: 1.5rem; width: 672px" id="div-4">
+              <div style="align-items: center; height: 26px; width: 672px; display: flex">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" style="color: rgb(0, 112, 74); height: 1.5rem; overflow-block: hidden; overflow-inline: hidden; width: 1.5rem; overflow: hidden"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" fill="none" stroke="#00704a" style="overflow-block: visible; overflow-inline: visible"></path></svg>
+                <h3 style="color: rgb(71, 85, 105); font-size: 16px; font-weight: 600; height: 26px; line-height: 26px; margin-left: 0.75rem; width: 134px">설명 (Description)</h3>
+              </div>
+              <p style="border-left-width: 2px; color: rgb(51, 65, 85); height: 42px; margin-left: 0.875rem; margin-top: 0.5rem; padding-left: 2rem; width: 660px; border-color: rgb(0, 112, 74); border-style: solid">배경이 흐릿하게 비치는 반투명한 유리를 겹쳐 놓은 듯한 효과를 주는 디자인 스타일입니다. 배경의 색상과 형태가 은은하게 비쳐 깊이감과 개방감을 줍니다.</p>
+            </div>
+            <div style="height: 74px; margin-top: 1.5rem; width: 672px" id="div-5">
+              <div style="align-items: center; height: 26px; width: 672px; display: flex">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" style="color: rgb(0, 112, 74); height: 1.5rem; overflow-block: hidden; overflow-inline: hidden; width: 1.5rem; overflow: hidden"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" fill="none" stroke="#00704a" style="overflow-block: visible; overflow-inline: visible"></path></svg>
+                <h3 style="color: rgb(71, 85, 105); font-size: 16px; font-weight: 600; height: 26px; line-height: 26px; margin-left: 0.75rem; width: 198px">언제 써요? (When to Use?)</h3>
+              </div>
+              <p style="border-left-width: 2px; color: rgb(51, 65, 85); height: 42px; margin-left: 0.875rem; margin-top: 0.5rem; padding-left: 2rem; width: 660px; border-color: rgb(0, 112, 74); border-style: solid">macOS나 Windows 11의 UI처럼 모던하고 세련된 느낌을 주고자 할 때 사용됩니다. 카드, 사이드바, 모달 등 다양한 컴포넌트에 적용하여 깔끔하고 고급스러운 인터페이스를 만들 수 있습니다.</p>
+            </div>
+            <div style="height: 74px; margin-top: 1.5rem; width: 672px" id="div-6">
+              <div style="align-items: center; height: 26px; width: 672px; display: flex">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" style="color: rgb(0, 112, 74); height: 1.5rem; overflow-block: hidden; overflow-inline: hidden; width: 1.5rem; overflow: hidden">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" fill="none" stroke="#00704a" style="overflow-block: visible; overflow-inline: visible"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" fill="none" stroke="#00704a" style="overflow-block: visible; overflow-inline: visible"></path>
+                </svg>
+                <h3 style="color: rgb(71, 85, 105); font-size: 16px; font-weight: 600; height: 26px; line-height: 26px; margin-left: 0.75rem; width: 112px">예시 (Example)</h3>
+              </div>
+              <p style="border-left-width: 2px; color: rgb(51, 65, 85); height: 42px; margin-left: 0.875rem; margin-top: 0.5rem; padding-left: 2rem; width: 660px; border-color: rgb(0, 112, 74); border-style: solid">화려한 색상의 배경 이미지 위에, 배경을 블러 처리하여 비치게 하는 반투명한 흰색 카드를 띄우고 그 위에 텍스트와 아이콘을 배치한 디자인.</p>
+            </div>
+            <div style="border-top-width: 2px; height: 244px; margin-top: 2rem; padding-top: 1.5rem; width: 672px; border-color: rgb(229, 231, 235); border-style: solid">
+              <div style="align-items: center; height: 26px; width: 672px; display: flex">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" style="color: rgb(0, 112, 74); height: 1.5rem; overflow-block: hidden; overflow-inline: hidden; width: 1.5rem; overflow: hidden"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L15.232 5.232z" fill="none" stroke="#00704a" style="overflow-block: visible; overflow-inline: visible"></path></svg>
+                <h3 style="color: rgb(71, 85, 105); font-size: 16px; font-weight: 600; height: 26px; line-height: 26px; margin-left: 0.75rem; width: 216px">시각화 예시 (Visual Example)</h3>
+              </div>
+              <div style="align-items: center; background-color: rgb(248, 250, 252); color: rgb(0, 112, 74); height: 184px; justify-content: center; margin-top: 1rem; width: 672px; display: flex; border-width: 2px; border-color: rgb(229, 231, 235); border-style: solid; border-radius: 8px; padding: 1rem" id="div-7">
+                <div style="height: 140px; max-width: 20rem; width: 100%">
+                  <svg height="100" viewbox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" fill="rgb(0, 0, 0)" style="height: 100px; overflow-block: hidden; overflow-inline: hidden; width: 160px; overflow: hidden">
+                    <defs fill="rgb(0, 0, 0)" style="overflow-block: visible; overflow-inline: visible">
+                      <filter id="blur" fill="rgb(0, 0, 0)"><fegaussianblur stddeviation="5" fill="rgb(0, 0, 0)"></fegaussianblur></filter>
+                      <lineargradient x1="0%" y1="0%" x2="100%" y2="100%" fill="rgb(0, 0, 0)">
+                        <stop offset="0%" stop-color="rgba(255, 255, 255, 0.5)" fill="rgb(0, 0, 0)"></stop>
+                        <stop offset="100%" stop-color="rgba(255, 255, 255, 0.2)" fill="rgb(0, 0, 0)"></stop>
+                      </lineargradient>
+                    </defs>
+                    <circle cx="40" cy="30" r="30" fill="rgb(129, 140, 248)" filter="url(#blur)" style='filter: url("#blur"); overflow-block: visible; overflow-inline: visible'></circle>
+                    <circle cx="120" cy="70" r="40" fill="rgb(244, 114, 182)" filter="url(#blur)" style='filter: url("#blur"); overflow-block: visible; overflow-inline: visible'></circle>
+                    <rect x="20" y="15" height="70" rx="10" fill='url("#glass")' stroke="#ffffff" style="height: 70px; overflow-block: visible; overflow-inline: visible; width: 120px"></rect>
+                    <text style="font-size: 12px; line-height: 18px; overflow-block: visible; overflow-inline: visible">Glassmorphism</text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div style="width: 2196px"></div>
+  <div style="bottom: 1028px; left: 1852px; position: fixed; right: 24px; top: 40px; width: 320px; z-index: 9999"></div>
 </div>
-  </body>
+</body>
 </html>
-    
