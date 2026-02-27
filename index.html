@@ -30,6 +30,8 @@
         .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
         .scrollbar-thin::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,0.15); border-radius: 3px; }
         .dark .scrollbar-thin::-webkit-scrollbar-thumb { background-color: rgba(255,255,255,0.15); }
+        @keyframes balloon-in { from { opacity:0; transform:translateX(-50%) translateY(-6px); } to { opacity:1; transform:translateX(-50%) translateY(0); } }
+        .balloon-dropdown { animation: balloon-in 0.15s ease-out; }
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-900 transition-colors">
@@ -50,6 +52,7 @@
         let mobileCodeOpen = false;
         let selectedGroup = 0;
         let gridCategory = null;
+        let openDropdownGroup = null;
 
         // ===== i18n =====
         const strings = {
@@ -236,24 +239,62 @@
                 ? gridCategory
                 : (currentCats.length > 0 ? currentCats[0].ci : 0);
 
-            // Group segmented control
-            let groupTabsHtml = groupOrder.map((g, i) => {
+            // Desktop: group tabs with balloon dropdown
+            let desktopMenuHtml = groupOrder.map((g, i) => {
                 const isActive = i === gi;
-                return '<button class="group-tab-btn px-5 py-2 rounded-xl text-sm transition-all duration-200 whitespace-nowrap ' +
+                const isOpen = openDropdownGroup === i;
+                const cats = groupMap[g] || [];
+
+                let dropdownItems = cats.map(({ cat, ci }) => {
+                    const subName = cat.categoryName.replace(/^.*?[-–]\s*\d+\)\s*/, '');
+                    const numMatch = cat.categoryName.match(/(\d+)\)/);
+                    const num = numMatch ? numMatch[1] : '';
+                    const isSubActive = ci === activeCi && i === gi;
+                    return '<button class="subcategory-chip w-full text-left px-3 py-2.5 rounded-lg text-sm flex items-center gap-2.5 transition-colors ' +
+                        (isSubActive
+                            ? 'bg-starbucks-green/10 dark:bg-sky-400/15 text-starbucks-green dark:text-sky-400 font-semibold'
+                            : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/60 font-medium') +
+                        '" data-ci="' + ci + '" data-gi="' + i + '">' +
+                        '<span class="w-5 h-5 rounded bg-starbucks-green/8 dark:bg-sky-400/10 text-starbucks-green dark:text-sky-400 text-[10px] font-bold flex items-center justify-center flex-shrink-0">' + num + '</span>' +
+                        subName +
+                    '</button>';
+                }).join('');
+
+                return '<div class="relative">' +
+                    '<button class="group-tab-btn flex items-center gap-1 px-3.5 py-2 rounded-lg text-sm transition-all duration-200 whitespace-nowrap ' +
                     (isActive
-                        ? 'bg-white dark:bg-slate-600 text-starbucks-green dark:text-sky-400 font-bold shadow-sm'
-                        : 'text-slate-400 dark:text-slate-500 font-medium hover:text-slate-600 dark:hover:text-slate-300') +
+                        ? 'bg-starbucks-green text-white font-semibold'
+                        : 'text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-100 dark:hover:bg-slate-700') +
+                    '" data-gi="' + i + '">' +
+                        g +
+                        '<svg class="w-3 h-3 ml-0.5 transition-transform duration-200 ' + (isOpen ? 'rotate-180' : '') + '" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>' +
+                    '</button>' +
+                    (isOpen ?
+                        '<div class="balloon-dropdown absolute top-full left-1/2 -translate-x-1/2 mt-3 w-60 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 p-2 z-30">' +
+                            '<div class="absolute -top-[7px] left-1/2 -translate-x-1/2 w-3.5 h-3.5 bg-white dark:bg-slate-800 border-t border-l border-slate-200 dark:border-slate-700 rotate-45"></div>' +
+                            '<div class="relative space-y-0.5">' + dropdownItems + '</div>' +
+                        '</div>'
+                    : '') +
+                '</div>';
+            }).join('');
+
+            // Mobile: simple group tabs + chips (no dropdown)
+            let mobileGroupTabsHtml = groupOrder.map((g, i) => {
+                const isActive = i === gi;
+                return '<button class="group-tab-btn flex-shrink-0 px-4 py-2 rounded-lg text-sm transition-all whitespace-nowrap ' +
+                    (isActive
+                        ? 'bg-starbucks-green text-white font-semibold'
+                        : 'text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-100 dark:hover:bg-slate-700') +
                     '" data-gi="' + i + '">' + g + '</button>';
             }).join('');
 
-            // Sub-category chips with active state
-            let chipsHtml = currentCats.map(({ cat, ci }) => {
+            let mobileChipsHtml = currentCats.map(({ cat, ci }) => {
                 const subName = cat.categoryName.replace(/^.*?[-–]\s*\d+\)\s*/, '');
                 const isActive = ci === activeCi;
-                return '<button class="subcategory-chip flex-shrink-0 px-4 py-2 rounded-full text-sm transition-all duration-200 whitespace-nowrap ' +
+                return '<button class="subcategory-chip flex-shrink-0 px-3 py-1.5 rounded-full text-xs transition-all whitespace-nowrap ' +
                     (isActive
-                        ? 'bg-starbucks-green dark:bg-sky-500 text-white font-semibold shadow-sm'
-                        : 'text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600') +
+                        ? 'bg-starbucks-green dark:bg-sky-500 text-white font-semibold'
+                        : 'text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700') +
                     '" data-ci="' + ci + '">' + subName + '</button>';
             }).join('');
 
@@ -265,43 +306,44 @@
                     t.name.toLowerCase().includes(sq) || t.description.toLowerCase().includes(sq)
                 );
             }
-
-            // Calculate grid layout for viewport-filling
-            const count = terms.length;
-            let cols, rows;
-            if (count === 0) { cols = 1; rows = 1; }
-            else if (count <= 5) { rows = 1; cols = count; }
-            else if (count <= 12) { rows = 2; cols = Math.ceil(count / 2); }
-            else { rows = 3; cols = Math.ceil(count / 3); }
+            const activeSubName = activeCat ? activeCat.categoryName.replace(/^.*?[-–]\s*\d+\)\s*/, '') : '';
 
             // Build cards
             let cardsHtml = '';
-            if (count === 0) {
-                cardsHtml = '<div class="col-span-full flex items-center justify-center text-slate-400 dark:text-slate-500 text-sm">' + t('noTermsFound') + '</div>';
+            if (terms.length === 0) {
+                cardsHtml = '<div class="col-span-full text-center py-16 text-slate-400 dark:text-slate-500">' + t('noTermsFound') + '</div>';
             } else {
                 terms.forEach(term => {
-                    cardsHtml += '<div class="grid-card bg-white dark:bg-slate-800 rounded-2xl shadow-sm hover:shadow-xl cursor-pointer border border-gray-200 dark:border-slate-700 flex flex-col items-center justify-center text-center transition-all duration-300 hover:border-starbucks-green/30 dark:hover:border-sky-400/30" data-ci="' + activeCi + '" data-ti="' + term.ti + '">' +
-                        '<div class="flex items-center justify-center text-starbucks-green dark:text-sky-400 mb-2 p-2">' +
+                    cardsHtml += '<div class="grid-card bg-white dark:bg-slate-800 rounded-2xl shadow-sm hover:shadow-lg cursor-pointer border border-gray-200 dark:border-slate-700 flex flex-col items-center justify-center text-center p-5 transition-all duration-300 hover:-translate-y-1 hover:border-starbucks-green/30 dark:hover:border-sky-400/30" data-ci="' + activeCi + '" data-ti="' + term.ti + '">' +
+                        '<div class="flex items-center justify-center text-starbucks-green dark:text-sky-400 mb-3" style="min-height:80px;">' +
                             (term.visualExample || '') +
                         '</div>' +
-                        '<h4 class="text-sm font-semibold text-slate-700 dark:text-slate-200 px-3 pb-3">' + term.name + '</h4>' +
+                        '<h4 class="text-sm font-medium text-slate-700 dark:text-slate-200 leading-snug">' + term.name + '</h4>' +
                     '</div>';
                 });
             }
 
             return `
-            <div class="min-h-screen lg:h-screen lg:overflow-hidden bg-slate-50 dark:bg-slate-900 flex flex-col">
+            <div class="min-h-screen bg-slate-50 dark:bg-slate-900">
+                ${openDropdownGroup !== null ? '<div class="fixed inset-0 z-10" id="dropdownOverlay"></div>' : ''}
+
                 <!-- Header -->
-                <header class="flex-shrink-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700 z-20">
+                <header class="sticky top-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700 z-20">
                     <div class="px-4 sm:px-6">
                         <div class="flex items-center justify-between h-14">
-                            <span class="text-xl font-extrabold tracking-tight text-starbucks-green dark:text-sky-400" style="font-family:'Google Sans','Noto Sans KR',sans-serif;letter-spacing:-0.5px;">${t('glossaryTitle')}</span>
-                            <div class="flex items-center gap-2">
+                            <span class="text-xl font-extrabold tracking-tight text-starbucks-green dark:text-sky-400 flex-shrink-0" style="font-family:'Google Sans','Noto Sans KR',sans-serif;letter-spacing:-0.5px;">${t('glossaryTitle')}</span>
+
+                            <!-- Desktop Group Menu -->
+                            <div class="hidden md:flex items-center gap-1.5 mx-4">
+                                ${desktopMenuHtml}
+                            </div>
+
+                            <div class="flex items-center gap-2 flex-shrink-0">
                                 <div class="relative">
                                     <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">${icons.search}</span>
-                                    <input id="gridSearch" type="text" value="${searchTerm}" placeholder="${t('searchPlaceholder')}" class="pl-10 pr-4 py-2 w-40 sm:w-48 rounded-lg bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-starbucks-green" />
+                                    <input id="gridSearch" type="text" value="${searchTerm}" placeholder="${t('searchPlaceholder')}" class="pl-10 pr-4 py-2 w-36 sm:w-44 rounded-lg bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-starbucks-green" />
                                 </div>
-                                <button id="langToggle" class="px-3 py-2 rounded-md text-sm font-semibold text-starbucks-green dark:text-sky-400 hover:bg-starbucks-green-light dark:hover:bg-slate-700 transition-colors">
+                                <button id="langToggle" class="px-2.5 py-2 rounded-md text-sm font-semibold text-starbucks-green dark:text-sky-400 hover:bg-starbucks-green-light dark:hover:bg-slate-700 transition-colors">
                                     ${language === 'ko' ? 'EN' : 'KO'}
                                 </button>
                                 <button id="themeToggle" class="p-2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors">
@@ -312,31 +354,36 @@
                     </div>
                 </header>
 
-                <!-- Navigation -->
-                <nav class="flex-shrink-0 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 z-10">
-                    <div class="flex justify-center py-3 px-4">
-                        <div class="inline-flex bg-slate-100 dark:bg-slate-700/50 rounded-2xl p-1.5 gap-1">
-                            ${groupTabsHtml}
-                        </div>
+                <!-- Mobile Navigation (< md) -->
+                <div class="md:hidden sticky top-14 z-10 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+                    <div class="flex gap-1.5 px-4 py-2 overflow-x-auto scrollbar-thin">
+                        ${mobileGroupTabsHtml}
                     </div>
-                    <div class="flex gap-2 overflow-x-auto px-4 sm:px-6 pb-3 justify-center scrollbar-thin">
-                        ${chipsHtml}
+                    <div class="flex gap-2 px-4 pb-2.5 overflow-x-auto scrollbar-thin">
+                        ${mobileChipsHtml}
                     </div>
-                </nav>
+                </div>
 
-                <!-- Content -->
-                <main class="flex-1 min-h-0 overflow-y-auto lg:overflow-hidden">
+                <!-- Section Title -->
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-3">
+                    <div class="flex items-center gap-3">
+                        <h2 class="text-lg font-bold text-slate-700 dark:text-slate-200">${activeSubName}</h2>
+                        <span class="text-xs text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-700/50 px-2 py-0.5 rounded-full">${terms.length}</span>
+                    </div>
+                </div>
+
+                <!-- Cards Grid -->
+                <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
                     <style>
-                        .card-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; padding:16px; height:auto; }
-                        @media(min-width:640px) { .card-grid { grid-template-columns:repeat(3,1fr); gap:16px; padding:20px; } }
-                        @media(min-width:1024px) { .card-grid { grid-template-columns:repeat(${cols},1fr); grid-template-rows:repeat(${rows},1fr); height:100%; gap:20px; padding:24px 32px; } }
+                        .card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,200px)); justify-content:center; gap:16px; }
+                        @media(min-width:640px) { .card-grid { grid-template-columns:repeat(auto-fill,minmax(170px,220px)); gap:20px; } }
                     </style>
                     <div class="card-grid">
                         ${cardsHtml}
                     </div>
                 </main>
 
-                <footer class="flex-shrink-0 text-center py-1.5 text-xs text-slate-400 dark:text-slate-500 border-t border-slate-100 dark:border-slate-800">
+                <footer class="text-center py-4 text-xs text-slate-400 dark:text-slate-500 border-t border-slate-100 dark:border-slate-800">
                     ${t('designedBy')}
                 </footer>
             </div>`;
@@ -561,22 +608,43 @@
                 });
             });
 
-            // Group tab buttons (grid view)
+            // Group tab buttons (grid view) — toggle dropdown
             document.querySelectorAll('.group-tab-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    selectedGroup = parseInt(btn.dataset.gi);
-                    gridCategory = null;
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const newGi = parseInt(btn.dataset.gi);
+                    if (selectedGroup === newGi) {
+                        openDropdownGroup = openDropdownGroup === newGi ? null : newGi;
+                    } else {
+                        selectedGroup = newGi;
+                        gridCategory = null;
+                        openDropdownGroup = newGi;
+                    }
                     render();
                 });
             });
 
-            // Sub-category chips (filter to category)
+            // Sub-category chips (dropdown items + mobile chips)
             document.querySelectorAll('.subcategory-chip').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    gridCategory = parseInt(btn.dataset.ci);
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const ci = parseInt(btn.dataset.ci);
+                    const giAttr = btn.dataset.gi;
+                    if (giAttr !== undefined) selectedGroup = parseInt(giAttr);
+                    gridCategory = ci;
+                    openDropdownGroup = null;
                     render();
                 });
             });
+
+            // Dropdown overlay (close on outside click)
+            const dropdownOverlay = document.getElementById('dropdownOverlay');
+            if (dropdownOverlay) {
+                dropdownOverlay.addEventListener('click', () => {
+                    openDropdownGroup = null;
+                    render();
+                });
+            }
 
             // Left sidebar category buttons (desktop)
             document.querySelectorAll('.category-btn').forEach(btn => {
@@ -701,6 +769,7 @@
             selectedTermIndex = null;
             searchTerm = '';
             gridCategory = null;
+            openDropdownGroup = null;
             render();
         }
 
