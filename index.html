@@ -230,8 +230,9 @@
                 const groupMatch = cat.categoryName.match(/^(.*?)\s*[-–]\s*\d/);
                 const group = groupMatch ? groupMatch[1].trim() : '';
                 if (group && group !== lastGroup) {
-                    if (lastGroup !== '') sidebarHtml += '<div class="my-2.5"></div>';
-                    sidebarHtml += '<div class="px-3 pt-1 pb-1.5"><span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">' + group + '</span></div>';
+                    if (lastGroup !== '') sidebarHtml += '<div class="mt-4 mb-1.5"></div>';
+                    sidebarHtml += '<div class="mx-2 px-3 py-2 rounded-lg bg-gradient-to-r from-starbucks-green/10 to-transparent dark:from-sky-400/10 dark:to-transparent border-l-[3px] border-starbucks-green dark:border-sky-400">' +
+                        '<span class="text-[12px] font-bold tracking-wide text-starbucks-green dark:text-sky-400">' + group + '</span></div>';
                 }
                 lastGroup = group;
 
