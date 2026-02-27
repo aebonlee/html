@@ -271,7 +271,7 @@
             } else {
                 const code = ce[activeCodeTab] || '';
                 const langColors = { html: 'text-orange-500', css: 'text-blue-500', js: 'text-yellow-500' };
-                content = '<div class="relative"><pre class="bg-slate-50 dark:bg-slate-900/80 rounded-b-lg p-4 overflow-auto text-sm leading-relaxed scrollbar-thin" style="max-height:calc(100vh - 10rem);"><code class="' + (langColors[activeCodeTab] || '') + ' font-mono whitespace-pre">' + escapeHtml(code) + '</code></pre></div>';
+                content = '<div class="relative"><pre class="bg-slate-50 dark:bg-slate-900/80 rounded-b-lg p-4 text-sm leading-relaxed"><code class="' + (langColors[activeCodeTab] || '') + ' font-mono whitespace-pre">' + escapeHtml(code) + '</code></pre></div>';
             }
 
             return '<div class="flex border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800">' + tabBtns + '</div>' + content;
