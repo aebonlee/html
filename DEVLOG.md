@@ -482,6 +482,27 @@ overflow-x: clip + overflow-y: visible
 | **상세 뷰** | 탑메뉴 + 좌측 아코디언(UI 기본~) + 콘텐츠 + 코드 패널 | 탑메뉴 + 햄버거 + 드롭다운 |
 | **Vibe Coding 뷰** | 탑메뉴 + 탭바 + 콘텐츠 | 탑메뉴 + 햄버거 + 탭바 |
 
+### Phase 18 - 다크 블루 그라데이션 테마 통일 (2026-02-27)
+
+**주요 변경 사항:**
+
+#### 활성 상태 컬러 통일: 다크 블루 그라데이션
+- **적용 범위**: 모든 활성 메뉴/버튼에 `bg-gradient-to-r from-starbucks-green to-blue-600` 적용
+  - `#1E3A5F` (다크 네이비) → `#2563EB` (블루-600) 그라데이션
+- **기존 Vibe Coding 버튼**: `from-violet-500 to-fuchsia-500` (보라-핑크) → 다크 블루 그라데이션으로 변경
+- **기존 그룹 탭**: 단색 `bg-starbucks-green` → 다크 블루 그라데이션으로 변경
+
+#### 적용 위치 (7곳)
+| 위치 | 기존 | 변경 |
+|------|------|------|
+| 헤더 Vibe Coding 버튼 | `from-violet-500 to-fuchsia-500` | `from-starbucks-green to-blue-600` |
+| 헤더 그룹 탭 | `bg-starbucks-green` | `bg-gradient-to-r from-starbucks-green to-blue-600` |
+| 모바일 메뉴 Vibe Coding | `fuchsia-600/fuchsia-50` | `from-starbucks-green to-blue-600` |
+| 사이드바 Vibe Coding | `from-violet-500 to-fuchsia-500` | `from-starbucks-green to-blue-600` |
+| 사이드바 그룹 링크 | `bg-starbucks-green` | `bg-gradient-to-r from-starbucks-green to-blue-600` |
+| 모바일 그룹 탭 | `bg-starbucks-green` | `bg-gradient-to-r from-starbucks-green to-blue-600` |
+| 사이드바 카테고리 버튼 | `bg-starbucks-green` | `bg-gradient-to-r from-starbucks-green to-blue-600` |
+
 ---
 
 ## 3. 파일 구조
@@ -668,6 +689,7 @@ D:\html\
 | 2026-02-27 | `af0c122` | 헤더 드롭다운 클리핑 수정 (overflow-x:clip + overflow-y:visible 축 분리) |
 | 2026-02-27 | - | 하위 페이지 좌측 사이드바 네비게이션 (탑메뉴 수직 나열 + 기존 아코디언 유지, 클래스 기반 이벤트 통합) |
 | 2026-02-27 | - | 하위 페이지 탑메뉴 + 기존 좌측 메뉴 복원 (renderHeader 통일, 사이드바 UI기본부터 표시) |
+| 2026-02-27 | - | 다크 블루 그라데이션 테마 통일 (모든 활성 메뉴 from-starbucks-green to-blue-600, violet/fuchsia 제거) |
 
 ---
 

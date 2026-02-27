@@ -212,7 +212,7 @@
                 sidebarHtml += '<div>' +
                     '<button class="category-btn w-full flex items-center justify-between gap-1.5 px-3 py-2 rounded-lg text-[13px] transition-all duration-150 ' +
                     (isActive
-                        ? 'bg-starbucks-green text-white font-semibold shadow-sm'
+                        ? 'bg-gradient-to-r from-starbucks-green to-blue-600 text-white font-semibold shadow-sm'
                         : isExpanded
                             ? 'bg-starbucks-green/10 dark:bg-sky-400/10 text-starbucks-green dark:text-sky-400 font-semibold'
                             : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/60 font-medium') +
@@ -282,7 +282,7 @@
                 return '<div class="relative">' +
                     '<button class="header-group-tab flex items-center gap-1 px-3 py-2 rounded-lg text-sm transition-all duration-200 whitespace-nowrap ' +
                     (isActive
-                        ? 'bg-starbucks-green text-white font-semibold'
+                        ? 'bg-gradient-to-r from-starbucks-green to-blue-600 text-white font-semibold'
                         : 'text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-100 dark:hover:bg-slate-700') +
                     '" data-gi="' + i + '">' +
                         g +
@@ -313,7 +313,7 @@
                         '</button>' +
                         '<nav class="hidden md:flex items-center gap-1 mx-4 flex-1 min-w-0" style="overflow-x:clip;overflow-y:visible">' +
                             '<button id="navVibeCoding" class="flex-shrink-0 px-3 py-2 rounded-lg text-sm whitespace-nowrap transition-all ' +
-                                (showVibeCodingInfo ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white font-semibold' : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium') +
+                                (showVibeCodingInfo ? 'bg-gradient-to-r from-starbucks-green to-blue-600 text-white font-semibold' : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium') +
                             '">Vibe Coding</button>' +
                             '<button id="navWebProg" class="flex-shrink-0 px-3 py-2 rounded-lg text-sm whitespace-nowrap text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium transition-all">Web Programming</button>' +
                             groupMenuHtml +
@@ -350,7 +350,7 @@
 
             // Vibe Coding
             menuItemsHtml += '<button id="mNavVibeCoding" class="w-full text-left px-5 py-3 text-sm font-medium ' +
-                (showVibeCodingInfo ? 'text-fuchsia-600 dark:text-fuchsia-400 bg-fuchsia-50 dark:bg-fuchsia-900/20' : 'text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50') +
+                (showVibeCodingInfo ? 'text-white bg-gradient-to-r from-starbucks-green to-blue-600' : 'text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50') +
                 ' transition-colors">Vibe Coding</button>';
 
             // Web Programming
@@ -416,7 +416,7 @@
 
             // Top menu items (same as main header): Vibe Coding, Web Prog, Groups, Q&A, 교육신청
             let topMenuHtml = '<button id="snavVibeCoding" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ' +
-                (showVibeCodingInfo ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700') +
+                (showVibeCodingInfo ? 'bg-gradient-to-r from-starbucks-green to-blue-600 text-white' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700') +
                 '">Vibe Coding</button>' +
                 '<button id="snavWebProg" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">Web Programming</button>';
 
@@ -424,7 +424,7 @@
                 const isActive = i === activeGroupIdx;
                 topMenuHtml += '<button class="group-nav-link w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ' +
                     (isActive
-                        ? 'bg-starbucks-green text-white font-semibold'
+                        ? 'bg-gradient-to-r from-starbucks-green to-blue-600 text-white font-semibold'
                         : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700') +
                     '" data-gi="' + i + '">' + g + '</button>';
             });
@@ -498,7 +498,7 @@
                 const isActive = i === gi;
                 return '<button class="group-tab-btn flex-shrink-0 px-4 py-2 rounded-lg text-sm transition-all whitespace-nowrap ' +
                     (isActive
-                        ? 'bg-starbucks-green text-white font-semibold'
+                        ? 'bg-gradient-to-r from-starbucks-green to-blue-600 text-white font-semibold'
                         : 'text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-100 dark:hover:bg-slate-700') +
                     '" data-gi="' + i + '">' + g + '</button>';
             }).join('');
