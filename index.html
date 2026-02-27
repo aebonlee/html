@@ -34,6 +34,8 @@
         .balloon-dropdown { animation: balloon-in 0.15s ease-out; }
         @keyframes slide-in-right { from { transform:translateX(100%); } to { transform:translateX(0); } }
         .mobile-menu-panel { animation: slide-in-right 0.2s ease-out; }
+        .scrollbar-none::-webkit-scrollbar { display: none; }
+        .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-900 transition-colors">
@@ -304,12 +306,12 @@
 
             return (openDropdownGroup !== null ? '<div class="fixed inset-0 z-10" id="dropdownOverlay"></div>' : '') +
             '<header class="sticky top-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700 z-20">' +
-                '<div class="px-4 sm:px-6">' +
+                '<div class="max-w-7xl mx-auto px-4 sm:px-6">' +
                     '<div class="flex items-center justify-between h-14">' +
                         '<button id="homeBtn" class="flex items-center gap-1.5 hover:opacity-80 transition-opacity flex-shrink-0">' +
                             '<span class="text-xl font-extrabold tracking-tight text-starbucks-green dark:text-sky-400" style="font-family:\'Google Sans\',\'Noto Sans KR\',sans-serif;letter-spacing:-0.5px;">' + t('glossaryTitle') + '</span>' +
                         '</button>' +
-                        '<nav class="hidden md:flex items-center gap-1 mx-4 overflow-x-auto scrollbar-thin flex-1 min-w-0">' +
+                        '<nav class="hidden md:flex items-center gap-1 mx-4 overflow-x-auto scrollbar-none flex-1 min-w-0">' +
                             '<button id="navVibeCoding" class="flex-shrink-0 px-3 py-2 rounded-lg text-sm whitespace-nowrap transition-all ' +
                                 (showVibeCodingInfo ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white font-semibold' : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium') +
                             '">Vibe Coding</button>' +
@@ -635,7 +637,7 @@
                 ${renderMobileMenu()}
 
                 <!-- Mobile Dropdowns (< md) -->
-                <div class="md:hidden px-4 pt-3 pb-2 space-y-2 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
+                <div class="md:hidden sticky top-14 z-10 px-4 pt-3 pb-2 space-y-2 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
                     <select id="mobileCategoryDropdown" class="w-full px-4 py-2.5 rounded-lg bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-starbucks-green cursor-pointer">
                         ${mobileCategoryOptions}
                     </select>
@@ -647,7 +649,7 @@
                 <!-- 3-Panel Layout -->
                 <div class="flex">
                     <!-- Left Sidebar: Accordion Nav -->
-                    <aside class="hidden md:block w-64 flex-shrink-0 border-r border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto scrollbar-thin self-start">
+                    <aside class="hidden md:block w-64 flex-shrink-0 border-r border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 sticky top-14 z-10 h-[calc(100vh-3.5rem)] overflow-y-auto scrollbar-thin self-start">
                         <nav class="p-2.5 space-y-0.5">
                             ${sidebarHtml}
                         </nav>
@@ -663,7 +665,7 @@
 
                     <!-- Right Code Panel (lg+ Desktop) -->
                     ${selectedTerm ? `
-                    <aside class="hidden lg:block w-[580px] flex-shrink-0 border-l border-slate-200 dark:border-slate-700 sticky top-14 h-[calc(100vh-3.5rem)] self-start overflow-hidden flex flex-col">
+                    <aside class="hidden lg:block w-[580px] flex-shrink-0 border-l border-slate-200 dark:border-slate-700 sticky top-14 z-10 h-[calc(100vh-3.5rem)] self-start overflow-hidden flex flex-col">
                         <div class="bg-white dark:bg-slate-800 h-full flex flex-col">
                             <div class="px-4 py-3 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
                                 ${icons.code}
