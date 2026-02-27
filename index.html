@@ -712,7 +712,7 @@
 
             return `
             <div class="min-h-screen bg-slate-50 dark:bg-slate-900">
-                ${renderMobileSubHeader()}
+                ${renderHeader()}
                 ${renderMobileMenu()}
 
                 <!-- Mobile Dropdowns (< md) -->
@@ -725,9 +725,14 @@
                     </select>
                 </div>
 
-                <!-- Layout: Side Nav + Content + Code Panel -->
+                <!-- 3-Panel Layout -->
                 <div class="flex">
-                    ${renderSideNav(sidebarHtml)}
+                    <!-- Left Sidebar: Accordion Nav -->
+                    <aside class="hidden md:block w-64 flex-shrink-0 border-r border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 sticky top-14 z-10 h-[calc(100vh-3.5rem)] overflow-y-auto scrollbar-thin self-start">
+                        <nav class="p-2.5 space-y-0.5">
+                            ${sidebarHtml}
+                        </nav>
+                    </aside>
 
                     <!-- Center Content -->
                     <main class="flex-1 min-w-0 p-4 md:p-6 lg:px-8 lg:py-6">
@@ -739,7 +744,7 @@
 
                     <!-- Right Code Panel (lg+ Desktop) -->
                     ${selectedTerm ? `
-                    <aside class="hidden lg:block w-[580px] flex-shrink-0 border-l border-slate-200 dark:border-slate-700 sticky top-0 z-10 h-screen self-start overflow-hidden flex flex-col">
+                    <aside class="hidden lg:block w-[580px] flex-shrink-0 border-l border-slate-200 dark:border-slate-700 sticky top-14 z-10 h-[calc(100vh-3.5rem)] self-start overflow-hidden flex flex-col">
                         <div class="bg-white dark:bg-slate-800 h-full flex flex-col">
                             <div class="px-4 py-3 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
                                 ${icons.code}
@@ -1050,29 +1055,23 @@
 
             return `
             <div class="min-h-screen bg-slate-50 dark:bg-slate-900">
-                ${renderMobileSubHeader()}
+                ${renderHeader()}
                 ${renderMobileMenu()}
 
-                <div class="flex">
-                    ${renderSideNav('')}
-
-                    <div class="flex-1 min-w-0">
-                        <div class="sticky top-14 md:top-0 z-10 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
-                            <div class="max-w-4xl mx-auto flex overflow-x-auto scrollbar-thin px-4">
-                                ${tabBarHtml}
-                            </div>
-                        </div>
-
-                        <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
-                            ${c}
-                            ${sourcesHtml}
-                        </main>
-
-                        <footer class="text-center py-4 text-xs text-slate-400 dark:text-slate-500 border-t border-slate-100 dark:border-slate-800">
-                            ${t('designedBy')}
-                        </footer>
+                <div class="sticky top-14 z-10 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+                    <div class="max-w-4xl mx-auto flex overflow-x-auto scrollbar-thin px-4">
+                        ${tabBarHtml}
                     </div>
                 </div>
+
+                <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+                    ${c}
+                    ${sourcesHtml}
+                </main>
+
+                <footer class="text-center py-4 text-xs text-slate-400 dark:text-slate-500 border-t border-slate-100 dark:border-slate-800">
+                    ${t('designedBy')}
+                </footer>
             </div>`;
         }
 
