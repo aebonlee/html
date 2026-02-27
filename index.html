@@ -55,7 +55,7 @@
                 searchPlaceholder: '용어 검색...',
                 noTermsFound: '검색된 용어가 없습니다.',
                 goHome: '홈으로',
-                designedBy: 'Designed by Junseong Hong',
+                designedBy: 'Designed by Ph.D Aebon Lee',
                 description: '설명 (Description)',
                 whenToUse: '언제 써요? (When to Use?)',
                 example: '예시 (Example)',
@@ -72,7 +72,7 @@
                 searchPlaceholder: 'Search terms...',
                 noTermsFound: 'No terms found.',
                 goHome: 'Home',
-                designedBy: 'Designed by Junseong Hong',
+                designedBy: 'Designed by Ph.D Aebon Lee',
                 description: 'Description',
                 whenToUse: 'When to Use?',
                 example: 'Example',
@@ -159,7 +159,7 @@
             } else {
                 for (const catName in grouped) {
                     cardsHtml += `<div class="col-span-full mt-6 mb-2 first:mt-0">
-                        <h3 class="text-lg font-semibold text-starbucks-green dark:text-sky-400">${catName}</h3>
+                        <h3 class="text-lg font-medium text-starbucks-green dark:text-sky-400">${catName}</h3>
                     </div>`;
                     grouped[catName].forEach(term => {
                         cardsHtml += `<div class="grid-card bg-white dark:bg-slate-800 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-gray-200 dark:border-slate-700 overflow-hidden" data-ci="${term.ci}" data-ti="${term.ti}">
@@ -167,7 +167,7 @@
                                 <div class="w-full flex justify-center items-center mb-4 text-starbucks-green dark:text-sky-400 transition-colors duration-300" style="min-height:120px;">
                                     ${term.visualExample || ''}
                                 </div>
-                                <h4 class="text-base font-semibold text-slate-800 dark:text-slate-200 leading-tight">${term.name}</h4>
+                                <h4 class="text-sm font-medium text-slate-800 dark:text-slate-200 leading-snug">${term.name}</h4>
                             </div>
                         </div>`;
                     });
@@ -238,11 +238,11 @@
                 if (filteredTerms.length === 0) return;
 
                 sidebarHtml += `<div class="mb-4">
-                    <h3 class="text-xs font-semibold text-starbucks-green dark:text-sky-400 uppercase tracking-wider mb-2 px-2">${cat.categoryName}</h3>`;
+                    <h3 class="text-xs font-medium text-starbucks-green dark:text-sky-400 uppercase tracking-wider mb-2 px-2">${cat.categoryName}</h3>`;
                 filteredTerms.forEach((term, origIdx) => {
                     const ti = cat.terms.indexOf(term);
                     const isSelected = selectedCategoryIndex === ci && selectedTermIndex === ti;
-                    sidebarHtml += `<button class="sidebar-term w-full text-left px-3 py-2 rounded-md text-sm transition-colors duration-150 ${isSelected ? 'bg-starbucks-green text-white font-semibold' : 'text-slate-600 dark:text-slate-300 hover:bg-starbucks-green-light dark:hover:bg-slate-700'}" data-ci="${ci}" data-ti="${ti}">
+                    sidebarHtml += `<button class="sidebar-term w-full text-left px-3 py-2 rounded-md text-sm transition-colors duration-150 ${isSelected ? 'bg-starbucks-green text-white font-medium' : 'text-slate-600 dark:text-slate-300 font-normal hover:bg-starbucks-green-light dark:hover:bg-slate-700'}" data-ci="${ci}" data-ti="${ti}">
                         ${term.name}
                     </button>`;
                 });
