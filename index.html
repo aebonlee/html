@@ -216,24 +216,40 @@
             </div>`;
         }
 
-        // ===== Detail View =====
+        // ===== Detail View (3-Panel Layout) =====
         function renderDetailView() {
             const data = getData();
 
-            // Category tabs (horizontal scrollable chips)
-            let tabsHtml = '';
+            // Left sidebar - category list
+            let categoryListHtml = '';
             data.forEach((cat, ci) => {
                 const isActive = selectedCategoryIndex === ci;
-                tabsHtml += `<button class="category-tab whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-colors duration-150 flex-shrink-0 ${isActive ? 'bg-starbucks-green text-white shadow-sm' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-starbucks-green-light dark:hover:bg-slate-700 border border-gray-200 dark:border-slate-600'}" data-ci="${ci}">
+                categoryListHtml += `<button class="category-btn w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150 ${isActive ? 'bg-starbucks-green text-white shadow-sm' : 'text-slate-600 dark:text-slate-300 hover:bg-starbucks-green-light dark:hover:bg-slate-700'}" data-ci="${ci}">
                     ${cat.categoryName}
                 </button>`;
             });
 
-            // Term dropdown for selected category
-            let dropdownHtml = '';
+            // Right sidebar - term list for current category
+            let termListHtml = '';
             if (selectedCategoryIndex !== null && data[selectedCategoryIndex]) {
                 data[selectedCategoryIndex].terms.forEach((term, ti) => {
-                    dropdownHtml += `<option value="${ti}" ${selectedTermIndex === ti ? 'selected' : ''}>${term.name}</option>`;
+                    const isActive = selectedTermIndex === ti;
+                    termListHtml += `<button class="term-btn w-full text-left px-3 py-2 rounded-lg text-sm transition-colors duration-150 ${isActive ? 'bg-starbucks-green text-white font-medium' : 'text-slate-600 dark:text-slate-300 hover:bg-starbucks-green-light dark:hover:bg-slate-700'}" data-ti="${ti}">
+                        ${term.name}
+                    </button>`;
+                });
+            }
+
+            // Mobile dropdowns
+            let mobileCategoryOptions = '';
+            data.forEach((cat, ci) => {
+                mobileCategoryOptions += `<option value="${ci}" ${selectedCategoryIndex === ci ? 'selected' : ''}>${cat.categoryName}</option>`;
+            });
+
+            let mobileTermOptions = '';
+            if (selectedCategoryIndex !== null && data[selectedCategoryIndex]) {
+                data[selectedCategoryIndex].terms.forEach((term, ti) => {
+                    mobileTermOptions += `<option value="${ti}" ${selectedTermIndex === ti ? 'selected' : ''}>${term.name}</option>`;
                 });
             }
 
@@ -244,7 +260,6 @@
                 <div class="bg-white dark:bg-slate-800 rounded-xl shadow-md p-6 md:p-8">
                     <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-200 mb-6">${selectedTerm.name}</h2>
 
-                    <!-- Description -->
                     <div class="mb-6">
                         <h3 class="flex items-center text-lg font-semibold text-starbucks-green dark:text-sky-400 mb-3">
                             ${icons.info} ${t('description')}
@@ -252,7 +267,6 @@
                         <p class="text-slate-600 dark:text-slate-300 leading-relaxed">${selectedTerm.description}</p>
                     </div>
 
-                    <!-- When to Use -->
                     <div class="mb-6">
                         <h3 class="flex items-center text-lg font-semibold text-starbucks-green dark:text-sky-400 mb-3">
                             ${icons.question} ${t('whenToUse')}
@@ -260,7 +274,6 @@
                         <p class="text-slate-600 dark:text-slate-300 leading-relaxed">${selectedTerm.usage}</p>
                     </div>
 
-                    <!-- Example -->
                     <div class="mb-6">
                         <h3 class="flex items-center text-lg font-semibold text-starbucks-green dark:text-sky-400 mb-3">
                             ${icons.eye} ${t('example')}
@@ -268,7 +281,6 @@
                         <p class="text-slate-600 dark:text-slate-300 leading-relaxed">${selectedTerm.example}</p>
                     </div>
 
-                    <!-- Visual Example -->
                     ${selectedTerm.visualExample ? `
                     <div class="mb-2">
                         <h3 class="flex items-center text-lg font-semibold text-starbucks-green dark:text-sky-400 mb-3">
@@ -285,7 +297,7 @@
             <div class="min-h-screen bg-slate-50 dark:bg-slate-900">
                 <!-- Sticky Header -->
                 <header class="sticky top-0 bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700 z-20">
-                    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+                    <div class="px-4 sm:px-6">
                         <div class="flex items-center justify-between h-14">
                             <div class="flex items-center gap-3">
                                 <button id="homeBtn" class="flex items-center gap-2 text-starbucks-green dark:text-sky-400 hover:bg-starbucks-green-light dark:hover:bg-slate-700 px-3 py-1.5 rounded-lg transition-colors">
@@ -306,31 +318,40 @@
                     </div>
                 </header>
 
-                <!-- Category Tabs (horizontal scroll) -->
-                <div class="sticky top-14 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-slate-200 dark:border-slate-700 z-10">
-                    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3">
-                        <div class="flex gap-2 overflow-x-auto scrollbar-thin pb-1" id="categoryTabsContainer">
-                            ${tabsHtml}
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Term Dropdown -->
-                <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-4 pb-2">
-                    <select id="termDropdown" class="w-full px-4 py-3 rounded-lg bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-starbucks-green cursor-pointer shadow-sm">
-                        ${dropdownHtml}
+                <!-- Mobile Dropdowns (visible < md) -->
+                <div class="md:hidden px-4 pt-3 pb-2 space-y-2 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
+                    <select id="mobileCategoryDropdown" class="w-full px-4 py-2.5 rounded-lg bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-starbucks-green cursor-pointer">
+                        ${mobileCategoryOptions}
+                    </select>
+                    <select id="mobileTermDropdown" class="w-full px-4 py-2.5 rounded-lg bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-starbucks-green cursor-pointer">
+                        ${mobileTermOptions}
                     </select>
                 </div>
 
-                <!-- Content -->
-                <main class="max-w-5xl mx-auto px-4 sm:px-6 py-4">
-                    ${contentHtml}
-                </main>
+                <!-- 3-Panel Layout (desktop) -->
+                <div class="flex">
+                    <!-- Left Sidebar: Categories -->
+                    <aside class="hidden md:block w-48 flex-shrink-0 border-r border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto scrollbar-thin self-start">
+                        <nav class="p-3 space-y-1">
+                            ${categoryListHtml}
+                        </nav>
+                    </aside>
 
-                <!-- Footer -->
-                <footer class="text-center py-6 text-sm text-slate-400 dark:text-slate-500">
-                    ${t('designedBy')}
-                </footer>
+                    <!-- Center Content -->
+                    <main class="flex-1 min-w-0 p-4 md:p-6 lg:p-8">
+                        ${contentHtml}
+                        <footer class="text-center py-6 text-sm text-slate-400 dark:text-slate-500">
+                            ${t('designedBy')}
+                        </footer>
+                    </main>
+
+                    <!-- Right Sidebar: Term List -->
+                    <aside class="hidden md:block w-52 flex-shrink-0 border-l border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto scrollbar-thin self-start">
+                        <nav class="p-3 space-y-1">
+                            ${termListHtml}
+                        </nav>
+                    </aside>
+                </div>
             </div>`;
         }
 
@@ -345,8 +366,8 @@
                 });
             });
 
-            // Category tabs in detail view
-            document.querySelectorAll('.category-tab').forEach(btn => {
+            // Left sidebar category buttons (desktop)
+            document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const ci = parseInt(btn.dataset.ci);
                     const data = getData();
@@ -354,17 +375,37 @@
                     selectedTermIndex = 0;
                     selectedTerm = data[ci].terms[0];
                     render();
-                    setTimeout(() => {
-                        const activeTab = document.querySelector('.category-tab[data-ci="' + ci + '"]');
-                        if (activeTab) activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                    }, 0);
                 });
             });
 
-            // Term dropdown in detail view
-            const termDropdown = document.getElementById('termDropdown');
-            if (termDropdown) {
-                termDropdown.addEventListener('change', (e) => {
+            // Right sidebar term buttons (desktop)
+            document.querySelectorAll('.term-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const ti = parseInt(btn.dataset.ti);
+                    const data = getData();
+                    selectedTermIndex = ti;
+                    selectedTerm = data[selectedCategoryIndex].terms[ti];
+                    render();
+                });
+            });
+
+            // Mobile category dropdown
+            const mobileCategoryDropdown = document.getElementById('mobileCategoryDropdown');
+            if (mobileCategoryDropdown) {
+                mobileCategoryDropdown.addEventListener('change', (e) => {
+                    const ci = parseInt(e.target.value);
+                    const data = getData();
+                    selectedCategoryIndex = ci;
+                    selectedTermIndex = 0;
+                    selectedTerm = data[ci].terms[0];
+                    render();
+                });
+            }
+
+            // Mobile term dropdown
+            const mobileTermDropdown = document.getElementById('mobileTermDropdown');
+            if (mobileTermDropdown) {
+                mobileTermDropdown.addEventListener('change', (e) => {
                     const ti = parseInt(e.target.value);
                     const data = getData();
                     selectedTermIndex = ti;
