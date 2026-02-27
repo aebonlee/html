@@ -400,10 +400,16 @@
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const ci = parseInt(btn.dataset.ci);
-                    const data = getData();
-                    selectedCategoryIndex = ci;
-                    selectedTermIndex = 0;
-                    selectedTerm = data[ci].terms[0];
+                    if (selectedCategoryIndex === ci) {
+                        selectedCategoryIndex = null;
+                        selectedTermIndex = null;
+                        selectedTerm = null;
+                    } else {
+                        const data = getData();
+                        selectedCategoryIndex = ci;
+                        selectedTermIndex = 0;
+                        selectedTerm = data[ci].terms[0];
+                    }
                     render();
                 });
             });
