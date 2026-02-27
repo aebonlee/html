@@ -431,11 +431,13 @@ overflow-x: clip + overflow-y: visible
 1. **`renderSideNav(innerContentHtml)`** — 데스크톱 전용 좌측 사이드바 (`hidden md:flex`, `sticky top-0 h-screen`)
    - 상단: 로고 (클릭 시 홈)
    - 검색 입력창 (IME 한국어 조합 처리)
-   - 메뉴: Vibe Coding / Web Programming
+   - **탑메뉴 항목 수직 나열** (메인 헤더와 동일한 구성):
+     - Vibe Coding / Web Programming / UI 기본 / UI 심화 / UI 심화확장 / Q&A / 교육신청
+     - 현재 뷰에 해당하는 그룹 활성 상태 하이라이트
+     - 그룹 클릭 시 해당 그룹의 그리드 뷰로 이동
    - 내부 콘텐츠 영역 (뷰별 다른 콘텐츠 삽입)
-     - **상세 뷰**: `buildSidebarHtml()` 아코디언 (카테고리 + 용어 목록)
-     - **Vibe Coding 뷰**: 그룹 링크 (클릭 시 그리드 뷰 이동)
-   - 하단 메뉴: Q&A / 교육신청
+     - **상세 뷰**: `buildSidebarHtml()` 아코디언 (카테고리 + 용어 목록) — 기존 좌측 메뉴 유지
+     - **Vibe Coding 뷰**: 내부 콘텐츠 없음 (탑메뉴만 표시)
    - 최하단: 언어 전환(EN/KO) + 다크모드 토글(🌙/☀️)
 
 2. **`renderMobileSubHeader()`** — 모바일 전용 슬림 헤더 (`md:hidden`, `sticky top-0 h-14`)
@@ -446,13 +448,13 @@ overflow-x: clip + overflow-y: visible
 | 뷰 | 데스크톱 | 모바일 |
 |------|----------|--------|
 | **그리드 뷰** | 수평 헤더 (`renderHeader()`) — 변경 없음 | 수평 헤더 + 햄버거 — 변경 없음 |
-| **상세 뷰** | ~~수평 헤더~~ → 좌측 사이드바 + 콘텐츠 + 코드 패널 | 슬림 헤더 + 햄버거 드로어 |
-| **Vibe Coding 뷰** | ~~수평 헤더~~ → 좌측 사이드바 + 탭 콘텐츠 | 슬림 헤더 + 햄버거 드로어 |
+| **상세 뷰** | 좌측 사이드바 (탑메뉴 + 기존 아코디언) + 콘텐츠 + 코드 패널 | 슬림 헤더 + 햄버거 드로어 |
+| **Vibe Coding 뷰** | 좌측 사이드바 (탑메뉴) + 탭 콘텐츠 | 슬림 헤더 + 햄버거 드로어 |
 
 #### 이벤트 핸들러 통합
 - **클래스 기반 핸들러**: `.home-btn`, `.lang-btn`, `.theme-btn` 클래스로 통합 (복수 요소 동시 바인딩)
 - **사이드바 전용 ID**: `#snavSearch`, `#snavVibeCoding`, `#snavWebProg`, `#snavQA`, `#snavEdu`
-- **그룹 네비게이션**: `.group-nav-link` 클래스 (Vibe Coding 뷰 사이드바에서 그룹 클릭 → 그리드 뷰 이동)
+- **그룹 네비게이션**: `.group-nav-link` 클래스 (사이드바에서 그룹 클릭 → 그리드 뷰 이동)
 
 #### sticky 오프셋 조정
 - 사이드바: `sticky top-0 h-screen` (데스크톱에서 상단 헤더 없으므로 `top-0`)
@@ -643,7 +645,7 @@ D:\html\
 | 2026-02-27 | - | 통합 헤더 메뉴 구조 개편 (공통 renderHeader + 모바일 햄버거 드로어 + 크로스-뷰 네비게이션) |
 | 2026-02-27 | `28b5549` | 헤더 레이아웃 품질 개선 (중앙정렬 max-w-7xl, 스크롤바 숨김, 하위뷰 sticky z-10) |
 | 2026-02-27 | `af0c122` | 헤더 드롭다운 클리핑 수정 (overflow-x:clip + overflow-y:visible 축 분리) |
-| 2026-02-27 | - | 하위 페이지 좌측 사이드바 네비게이션 (renderSideNav + renderMobileSubHeader, 클래스 기반 이벤트 통합) |
+| 2026-02-27 | - | 하위 페이지 좌측 사이드바 네비게이션 (탑메뉴 수직 나열 + 기존 아코디언 유지, 클래스 기반 이벤트 통합) |
 
 ---
 

@@ -401,6 +401,37 @@
 
         // ===== Side Navigation (Desktop subpages) =====
         function renderSideNav(innerContentHtml) {
+            const { groupOrder: snavGroups, groupMap: snavGroupMap } = getGroups();
+
+            // Determine active group
+            let activeGroupIdx = -1;
+            if (!showVibeCodingInfo && selectedCategoryIndex !== null) {
+                for (let i = 0; i < snavGroups.length; i++) {
+                    if (snavGroupMap[snavGroups[i]].some(c => c.ci === selectedCategoryIndex)) {
+                        activeGroupIdx = i;
+                        break;
+                    }
+                }
+            }
+
+            // Top menu items (same as main header): Vibe Coding, Web Prog, Groups, Q&A, 교육신청
+            let topMenuHtml = '<button id="snavVibeCoding" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ' +
+                (showVibeCodingInfo ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700') +
+                '">Vibe Coding</button>' +
+                '<button id="snavWebProg" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">Web Programming</button>';
+
+            snavGroups.forEach((g, i) => {
+                const isActive = i === activeGroupIdx;
+                topMenuHtml += '<button class="group-nav-link w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ' +
+                    (isActive
+                        ? 'bg-starbucks-green text-white font-semibold'
+                        : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700') +
+                    '" data-gi="' + i + '">' + g + '</button>';
+            });
+
+            topMenuHtml += '<button id="snavQA" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">Q&amp;A</button>' +
+                '<button id="snavEdu" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">' + t('applyEdu') + '</button>';
+
             return '<aside class="hidden md:flex flex-col w-64 flex-shrink-0 border-r border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 sticky top-0 z-10 h-screen self-start">' +
                 '<div class="px-4 py-3 border-b border-slate-200 dark:border-slate-700">' +
                     '<button class="home-btn flex items-center gap-1.5 hover:opacity-80 transition-opacity">' +
@@ -415,20 +446,14 @@
                 '</div>' +
                 '<div class="flex-1 overflow-y-auto scrollbar-thin">' +
                     '<div class="p-2 space-y-0.5">' +
-                        '<button id="snavVibeCoding" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ' +
-                            (showVibeCodingInfo ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700') +
-                        '">Vibe Coding</button>' +
-                        '<button id="snavWebProg" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">Web Programming</button>' +
+                        topMenuHtml +
                     '</div>' +
-                    '<div class="border-t border-slate-200 dark:border-slate-700 mx-2"></div>' +
-                    '<nav class="p-2.5 space-y-0.5">' +
-                        innerContentHtml +
-                    '</nav>' +
-                    '<div class="border-t border-slate-200 dark:border-slate-700 mx-2"></div>' +
-                    '<div class="p-2 space-y-0.5">' +
-                        '<button id="snavQA" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">Q&amp;A</button>' +
-                        '<button id="snavEdu" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">' + t('applyEdu') + '</button>' +
-                    '</div>' +
+                    (innerContentHtml ?
+                        '<div class="border-t border-slate-200 dark:border-slate-700 mx-2"></div>' +
+                        '<nav class="p-2.5 space-y-0.5">' +
+                            innerContentHtml +
+                        '</nav>'
+                    : '') +
                 '</div>' +
                 '<div class="px-3 py-2.5 border-t border-slate-200 dark:border-slate-700 flex items-center gap-2">' +
                     '<button class="lang-btn px-2.5 py-1.5 rounded-md text-sm font-semibold text-starbucks-green dark:text-sky-400 hover:bg-starbucks-green-light dark:hover:bg-slate-700 transition-colors">' + (language === 'ko' ? 'EN' : 'KO') + '</button>' +
@@ -733,12 +758,6 @@
         function renderVibeCodingView() {
             const k = language === 'ko';
 
-            // Side nav content: group links for navigation to grid view
-            const { groupOrder: vcGroups } = getGroups();
-            let vcGroupLinks = vcGroups.map((g, i) => {
-                return '<button class="group-nav-link w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/60 transition-colors" data-gi="' + i + '">' + g + '</button>';
-            }).join('');
-
             const tabs = k
                 ? ['바이브 코딩이란?', '작동 방식 이해', '기존 프로그래밍 비교', '시작하기: 도구 선택']
                 : ['What is Vibe Coding?', 'How It Works', 'vs Traditional Programming', 'Getting Started: Tools'];
@@ -1035,7 +1054,7 @@
                 ${renderMobileMenu()}
 
                 <div class="flex">
-                    ${renderSideNav(vcGroupLinks)}
+                    ${renderSideNav('')}
 
                     <div class="flex-1 min-w-0">
                         <div class="sticky top-14 md:top-0 z-10 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
