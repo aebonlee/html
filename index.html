@@ -563,28 +563,26 @@
                 });
             }
 
-            // Search input (grid view)
-            const gridSearch = document.getElementById('gridSearch');
-            if (gridSearch) {
-                gridSearch.addEventListener('input', (e) => {
+            // Search inputs (grid + detail desktop + detail mobile)
+            ['gridSearch', 'detailSearch', 'mobileDetailSearch'].forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                let composing = false;
+                el.addEventListener('compositionstart', () => { composing = true; });
+                el.addEventListener('compositionend', (e) => {
+                    composing = false;
                     searchTerm = e.target.value;
                     render();
-                    const el = document.getElementById('gridSearch');
-                    if (el) { el.focus(); el.setSelectionRange(searchTerm.length, searchTerm.length); }
+                    const refocus = document.getElementById(id);
+                    if (refocus) { refocus.focus(); refocus.setSelectionRange(searchTerm.length, searchTerm.length); }
                 });
-            }
-
-            // Search input (detail view - desktop & mobile)
-            ['detailSearch', 'mobileDetailSearch'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    el.addEventListener('input', (e) => {
-                        searchTerm = e.target.value;
-                        render();
-                        const refocus = document.getElementById(id);
-                        if (refocus) { refocus.focus(); refocus.setSelectionRange(searchTerm.length, searchTerm.length); }
-                    });
-                }
+                el.addEventListener('input', (e) => {
+                    if (composing) return;
+                    searchTerm = e.target.value;
+                    render();
+                    const refocus = document.getElementById(id);
+                    if (refocus) { refocus.focus(); refocus.setSelectionRange(searchTerm.length, searchTerm.length); }
+                });
             });
 
             // Theme toggle
