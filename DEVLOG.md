@@ -304,6 +304,62 @@ function render() {
 }
 ```
 
+### Phase 13 - 통합 헤더 메뉴 구조 개편 (2026-02-27)
+
+**주요 변경 사항:**
+
+#### 공통 헤더 함수 (`renderHeader()`) 신규 생성
+- **기존**: 3개 뷰(gridView, detailView, vibeCodingView)가 각각 별도의 헤더를 가지고 있어 메뉴 구조가 일관되지 않음
+- **변경**: 모든 뷰에서 공유하는 단일 통합 헤더로 통합
+- **데스크톱 메뉴 구조**: `로고 | Vibe Coding | Web Programming | UI 기본▾ | UI 심화▾ | UI 심화확장▾ | Q&A | 교육신청 | 🔍 | EN | 🌙`
+  - **Vibe Coding**: 바이브 코딩 정보 페이지로 이동 (활성 시 보라~핑크 그라데이션 하이라이트)
+  - **Web Programming / Q&A / 교육신청**: 메뉴 배치만 완료 (클릭 시 "준비 중입니다" 알림)
+  - **UI 기본▾ / UI 심화▾ / UI 심화확장▾**: 기존 풍선 드롭다운 재사용, 하위 카테고리 클릭 시 그리드 뷰로 이동
+  - **🔍 검색 토글**: `searchOpen` 상태로 인라인 검색 입력창 표시/숨김
+  - **EN / 🌙**: 기존 동작 유지
+
+#### 활성 상태 하이라이트
+- Vibe Coding 뷰일 때: "Vibe Coding" 메뉴 강조
+- Grid 뷰일 때: 현재 `selectedGroup`에 해당하는 그룹 탭 강조
+- Detail 뷰일 때: `selectedCategoryIndex`로 그룹 역추적하여 해당 탭 강조
+
+#### 모바일 햄버거 메뉴 (`renderMobileMenu()`) 신규 생성
+- **md 이하** 화면에서 우측 슬라이드인 드로어 (`w-72`, `slide-in-right` 애니메이션)
+- 메뉴 아이템: Vibe Coding / Web Programming / UI 기본 (아코디언) / UI 심화 (아코디언) / UI 심화확장 (아코디언) / Q&A / 교육신청
+- HTML `<details>/<summary>` 태그로 아코디언 구현 (추가 상태 변수 불필요)
+- 하단에 검색 입력창 배치
+- 반투명 오버레이 (`bg-black/40`) 클릭 시 닫힘
+
+#### `getGroups()` 헬퍼 함수 추출
+- 기존 `renderGridView()` 내부의 그룹/카테고리 매핑 로직을 독립 함수로 추출
+- `renderHeader()`, `renderMobileMenu()`, `renderGridView()`에서 공유 사용
+
+#### 3개 뷰 함수 수정
+- **renderGridView()**: 개별 헤더 제거 → `renderHeader()` + `renderMobileMenu()` 삽입, `desktopMenuHtml` 생성 로직 제거 (renderHeader로 이동)
+- **renderDetailView()**: 개별 헤더 및 `vibeCodingBtn`, `mobileDetailSearch` 제거 → 통합 헤더 삽입
+- **renderVibeCodingView()**: 개별 헤더 제거 → 통합 헤더 삽입 (탭바는 뷰별 콘텐츠로 유지)
+
+#### `attachEvents()` 업데이트
+- **제거**: `['gridSearch', 'detailSearch', 'mobileDetailSearch']` 검색 루프, `#vibeCodingBtn` 핸들러
+- **추가**: `#searchToggle` (검색 토글), `#headerSearch` / `#mobileSearch` (IME 처리 유지), `#hamburgerBtn` / `#closeMobileMenu` / `#mobileMenuOverlay`, `#navVibeCoding` / `#mNavVibeCoding`, `#navWebProg` / `#navQA` / `#navEdu` 및 모바일 버전 (`alert(t('comingSoon'))`)
+- **수정**: `.subcategory-chip` 핸들러에 크로스-뷰 네비게이션 추가 (showVibeCodingInfo/selectedTerm 리셋)
+- `.header-group-tab` / `.group-tab-btn` 분리 (데스크톱: 드롭다운 토글만, 모바일: 그룹 전환)
+
+#### 상태 변수 추가
+- `searchOpen`: 검색 입력창 토글
+- `mobileMenuOpen`: 모바일 햄버거 메뉴 토글
+
+#### i18n 문자열 추가
+- `comingSoon`: '준비 중입니다.' / 'Coming soon.'
+- `applyEdu`: '교육신청' / 'Apply'
+
+#### CSS 애니메이션 추가
+- `@keyframes slide-in-right`: 모바일 메뉴 슬라이드인 애니메이션
+- `.mobile-menu-panel`: `animation: slide-in-right 0.2s ease-out`
+
+#### `goHome()` 수정
+- `searchOpen = false`, `mobileMenuOpen = false` 리셋 추가
+
 ---
 
 ## 3. 파일 구조
@@ -321,20 +377,26 @@ D:\html\
 
 ## 4. 기능 상세
 
-### 4.1 그리드 뷰 (메인 홈)
+### 4.1 통합 헤더 메뉴
 
-- **3-그룹 메뉴**: UI 기본 / UI 심화 / UI 심화 확장 (헤더 내 통합)
+- **공통 헤더**: 모든 뷰(그리드/상세/Vibe Coding)에서 동일한 통합 메뉴 표시
+- **데스크톱 메뉴**: `로고 | Vibe Coding | Web Programming | UI 기본▾ | UI 심화▾ | UI 심화확장▾ | Q&A | 교육신청 | 🔍 | EN | 🌙`
 - **풍선 드롭다운**: 그룹 클릭 시 하위 카테고리 목록 표시 (balloon 애니메이션 + 삼각 화살표)
+- **활성 상태 하이라이트**: 현재 뷰/그룹에 맞는 메뉴 항목 강조
+- **모바일 햄버거 메뉴**: 우측 슬라이드인 드로어 (아코디언 하위 메뉴 + 검색)
+- **검색 토글**: 🔍 클릭 시 인라인 검색 입력창 표시/숨김
+
+### 4.2 그리드 뷰 (메인 홈)
+
 - **CSS Grid 카드 레이아웃**: `auto-fill` + `minmax()`로 갯수에 따른 자연 사이즈 배열
 - 각 카드에 SVG 시각화 예시 + 용어 이름 표시
 - 카드 클릭 시 상세 뷰로 전환
 - 호버 시 카드 상승 애니메이션 (`hover:-translate-y-1`)
-- **Vibe Coding? 버튼**: 바이브 코딩 정보 페이지로 이동
+- **모바일**: 그룹 탭 + 하위 카테고리 칩 2줄 구성
 
-### 4.2 상세 뷰 (좌측 아코디언 + 콘텐츠)
+### 4.3 상세 뷰 (좌측 아코디언 + 콘텐츠)
 
 **데스크톱 (md+):**
-- **상단 헤더**: 홈 버튼, 제목, 언어/테마 토글 (sticky)
 - **좌측 사이드바** (`w-64`, sticky): 아코디언 내비게이션
   - 그룹 헤더 (UI 기본 / UI 심화 / UI 심화 확장)
   - 카테고리 클릭 → 용어 목록 펼침/접힘
@@ -351,32 +413,32 @@ D:\html\
 - 2개의 `<select>` 드롭다운 (카테고리 + 용어)
 - 콘텐츠 영역 전체 너비 활용
 
-### 4.3 바이브 코딩 정보 페이지
+### 4.4 바이브 코딩 정보 페이지
 
-- 헤더 "Vibe Coding?" 그라데이션 버튼 클릭으로 진입
+- 통합 헤더의 "Vibe Coding" 메뉴 클릭으로 진입
 - 4개 탭: 바이브 코딩이란? / 작동 방식 이해 / 기존 프로그래밍 비교 / 시작하기: 도구 선택
 - 한국어/영어 이중 언어 전체 지원
 - 출처(Sources) 섹션: Google Cloud, Wikipedia, IBM 링크
 - 로고 클릭 시 메인 그리드 뷰 복귀
 
-### 4.4 다크모드
+### 4.5 다크모드
 
 - 시스템 설정 자동 감지 (`prefers-color-scheme: dark`)
 - 수동 토글 (해/달 아이콘)
 - `<html>` 태그에 `dark` 클래스 토글 방식 (Tailwind `darkMode: 'class'`)
 
-### 4.5 언어 전환 (KO/EN)
+### 4.6 언어 전환 (KO/EN)
 
 - 모든 UI 텍스트 + 용어 데이터 양국어 지원
 - 상세 뷰에서 언어 전환 시 현재 선택된 용어 유지
 
-### 4.6 검색
+### 4.7 검색
 
 - 용어 이름 + 설명 기반 실시간 필터링 (case-insensitive)
 - 그리드 뷰 / 상세 뷰 모두 지원
 - 한국어 IME 조합 처리 (`compositionstart`/`compositionend`)
 
-### 4.7 반응형 디자인
+### 4.8 반응형 디자인
 
 | 화면 크기 | 그리드 뷰 | 상세 뷰 |
 |-----------|----------|----------|
@@ -470,6 +532,7 @@ D:\html\
 | 2026-02-27 | `f5e9daf` ~ `100da30` | 코드 패널 UX 개선, 상세 뷰 검색 추가, 한국어 IME 수정, 헤더 로고화 |
 | 2026-02-27 | `a9d9ed3` ~ `b0c7df3` | 메인 그리드 뷰 네비게이션 전면 개편 (3-그룹 풍선 드롭다운 + 자연 사이즈 카드) |
 | 2026-02-27 | `004a44c` | 바이브 코딩 정보 페이지 추가 (4-탭 콘텐츠 + 출처, 한/영 이중 언어) |
+| 2026-02-27 | - | 통합 헤더 메뉴 구조 개편 (공통 renderHeader + 모바일 햄버거 드로어 + 크로스-뷰 네비게이션) |
 
 ---
 

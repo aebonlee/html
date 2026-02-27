@@ -32,6 +32,8 @@
         .dark .scrollbar-thin::-webkit-scrollbar-thumb { background-color: rgba(255,255,255,0.15); }
         @keyframes balloon-in { from { opacity:0; transform:translateX(-50%) translateY(-6px); } to { opacity:1; transform:translateX(-50%) translateY(0); } }
         .balloon-dropdown { animation: balloon-in 0.15s ease-out; }
+        @keyframes slide-in-right { from { transform:translateX(100%); } to { transform:translateX(0); } }
+        .mobile-menu-panel { animation: slide-in-right 0.2s ease-out; }
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-900 transition-colors">
@@ -55,6 +57,8 @@
         let openDropdownGroup = null;
         let showVibeCodingInfo = false;
         let vibeCodingTab = 0;
+        let searchOpen = false;
+        let mobileMenuOpen = false;
 
         // ===== i18n =====
         const strings = {
@@ -77,6 +81,8 @@
                 codeToggle: '코드 예시 보기',
                 codeToggleHide: '코드 예시 숨기기',
                 noCodeExample: '이 용어에 대한 코드 예시가 없습니다.',
+                comingSoon: '준비 중입니다.',
+                applyEdu: '교육신청',
             },
             en: {
                 glossaryTitle: 'Vibe Coding Glossary',
@@ -97,6 +103,8 @@
                 codeToggle: 'Show Code Example',
                 codeToggleHide: 'Hide Code Example',
                 noCodeExample: 'No code example available for this term.',
+                comingSoon: 'Coming soon.',
+                applyEdu: 'Apply',
             }
         };
 
@@ -128,6 +136,22 @@
                 t.name.toLowerCase().includes(q) ||
                 t.description.toLowerCase().includes(q)
             );
+        }
+
+        function getGroups() {
+            const data = getData();
+            const groupOrder = [];
+            const groupMap = {};
+            data.forEach((cat, ci) => {
+                const groupMatch = cat.categoryName.match(/^(.*?)\s*[-–]\s*\d/);
+                const group = groupMatch ? groupMatch[1].trim() : cat.categoryName;
+                if (!groupMap[group]) {
+                    groupOrder.push(group);
+                    groupMap[group] = [];
+                }
+                groupMap[group].push({ cat, ci });
+            });
+            return { groupOrder, groupMap };
         }
 
         // ===== SVG Icons =====
@@ -216,36 +240,28 @@
             return sidebarHtml;
         }
 
-        // ===== Grid View =====
-        function renderGridView() {
-            const data = getData();
-            const sq = searchTerm.trim().toLowerCase();
+        // ===== Shared Header =====
+        function renderHeader() {
+            const { groupOrder, groupMap } = getGroups();
 
-            // Extract groups dynamically from category name prefixes
-            const groupOrder = [];
-            const groupMap = {};
-            data.forEach((cat, ci) => {
-                const groupMatch = cat.categoryName.match(/^(.*?)\s*[-–]\s*\d/);
-                const group = groupMatch ? groupMatch[1].trim() : cat.categoryName;
-                if (!groupMap[group]) {
-                    groupOrder.push(group);
-                    groupMap[group] = [];
+            // Determine active group index
+            let activeGroupIdx = -1;
+            if (!showVibeCodingInfo) {
+                if (selectedTerm && selectedCategoryIndex !== null) {
+                    for (let i = 0; i < groupOrder.length; i++) {
+                        if (groupMap[groupOrder[i]].some(c => c.ci === selectedCategoryIndex)) {
+                            activeGroupIdx = i;
+                            break;
+                        }
+                    }
+                } else {
+                    activeGroupIdx = Math.min(selectedGroup, groupOrder.length - 1);
                 }
-                groupMap[group].push({ cat, ci });
-            });
+            }
 
-            const gi = Math.min(selectedGroup, groupOrder.length - 1);
-            const currentGroupName = groupOrder[gi];
-            const currentCats = groupMap[currentGroupName] || [];
-
-            // Active sub-category
-            const activeCi = (gridCategory !== null && currentCats.some(c => c.ci === gridCategory))
-                ? gridCategory
-                : (currentCats.length > 0 ? currentCats[0].ci : 0);
-
-            // Desktop: group tabs with balloon dropdown
-            let desktopMenuHtml = groupOrder.map((g, i) => {
-                const isActive = i === gi;
+            // Desktop group menus with balloon dropdowns
+            let groupMenuHtml = groupOrder.map((g, i) => {
+                const isActive = i === activeGroupIdx;
                 const isOpen = openDropdownGroup === i;
                 const cats = groupMap[g] || [];
 
@@ -253,11 +269,8 @@
                     const subName = cat.categoryName.replace(/^.*?[-–]\s*\d+\)\s*/, '');
                     const numMatch = cat.categoryName.match(/(\d+)\)/);
                     const num = numMatch ? numMatch[1] : '';
-                    const isSubActive = ci === activeCi && i === gi;
                     return '<button class="subcategory-chip w-full text-left px-3 py-2.5 rounded-lg text-sm flex items-center gap-2.5 transition-colors ' +
-                        (isSubActive
-                            ? 'bg-starbucks-green/10 dark:bg-sky-400/15 text-starbucks-green dark:text-sky-400 font-semibold'
-                            : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/60 font-medium') +
+                        'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/60 font-medium' +
                         '" data-ci="' + ci + '" data-gi="' + i + '">' +
                         '<span class="w-5 h-5 rounded bg-starbucks-green/8 dark:bg-sky-400/10 text-starbucks-green dark:text-sky-400 text-[10px] font-bold flex items-center justify-center flex-shrink-0">' + num + '</span>' +
                         subName +
@@ -265,7 +278,7 @@
                 }).join('');
 
                 return '<div class="relative">' +
-                    '<button class="group-tab-btn flex items-center gap-1 px-3.5 py-2 rounded-lg text-sm transition-all duration-200 whitespace-nowrap ' +
+                    '<button class="header-group-tab flex items-center gap-1 px-3 py-2 rounded-lg text-sm transition-all duration-200 whitespace-nowrap ' +
                     (isActive
                         ? 'bg-starbucks-green text-white font-semibold'
                         : 'text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-100 dark:hover:bg-slate-700') +
@@ -281,6 +294,123 @@
                     : '') +
                 '</div>';
             }).join('');
+
+            // Inline search input (visible when searchOpen)
+            const searchInputHtml = searchOpen ?
+                '<div class="relative">' +
+                    '<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">' + icons.search + '</span>' +
+                    '<input id="headerSearch" type="text" value="' + searchTerm + '" placeholder="' + t('searchPlaceholder') + '" class="pl-10 pr-4 py-2 w-36 sm:w-44 rounded-lg bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-starbucks-green" />' +
+                '</div>' : '';
+
+            return (openDropdownGroup !== null ? '<div class="fixed inset-0 z-10" id="dropdownOverlay"></div>' : '') +
+            '<header class="sticky top-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700 z-20">' +
+                '<div class="px-4 sm:px-6">' +
+                    '<div class="flex items-center justify-between h-14">' +
+                        '<button id="homeBtn" class="flex items-center gap-1.5 hover:opacity-80 transition-opacity flex-shrink-0">' +
+                            '<span class="text-xl font-extrabold tracking-tight text-starbucks-green dark:text-sky-400" style="font-family:\'Google Sans\',\'Noto Sans KR\',sans-serif;letter-spacing:-0.5px;">' + t('glossaryTitle') + '</span>' +
+                        '</button>' +
+                        '<nav class="hidden md:flex items-center gap-1 mx-4 overflow-x-auto scrollbar-thin flex-1 min-w-0">' +
+                            '<button id="navVibeCoding" class="flex-shrink-0 px-3 py-2 rounded-lg text-sm whitespace-nowrap transition-all ' +
+                                (showVibeCodingInfo ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white font-semibold' : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium') +
+                            '">Vibe Coding</button>' +
+                            '<button id="navWebProg" class="flex-shrink-0 px-3 py-2 rounded-lg text-sm whitespace-nowrap text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium transition-all">Web Programming</button>' +
+                            groupMenuHtml +
+                            '<button id="navQA" class="flex-shrink-0 px-3 py-2 rounded-lg text-sm whitespace-nowrap text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium transition-all">Q&amp;A</button>' +
+                            '<button id="navEdu" class="flex-shrink-0 px-3 py-2 rounded-lg text-sm whitespace-nowrap text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium transition-all">' + t('applyEdu') + '</button>' +
+                        '</nav>' +
+                        '<div class="flex items-center gap-2 flex-shrink-0">' +
+                            searchInputHtml +
+                            '<button id="searchToggle" class="p-2 rounded-full ' + (searchOpen ? 'bg-starbucks-green/10 dark:bg-sky-400/10 text-starbucks-green dark:text-sky-400' : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700') + ' transition-colors">' +
+                                icons.search +
+                            '</button>' +
+                            '<button id="langToggle" class="px-2.5 py-2 rounded-md text-sm font-semibold text-starbucks-green dark:text-sky-400 hover:bg-starbucks-green-light dark:hover:bg-slate-700 transition-colors">' +
+                                (language === 'ko' ? 'EN' : 'KO') +
+                            '</button>' +
+                            '<button id="themeToggle" class="p-2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors">' +
+                                (isDarkMode ? icons.sun : icons.moon) +
+                            '</button>' +
+                            '<button id="hamburgerBtn" class="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">' +
+                                icons.menu +
+                            '</button>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</header>';
+        }
+
+        // ===== Mobile Menu Drawer =====
+        function renderMobileMenu() {
+            if (!mobileMenuOpen) return '';
+
+            const { groupOrder, groupMap } = getGroups();
+
+            let menuItemsHtml = '';
+
+            // Vibe Coding
+            menuItemsHtml += '<button id="mNavVibeCoding" class="w-full text-left px-5 py-3 text-sm font-medium ' +
+                (showVibeCodingInfo ? 'text-fuchsia-600 dark:text-fuchsia-400 bg-fuchsia-50 dark:bg-fuchsia-900/20' : 'text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50') +
+                ' transition-colors">Vibe Coding</button>';
+
+            // Web Programming
+            menuItemsHtml += '<button id="mNavWebProg" class="w-full text-left px-5 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">Web Programming</button>';
+
+            // Groups with accordion (using <details>)
+            groupOrder.forEach((g, i) => {
+                const cats = groupMap[g];
+                let subItems = cats.map(({ cat, ci }) => {
+                    const subName = cat.categoryName.replace(/^.*?[-–]\s*\d+\)\s*/, '');
+                    return '<button class="subcategory-chip w-full text-left pl-8 pr-5 py-2.5 text-sm text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 hover:text-slate-700 dark:hover:text-slate-200 transition-colors" data-ci="' + ci + '" data-gi="' + i + '">' + subName + '</button>';
+                }).join('');
+
+                menuItemsHtml += '<details class="group">' +
+                    '<summary class="flex items-center justify-between px-5 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors" style="list-style:none">' +
+                        g +
+                        '<svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>' +
+                    '</summary>' +
+                    '<div class="pb-1">' + subItems + '</div>' +
+                '</details>';
+            });
+
+            // Q&A
+            menuItemsHtml += '<button id="mNavQA" class="w-full text-left px-5 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">Q&amp;A</button>';
+
+            // 교육신청
+            menuItemsHtml += '<button id="mNavEdu" class="w-full text-left px-5 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">' + t('applyEdu') + '</button>';
+
+            return '<div id="mobileMenuOverlay" class="fixed inset-0 bg-black/40 z-40"></div>' +
+                '<div class="fixed top-0 right-0 bottom-0 w-72 bg-white dark:bg-slate-800 z-50 mobile-menu-panel shadow-2xl flex flex-col">' +
+                    '<div class="flex items-center justify-between px-5 py-4 border-b border-slate-200 dark:border-slate-700">' +
+                        '<span class="font-bold text-starbucks-green dark:text-sky-400">Menu</span>' +
+                        '<button id="closeMobileMenu" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">' +
+                            '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>' +
+                        '</button>' +
+                    '</div>' +
+                    '<div class="flex-1 overflow-y-auto">' +
+                        menuItemsHtml +
+                    '</div>' +
+                    '<div class="p-4 border-t border-slate-200 dark:border-slate-700">' +
+                        '<div class="relative">' +
+                            '<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">' + icons.search + '</span>' +
+                            '<input id="mobileSearch" type="text" value="' + searchTerm + '" placeholder="' + t('searchPlaceholder') + '" class="w-full pl-10 pr-4 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-800 dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-starbucks-green" />' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+        }
+
+        // ===== Grid View =====
+        function renderGridView() {
+            const data = getData();
+            const sq = searchTerm.trim().toLowerCase();
+            const { groupOrder, groupMap } = getGroups();
+
+            const gi = Math.min(selectedGroup, groupOrder.length - 1);
+            const currentGroupName = groupOrder[gi];
+            const currentCats = groupMap[currentGroupName] || [];
+
+            // Active sub-category
+            const activeCi = (gridCategory !== null && currentCats.some(c => c.ci === gridCategory))
+                ? gridCategory
+                : (currentCats.length > 0 ? currentCats[0].ci : 0);
 
             // Mobile: simple group tabs + chips (no dropdown)
             let mobileGroupTabsHtml = groupOrder.map((g, i) => {
@@ -329,38 +459,8 @@
 
             return `
             <div class="min-h-screen bg-slate-50 dark:bg-slate-900">
-                ${openDropdownGroup !== null ? '<div class="fixed inset-0 z-10" id="dropdownOverlay"></div>' : ''}
-
-                <!-- Header -->
-                <header class="sticky top-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700 z-20">
-                    <div class="px-4 sm:px-6">
-                        <div class="flex items-center justify-between h-14">
-                            <span class="text-xl font-extrabold tracking-tight text-starbucks-green dark:text-sky-400 flex-shrink-0" style="font-family:'Google Sans','Noto Sans KR',sans-serif;letter-spacing:-0.5px;">${t('glossaryTitle')}</span>
-
-                            <!-- Desktop Group Menu -->
-                            <div class="hidden md:flex items-center gap-1.5 mx-4">
-                                ${desktopMenuHtml}
-                            </div>
-
-                            <div class="flex items-center gap-2 flex-shrink-0">
-                                <button id="vibeCodingBtn" class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white hover:from-violet-600 hover:to-fuchsia-600 shadow-sm transition-all">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-                                    Vibe Coding?
-                                </button>
-                                <div class="relative">
-                                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">${icons.search}</span>
-                                    <input id="gridSearch" type="text" value="${searchTerm}" placeholder="${t('searchPlaceholder')}" class="pl-10 pr-4 py-2 w-36 sm:w-44 rounded-lg bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-starbucks-green" />
-                                </div>
-                                <button id="langToggle" class="px-2.5 py-2 rounded-md text-sm font-semibold text-starbucks-green dark:text-sky-400 hover:bg-starbucks-green-light dark:hover:bg-slate-700 transition-colors">
-                                    ${language === 'ko' ? 'EN' : 'KO'}
-                                </button>
-                                <button id="themeToggle" class="p-2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors">
-                                    ${isDarkMode ? icons.sun : icons.moon}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </header>
+                ${renderHeader()}
+                ${renderMobileMenu()}
 
                 <!-- Mobile Navigation (< md) -->
                 <div class="md:hidden sticky top-14 z-10 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
@@ -531,42 +631,11 @@
 
             return `
             <div class="min-h-screen bg-slate-50 dark:bg-slate-900">
-                <!-- Sticky Header -->
-                <header class="sticky top-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700 z-20">
-                    <div class="px-4 sm:px-6">
-                        <div class="flex items-center justify-between h-14">
-                            <div class="flex items-center">
-                                <button id="homeBtn" class="flex items-center gap-1.5 hover:opacity-80 transition-opacity">
-                                    <span class="text-xl font-extrabold tracking-tight text-starbucks-green dark:text-sky-400" style="font-family:'Google Sans','Noto Sans KR',sans-serif;letter-spacing:-0.5px;">Vibe Coding Glossary</span>
-                                </button>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <button id="vibeCodingBtn" class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white hover:from-violet-600 hover:to-fuchsia-600 shadow-sm transition-all">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-                                    Vibe Coding?
-                                </button>
-                                <!-- Detail Search -->
-                                <div class="relative">
-                                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">${icons.search}</span>
-                                    <input id="detailSearch" type="text" value="${searchTerm}" placeholder="${t('searchPlaceholder')}" class="pl-10 pr-4 py-2 w-40 sm:w-48 rounded-lg bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-starbucks-green" />
-                                </div>
-                                <button id="langToggle" class="px-3 py-2 rounded-md text-sm font-semibold text-starbucks-green dark:text-sky-400 hover:bg-starbucks-green-light dark:hover:bg-slate-700 transition-colors">
-                                    ${language === 'ko' ? 'EN' : 'KO'}
-                                </button>
-                                <button id="themeToggle" class="p-2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors">
-                                    ${isDarkMode ? icons.sun : icons.moon}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </header>
+                ${renderHeader()}
+                ${renderMobileMenu()}
 
                 <!-- Mobile Dropdowns (< md) -->
                 <div class="md:hidden px-4 pt-3 pb-2 space-y-2 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">${icons.search}</span>
-                        <input id="mobileDetailSearch" type="text" value="${searchTerm}" placeholder="${t('searchPlaceholder')}" class="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-starbucks-green" />
-                    </div>
                     <select id="mobileCategoryDropdown" class="w-full px-4 py-2.5 rounded-lg bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-starbucks-green cursor-pointer">
                         ${mobileCategoryOptions}
                     </select>
@@ -904,23 +973,8 @@
 
             return `
             <div class="min-h-screen bg-slate-50 dark:bg-slate-900">
-                <header class="sticky top-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700 z-20">
-                    <div class="px-4 sm:px-6">
-                        <div class="flex items-center justify-between h-14">
-                            <button id="homeBtn" class="flex items-center gap-1.5 hover:opacity-80 transition-opacity">
-                                <span class="text-xl font-extrabold tracking-tight text-starbucks-green dark:text-sky-400" style="font-family:'Google Sans','Noto Sans KR',sans-serif;letter-spacing:-0.5px;">${t('glossaryTitle')}</span>
-                            </button>
-                            <div class="flex items-center gap-2">
-                                <button id="langToggle" class="px-2.5 py-2 rounded-md text-sm font-semibold text-starbucks-green dark:text-sky-400 hover:bg-starbucks-green-light dark:hover:bg-slate-700 transition-colors">
-                                    ${language === 'ko' ? 'EN' : 'KO'}
-                                </button>
-                                <button id="themeToggle" class="p-2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors">
-                                    ${isDarkMode ? icons.sun : icons.moon}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </header>
+                ${renderHeader()}
+                ${renderMobileMenu()}
 
                 <div class="sticky top-14 z-10 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
                     <div class="max-w-4xl mx-auto flex overflow-x-auto scrollbar-thin px-4">
@@ -950,23 +1004,29 @@
                 });
             });
 
-            // Group tab buttons (grid view) — toggle dropdown
-            document.querySelectorAll('.group-tab-btn').forEach(btn => {
+            // Header group tab buttons (desktop) — toggle dropdown only
+            document.querySelectorAll('.header-group-tab').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     const newGi = parseInt(btn.dataset.gi);
-                    if (selectedGroup === newGi) {
-                        openDropdownGroup = openDropdownGroup === newGi ? null : newGi;
-                    } else {
-                        selectedGroup = newGi;
-                        gridCategory = null;
-                        openDropdownGroup = newGi;
-                    }
+                    openDropdownGroup = openDropdownGroup === newGi ? null : newGi;
                     render();
                 });
             });
 
-            // Sub-category chips (dropdown items + mobile chips)
+            // Mobile group tab buttons (grid view) — switch group
+            document.querySelectorAll('.group-tab-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const newGi = parseInt(btn.dataset.gi);
+                    selectedGroup = newGi;
+                    gridCategory = null;
+                    openDropdownGroup = null;
+                    render();
+                });
+            });
+
+            // Sub-category chips (header dropdown items + mobile chips + mobile menu)
             document.querySelectorAll('.subcategory-chip').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -975,6 +1035,12 @@
                     if (giAttr !== undefined) selectedGroup = parseInt(giAttr);
                     gridCategory = ci;
                     openDropdownGroup = null;
+                    showVibeCodingInfo = false;
+                    selectedTerm = null;
+                    selectedCategoryIndex = null;
+                    expandedCategoryIndex = null;
+                    selectedTermIndex = null;
+                    mobileMenuOpen = false;
                     render();
                 });
             });
@@ -988,7 +1054,7 @@
                 });
             }
 
-            // Left sidebar category buttons (desktop)
+            // Left sidebar category buttons (desktop detail view)
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const ci = parseInt(btn.dataset.ci);
@@ -1016,7 +1082,7 @@
                 });
             });
 
-            // Mobile category dropdown
+            // Mobile category dropdown (detail view)
             const mobileCategoryDropdown = document.getElementById('mobileCategoryDropdown');
             if (mobileCategoryDropdown) {
                 mobileCategoryDropdown.addEventListener('change', (e) => {
@@ -1030,7 +1096,7 @@
                 });
             }
 
-            // Mobile term dropdown
+            // Mobile term dropdown (detail view)
             const mobileTermDropdown = document.getElementById('mobileTermDropdown');
             if (mobileTermDropdown) {
                 mobileTermDropdown.addEventListener('change', (e) => {
@@ -1042,8 +1108,8 @@
                 });
             }
 
-            // Search inputs (grid + detail desktop + detail mobile)
-            ['gridSearch', 'detailSearch', 'mobileDetailSearch'].forEach(id => {
+            // Search inputs (header + mobile menu)
+            ['headerSearch', 'mobileSearch'].forEach(id => {
                 const el = document.getElementById(id);
                 if (!el) return;
                 let composing = false;
@@ -1064,6 +1130,20 @@
                 });
             });
 
+            // Search toggle
+            const searchToggle = document.getElementById('searchToggle');
+            if (searchToggle) {
+                searchToggle.addEventListener('click', () => {
+                    searchOpen = !searchOpen;
+                    if (!searchOpen) searchTerm = '';
+                    render();
+                    if (searchOpen) {
+                        const input = document.getElementById('headerSearch');
+                        if (input) input.focus();
+                    }
+                });
+            }
+
             // Theme toggle
             const themeToggle = document.getElementById('themeToggle');
             if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
@@ -1075,6 +1155,65 @@
             // Home button
             const homeBtn = document.getElementById('homeBtn');
             if (homeBtn) homeBtn.addEventListener('click', goHome);
+
+            // Hamburger menu open
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            if (hamburgerBtn) {
+                hamburgerBtn.addEventListener('click', () => {
+                    mobileMenuOpen = true;
+                    render();
+                });
+            }
+
+            // Mobile menu close
+            const closeMobileMenu = document.getElementById('closeMobileMenu');
+            if (closeMobileMenu) {
+                closeMobileMenu.addEventListener('click', () => {
+                    mobileMenuOpen = false;
+                    render();
+                });
+            }
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.addEventListener('click', () => {
+                    mobileMenuOpen = false;
+                    render();
+                });
+            }
+
+            // Nav menu items — Vibe Coding
+            const navVibeCoding = document.getElementById('navVibeCoding');
+            if (navVibeCoding) {
+                navVibeCoding.addEventListener('click', () => {
+                    showVibeCodingInfo = true;
+                    vibeCodingTab = 0;
+                    selectedTerm = null;
+                    openDropdownGroup = null;
+                    render();
+                });
+            }
+            const mNavVibeCoding = document.getElementById('mNavVibeCoding');
+            if (mNavVibeCoding) {
+                mNavVibeCoding.addEventListener('click', () => {
+                    showVibeCodingInfo = true;
+                    vibeCodingTab = 0;
+                    selectedTerm = null;
+                    openDropdownGroup = null;
+                    mobileMenuOpen = false;
+                    render();
+                });
+            }
+
+            // Nav menu items — Coming soon (Web Programming, Q&A, 교육신청)
+            ['navWebProg', 'navQA', 'navEdu', 'mNavWebProg', 'mNavQA', 'mNavEdu'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.addEventListener('click', () => {
+                        mobileMenuOpen = false;
+                        alert(t('comingSoon'));
+                    });
+                }
+            });
 
             // Code tab buttons
             document.querySelectorAll('.code-tab-btn').forEach(btn => {
@@ -1089,16 +1228,6 @@
             if (mobileCodeToggle) {
                 mobileCodeToggle.addEventListener('click', () => {
                     mobileCodeOpen = !mobileCodeOpen;
-                    render();
-                });
-            }
-
-            // Vibe Coding info button
-            const vibeCodingBtn = document.getElementById('vibeCodingBtn');
-            if (vibeCodingBtn) {
-                vibeCodingBtn.addEventListener('click', () => {
-                    showVibeCodingInfo = true;
-                    vibeCodingTab = 0;
                     render();
                 });
             }
@@ -1131,6 +1260,8 @@
             gridCategory = null;
             openDropdownGroup = null;
             showVibeCodingInfo = false;
+            searchOpen = false;
+            mobileMenuOpen = false;
             render();
         }
 
