@@ -339,15 +339,20 @@
                 sidebarHtml += '</div>';
             });
 
-            // Mobile dropdowns
+            // Mobile dropdowns (filtered by search)
             let mobileCategoryOptions = '';
             data.forEach((cat, ci) => {
+                if (sq) {
+                    const hasMatch = cat.terms.some(t => t.name.toLowerCase().includes(sq) || t.description.toLowerCase().includes(sq));
+                    if (!hasMatch) return;
+                }
                 mobileCategoryOptions += '<option value="' + ci + '"' + (selectedCategoryIndex === ci ? ' selected' : '') + '>' + cat.categoryName + '</option>';
             });
 
             let mobileTermOptions = '';
             if (selectedCategoryIndex !== null && data[selectedCategoryIndex]) {
                 data[selectedCategoryIndex].terms.forEach((term, ti) => {
+                    if (sq && !term.name.toLowerCase().includes(sq) && !term.description.toLowerCase().includes(sq)) return;
                     mobileTermOptions += '<option value="' + ti + '"' + (selectedTermIndex === ti ? ' selected' : '') + '>' + term.name + '</option>';
                 });
             }
@@ -447,6 +452,10 @@
 
                 <!-- Mobile Dropdowns (< md) -->
                 <div class="md:hidden px-4 pt-3 pb-2 space-y-2 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">${icons.search}</span>
+                        <input id="mobileDetailSearch" type="text" value="${searchTerm}" placeholder="${t('searchPlaceholder')}" class="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-starbucks-green" />
+                    </div>
                     <select id="mobileCategoryDropdown" class="w-full px-4 py-2.5 rounded-lg bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-starbucks-green cursor-pointer">
                         ${mobileCategoryOptions}
                     </select>
@@ -565,16 +574,18 @@
                 });
             }
 
-            // Search input (detail view)
-            const detailSearch = document.getElementById('detailSearch');
-            if (detailSearch) {
-                detailSearch.addEventListener('input', (e) => {
-                    searchTerm = e.target.value;
-                    render();
-                    const el = document.getElementById('detailSearch');
-                    if (el) { el.focus(); el.setSelectionRange(searchTerm.length, searchTerm.length); }
-                });
-            }
+            // Search input (detail view - desktop & mobile)
+            ['detailSearch', 'mobileDetailSearch'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.addEventListener('input', (e) => {
+                        searchTerm = e.target.value;
+                        render();
+                        const refocus = document.getElementById(id);
+                        if (refocus) { refocus.focus(); refocus.setSelectionRange(searchTerm.length, searchTerm.length); }
+                    });
+                }
+            });
 
             // Theme toggle
             const themeToggle = document.getElementById('themeToggle');
