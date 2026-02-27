@@ -262,7 +262,7 @@
 
             let content = '';
             if (activeCodeTab === 'result') {
-                const srcdoc = '<!DOCTYPE html><html><head><style>' +
+                const srcdoc = '<!DOCTYPE html><html><head><style>*,*::before,*::after{box-sizing:border-box;}body{margin:0;overflow-x:hidden;}' +
                     (ce.css || '').replace(/'/g, "\\'") +
                     '</style></head><body style="padding:16px;font-family:sans-serif;background:#fff;">' +
                     (ce.html || '') +
