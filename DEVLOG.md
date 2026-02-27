@@ -503,6 +503,30 @@ overflow-x: clip + overflow-y: visible
 | 모바일 그룹 탭 | `bg-starbucks-green` | `bg-gradient-to-r from-starbucks-green to-blue-600` |
 | 사이드바 카테고리 버튼 | `bg-starbucks-green` | `bg-gradient-to-r from-starbucks-green to-blue-600` |
 
+### Phase 19 - 드롭다운 → 인라인 탭 네비게이션 전환 (2026-02-27)
+
+**주요 변경 사항:**
+
+#### 그룹 하위 메뉴: 풍선 드롭다운 → 인라인 탭 방식
+- **기존**: 그룹 버튼 클릭 시 풍선 드롭다운(`balloon-in` 애니메이션)으로 하위 카테고리 표시
+- **변경**: Vibe Coding 페이지의 탭바 방식(`border-b-2` 언더라인 탭)으로 통일
+
+#### 신규 함수: `renderSubNav()`
+- 헤더 아래에 하위 카테고리를 수평 탭으로 표시 (데스크톱 전용, `hidden md:block`)
+- 활성 그룹의 하위 카테고리만 표시, `border-b-2` 언더라인으로 활성 상태 표시
+- 그리드 뷰 + 상세 뷰에 적용 (Vibe Coding 뷰는 자체 탭바 사용)
+- `sticky top-14`로 헤더 바로 아래 고정
+
+#### 헤더 그룹 버튼 동작 변경
+- **기존**: 클릭 시 `openDropdownGroup` 토글 (드롭다운 열기/닫기)
+- **변경**: 클릭 시 `selectedGroup` 직접 설정 (그리드 뷰로 이동 + 해당 그룹 표시)
+- 그룹 버튼에서 `▾` 화살표 아이콘 제거
+
+#### 코드 정리
+- `renderSideNav()`, `renderMobileSubHeader()` 미사용 함수 삭제
+- `balloon-in` CSS 애니메이션 삭제
+- `#dropdownOverlay` 이벤트 핸들러 삭제
+
 ---
 
 ## 3. 파일 구조
@@ -525,13 +549,13 @@ D:\html\
 #### 그리드 뷰 (메인): 수평 헤더
 - **공통 헤더** (`renderHeader()`): 메인 뷰에서 수평 통합 메뉴 표시
 - **중앙정렬**: `max-w-7xl mx-auto` 래퍼로 와이드 스크린에서도 콘텐츠 정렬
-- **데스크톱 메뉴**: `로고 | Vibe Coding | Web Programming | UI 기본▾ | UI 심화▾ | UI 심화확장▾ | Q&A | 교육신청 | 🔍 | EN | 🌙`
-- **풍선 드롭다운**: 그룹 클릭 시 하위 카테고리 목록 표시 (balloon 애니메이션 + 삼각 화살표)
-- **활성 상태 하이라이트**: 현재 그룹에 맞는 메뉴 항목 강조
+- **데스크톱 메뉴**: `로고 | Vibe Coding | Web Programming | UI 기본 | UI 심화 | UI 심화확장 | Q&A | 교육신청 | 🔍 | EN | 🌙`
+- **인라인 서브탭** (`renderSubNav()`): 그룹 클릭 시 하위 카테고리를 헤더 아래 수평 탭으로 표시 (`border-b-2` 언더라인 스타일)
+- **활성 상태 하이라이트**: 현재 그룹에 맞는 메뉴 항목 강조 (다크 블루 그라데이션)
 - **모바일 햄버거 메뉴** (`renderMobileMenu()`): 우측 슬라이드인 드로어 (아코디언 하위 메뉴 + 검색)
 
-#### 하위 페이지 (상세/Vibe Coding): 좌측 사이드바
-- **좌측 사이드바** (`renderSideNav()`): 데스크톱에서 `w-64 sticky top-0 h-screen`
+#### 하위 페이지 (상세/Vibe Coding): 통합 헤더 + 좌측 사이드바
+- **공통 헤더**: 메인과 동일한 `renderHeader()` + `renderSubNav()` 사용
 - **모바일 슬림 헤더** (`renderMobileSubHeader()`): 로고 + EN + 🌙 + ☰
 - **클래스 기반 이벤트**: `.home-btn`, `.lang-btn`, `.theme-btn` — 여러 위치의 같은 기능 버튼 통합 바인딩
 
