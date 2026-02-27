@@ -388,6 +388,37 @@ function render() {
 .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
 ```
 
+### Phase 15 - 헤더 드롭다운 메뉴 클리핑 수정 (2026-02-27)
+
+| 커밋 | 내용 |
+|------|------|
+| `af0c122` | 헤더 드롭다운 메뉴 z-index 클리핑 수정 |
+
+**주요 변경 사항:**
+
+#### 문제: 풍선 드롭다운이 보이지 않음
+- **원인**: `<nav>` 요소에 `overflow-x-auto`가 설정되어 있으면 CSS 스펙상 내부의 `position: absolute` 자식은 부모의 overflow 영역 밖으로 나갈 수 없음
+- 풍선 드롭다운(`balloon-dropdown`)이 `<nav>` 안에 `absolute top-full`로 배치되어 있었으나, `overflow-x-auto`가 이를 클리핑하여 화면에 표시되지 않았음
+- 이는 `overflow` 속성이 `visible`이 아닌 모든 값(`auto`, `hidden`, `scroll`, `clip` 등)에서 발생하는 CSS 기본 동작
+
+#### 해결: overflow-x/y 축 분리
+- **기존**: `overflow-x-auto scrollbar-none` → 가로/세로 모두 overflow 컨테이너 생성 → 드롭다운 잘림
+- **변경**: `overflow-x: clip; overflow-y: visible` (인라인 스타일)
+  - **가로(X축)**: `clip`으로 넘치는 메뉴 항목은 잘라내되 스크롤바 없음
+  - **세로(Y축)**: `visible`로 드롭다운이 `<nav>` 영역 아래로 정상 표시
+- `overflow-x: clip`은 `overflow-x: hidden`과 유사하나 스크롤 컨테이너를 생성하지 않아 더 가벼움
+
+#### 기술 배경
+```
+overflow-x-auto + overflow-y 미지정
+  → 브라우저가 자동으로 overflow-y: auto 적용 (CSS 스펙)
+  → absolute 자식이 가로·세로 모두 잘림
+
+overflow-x: clip + overflow-y: visible
+  → X축: 넘치는 항목 잘림 (스크롤바 없음)
+  → Y축: 드롭다운 정상 표시 ✓
+```
+
 ---
 
 ## 3. 파일 구조
@@ -565,6 +596,7 @@ D:\html\
 | 2026-02-27 | `004a44c` | 바이브 코딩 정보 페이지 추가 (4-탭 콘텐츠 + 출처, 한/영 이중 언어) |
 | 2026-02-27 | - | 통합 헤더 메뉴 구조 개편 (공통 renderHeader + 모바일 햄버거 드로어 + 크로스-뷰 네비게이션) |
 | 2026-02-27 | `28b5549` | 헤더 레이아웃 품질 개선 (중앙정렬 max-w-7xl, 스크롤바 숨김, 하위뷰 sticky z-10) |
+| 2026-02-27 | `af0c122` | 헤더 드롭다운 클리핑 수정 (overflow-x:clip + overflow-y:visible 축 분리) |
 
 ---
 
