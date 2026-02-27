@@ -53,6 +53,8 @@
         let selectedGroup = 0;
         let gridCategory = null;
         let openDropdownGroup = null;
+        let showVibeCodingInfo = false;
+        let vibeCodingTab = 0;
 
         // ===== i18n =====
         const strings = {
@@ -149,7 +151,9 @@
         // ===== Render =====
         function render() {
             const root = document.getElementById('root');
-            if (selectedTerm) {
+            if (showVibeCodingInfo) {
+                root.innerHTML = renderVibeCodingView();
+            } else if (selectedTerm) {
                 root.innerHTML = renderDetailView();
             } else {
                 root.innerHTML = renderGridView();
@@ -339,6 +343,10 @@
                             </div>
 
                             <div class="flex items-center gap-2 flex-shrink-0">
+                                <button id="vibeCodingBtn" class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white hover:from-violet-600 hover:to-fuchsia-600 shadow-sm transition-all">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                                    Vibe Coding?
+                                </button>
                                 <div class="relative">
                                     <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">${icons.search}</span>
                                     <input id="gridSearch" type="text" value="${searchTerm}" placeholder="${t('searchPlaceholder')}" class="pl-10 pr-4 py-2 w-36 sm:w-44 rounded-lg bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-starbucks-green" />
@@ -533,6 +541,10 @@
                                 </button>
                             </div>
                             <div class="flex items-center gap-2">
+                                <button id="vibeCodingBtn" class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white hover:from-violet-600 hover:to-fuchsia-600 shadow-sm transition-all">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                                    Vibe Coding?
+                                </button>
                                 <!-- Detail Search -->
                                 <div class="relative">
                                     <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">${icons.search}</span>
@@ -594,6 +606,336 @@
                         </div>
                     </aside>` : ''}
                 </div>
+            </div>`;
+        }
+
+        // ===== Vibe Coding Info View =====
+        function renderVibeCodingView() {
+            const k = language === 'ko';
+            const tabs = k
+                ? ['바이브 코딩이란?', '작동 방식 이해', '기존 프로그래밍 비교', '시작하기: 도구 선택']
+                : ['What is Vibe Coding?', 'How It Works', 'vs Traditional Programming', 'Getting Started: Tools'];
+
+            let tabBarHtml = tabs.map((label, i) => {
+                const a = vibeCodingTab === i;
+                return '<button class="vc-tab flex-shrink-0 px-4 py-3 text-sm whitespace-nowrap transition-colors border-b-2 ' +
+                    (a ? 'text-starbucks-green dark:text-sky-400 border-starbucks-green dark:border-sky-400 font-semibold'
+                       : 'text-slate-400 dark:text-slate-500 border-transparent hover:text-slate-600 dark:hover:text-slate-300') +
+                    '" data-vt="' + i + '">' + label + '</button>';
+            }).join('');
+
+            const h2 = 'text-2xl font-bold text-slate-800 dark:text-slate-200 mb-5';
+            const h3 = 'text-lg font-semibold text-slate-800 dark:text-slate-200 mb-3 mt-8';
+            const p = 'text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
+            const li = 'flex items-start gap-2 text-slate-600 dark:text-slate-300';
+            const dot = '<span class="w-1.5 h-1.5 rounded-full bg-starbucks-green dark:bg-sky-400 mt-2 flex-shrink-0"></span>';
+            const quote = 'bg-starbucks-green/5 dark:bg-sky-400/5 rounded-xl p-5 mb-6 border-l-4 border-starbucks-green dark:border-sky-400';
+            const card = 'bg-white dark:bg-slate-800 rounded-lg p-4 border border-slate-200 dark:border-slate-700';
+            const th = 'px-3 py-2.5 text-left text-xs font-semibold text-starbucks-green dark:text-sky-400 uppercase tracking-wider';
+            const td = 'px-3 py-2.5 text-sm text-slate-600 dark:text-slate-300';
+
+            let c = '';
+            if (vibeCodingTab === 0) {
+                c = k ? `
+                    <h2 class="${h2}">바이브 코딩이란?</h2>
+                    <p class="${p}">바이브 코딩(Vibe Coding)은 AI를 활용하여 <strong class="text-slate-800 dark:text-slate-100">자연어 프롬프트</strong>로 기능적인 코드를 생성하는 새로운 소프트웨어 개발 방식입니다. 개발자가 코드를 한 줄씩 직접 작성하는 대신, AI 어시스턴트와 대화하며 애플리케이션을 생성, 수정, 디버깅합니다.</p>
+                    <div class="${quote}">
+                        <p class="text-slate-600 dark:text-slate-300 italic leading-relaxed">"바이브 코딩이라 부르는 새로운 코딩 방식이 있습니다. 완전히 분위기에 몸을 맡기고, 기하급수적 성장을 받아들이며, 코드가 존재한다는 것 자체를 잊는 것입니다."</p>
+                        <p class="text-xs text-slate-400 dark:text-slate-500 mt-3 font-medium">— Andrej Karpathy, OpenAI 공동 창립자 (2025년 2월)</p>
+                    </div>
+                    <h3 class="${h3}" style="margin-top:0">핵심 특징</h3>
+                    <ul class="space-y-2 mb-6">
+                        <li class="${li}">${dot}코드를 직접 작성하는 대신, AI 어시스턴트와 대화하며 앱을 생성</li>
+                        <li class="${li}">${dot}LLM(대규모 언어 모델)이 자연어를 해석하여 소스 코드를 자동 생성</li>
+                        <li class="${li}">${dot}실행 결과를 기반으로 반복적으로 개선하는 워크플로우</li>
+                        <li class="${li}">${dot}프로그래밍 경험이 없어도 소프트웨어 개발이 가능</li>
+                    </ul>
+                    <h3 class="${h3}">문화적 인정</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="${card} text-center"><p class="text-xs text-slate-400 mb-1">2025</p><p class="text-sm font-semibold text-slate-700 dark:text-slate-200">Collins Dictionary</p><p class="text-xs text-starbucks-green dark:text-sky-400 mt-1">올해의 단어 선정</p></div>
+                        <div class="${card} text-center"><p class="text-xs text-slate-400 mb-1">2025</p><p class="text-sm font-semibold text-slate-700 dark:text-slate-200">Merriam-Webster</p><p class="text-xs text-starbucks-green dark:text-sky-400 mt-1">슬랭 & 트렌딩 등재</p></div>
+                        <div class="${card} text-center"><p class="text-xs text-slate-400 mb-1">Gartner 예측</p><p class="text-sm font-semibold text-slate-700 dark:text-slate-200">2028년까지</p><p class="text-xs text-starbucks-green dark:text-sky-400 mt-1">엔터프라이즈 SW 40%</p></div>
+                    </div>
+                ` : `
+                    <h2 class="${h2}">What is Vibe Coding?</h2>
+                    <p class="${p}">Vibe coding is an emerging software development practice that uses AI to generate functional code from <strong class="text-slate-800 dark:text-slate-100">natural language prompts</strong>. Instead of writing code line-by-line, developers guide an AI assistant through conversation to create, modify, and debug applications.</p>
+                    <div class="${quote}">
+                        <p class="text-slate-600 dark:text-slate-300 italic leading-relaxed">"There's a new kind of coding I call 'vibe coding', where you fully give in to the vibes, embrace exponentials, and forget that the code even exists."</p>
+                        <p class="text-xs text-slate-400 dark:text-slate-500 mt-3 font-medium">— Andrej Karpathy, OpenAI Co-founder (February 2025)</p>
+                    </div>
+                    <h3 class="${h3}" style="margin-top:0">Key Characteristics</h3>
+                    <ul class="space-y-2 mb-6">
+                        <li class="${li}">${dot}Create apps through conversation with an AI assistant instead of writing code manually</li>
+                        <li class="${li}">${dot}LLMs interpret natural language and generate source code automatically</li>
+                        <li class="${li}">${dot}Iterative refinement based on running results and follow-up prompts</li>
+                        <li class="${li}">${dot}Makes software development accessible even without programming experience</li>
+                    </ul>
+                    <h3 class="${h3}">Cultural Recognition</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="${card} text-center"><p class="text-xs text-slate-400 mb-1">2025</p><p class="text-sm font-semibold text-slate-700 dark:text-slate-200">Collins Dictionary</p><p class="text-xs text-starbucks-green dark:text-sky-400 mt-1">Word of the Year</p></div>
+                        <div class="${card} text-center"><p class="text-xs text-slate-400 mb-1">2025</p><p class="text-sm font-semibold text-slate-700 dark:text-slate-200">Merriam-Webster</p><p class="text-xs text-starbucks-green dark:text-sky-400 mt-1">Slang & Trending</p></div>
+                        <div class="${card} text-center"><p class="text-xs text-slate-400 mb-1">Gartner Forecast</p><p class="text-sm font-semibold text-slate-700 dark:text-slate-200">By 2028</p><p class="text-xs text-starbucks-green dark:text-sky-400 mt-1">40% Enterprise SW</p></div>
+                    </div>
+                `;
+            } else if (vibeCodingTab === 1) {
+                const step = (n, title, desc) => '<div class="flex gap-4 mb-4"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-starbucks-green dark:bg-sky-500 text-white text-sm font-bold flex items-center justify-center">' + n + '</span><div><p class="font-semibold text-slate-800 dark:text-slate-200 mb-1">' + title + '</p><p class="text-sm text-slate-500 dark:text-slate-400">' + desc + '</p></div></div>';
+                c = k ? `
+                    <h2 class="${h2}">바이브 코딩 프로세스의 작동 방식</h2>
+                    <p class="${p}">바이브 코딩은 <strong class="text-slate-800 dark:text-slate-100">두 가지 수준</strong>에서 작동합니다.</p>
+                    <h3 class="${h3}" style="margin-top:0">저수준: 코드 반복 루프</h3>
+                    <div class="${card} mb-6 space-y-1">
+                        ${step('1', '프롬프트 작성', '자연어로 원하는 기능을 설명합니다. 예: "CSV 파일을 읽는 Python 함수를 만들어줘"')}
+                        ${step('2', 'AI 코드 생성', 'AI가 요청을 해석하고 초기 코드를 생성합니다.')}
+                        ${step('3', '실행 및 테스트', '생성된 코드를 실행하여 의도대로 작동하는지 확인합니다.')}
+                        ${step('4', '반복 개선', '후속 프롬프트로 수정 지시. 예: "파일 없을 때 에러 처리 추가해줘"')}
+                        ${step('5', '완성', '설명→생성→테스트→개선 루프를 코드 완성까지 반복합니다.')}
+                    </div>
+                    <h3 class="${h3}">고수준: 애플리케이션 수명주기</h3>
+                    <div class="${card} mb-6 space-y-1">
+                        ${step('1', '앱 전체 설명', '전체 앱을 하나의 고수준 프롬프트로 설명합니다.')}
+                        ${step('2', '초기 버전 생성', 'AI가 UI, 백엔드 로직, 파일 구조를 포함한 전체 앱을 생성합니다.')}
+                        ${step('3', '기능 추가/변경', '테스트 후 후속 프롬프트로 새 기능 추가 또는 기존 기능 변경합니다.')}
+                        ${step('4', '전문가 검토', '보안, 품질, 정확성을 전문가가 검토합니다.')}
+                        ${step('5', '배포', '원클릭으로 프로덕션 환경에 배포합니다.')}
+                    </div>
+                    <h3 class="${h3}">실전 팁</h3>
+                    <ul class="space-y-2">
+                        <li class="${li}">${dot}<strong class="text-slate-700 dark:text-slate-200 mr-1">"어떻게"가 아니라 "무엇을"</strong> 원하는지 설명하세요</li>
+                        <li class="${li}">${dot}AI가 처음부터 완벽하지 않을 수 있으므로 <strong class="text-slate-700 dark:text-slate-200">반복 개선</strong>하세요</li>
+                        <li class="${li}">${dot}에러 발생 시 에러 메시지를 AI에게 전달하여 해결하세요</li>
+                        <li class="${li}">${dot}단위 테스트 생성도 AI에게 요청할 수 있습니다</li>
+                    </ul>
+                ` : `
+                    <h2 class="${h2}">How the Vibe Coding Process Works</h2>
+                    <p class="${p}">Vibe coding operates at <strong class="text-slate-800 dark:text-slate-100">two distinct levels</strong>.</p>
+                    <h3 class="${h3}" style="margin-top:0">Low-Level: Code Iteration Loop</h3>
+                    <div class="${card} mb-6 space-y-1">
+                        ${step('1', 'Write a Prompt', 'Describe the desired functionality in natural language. E.g., "Create a Python function that reads a CSV file."')}
+                        ${step('2', 'AI Generates Code', 'The AI interprets your request and produces the initial code.')}
+                        ${step('3', 'Run & Test', 'Run the generated code to see if it works as intended.')}
+                        ${step('4', 'Iterate & Refine', 'Provide follow-up prompts. E.g., "Add error handling for when the file is not found."')}
+                        ${step('5', 'Complete', 'Repeat the describe-generate-test-refine loop until the code is complete.')}
+                    </div>
+                    <h3 class="${h3}">High-Level: Application Lifecycle</h3>
+                    <div class="${card} mb-6 space-y-1">
+                        ${step('1', 'Describe the App', 'Describe the entire application in a single, high-level prompt.')}
+                        ${step('2', 'Generate Initial Version', 'AI generates the full app including UI, backend logic, and file structure.')}
+                        ${step('3', 'Add/Change Features', 'Test and use follow-up prompts to add new features or change existing ones.')}
+                        ${step('4', 'Expert Review', 'A human expert reviews for security, quality, and correctness.')}
+                        ${step('5', 'Deploy', 'Deploy to production with a single click.')}
+                    </div>
+                    <h3 class="${h3}">Practical Tips</h3>
+                    <ul class="space-y-2">
+                        <li class="${li}">${dot}Describe <strong class="text-slate-700 dark:text-slate-200 mr-1">"what" you need, not "how"</strong> to do it</li>
+                        <li class="${li}">${dot}The AI may not get it perfect the first time — <strong class="text-slate-700 dark:text-slate-200">iterate and refine</strong></li>
+                        <li class="${li}">${dot}When errors occur, copy-paste error messages to the AI for resolution</li>
+                        <li class="${li}">${dot}Ask the AI to generate unit tests for quality assurance</li>
+                    </ul>
+                `;
+            } else if (vibeCodingTab === 2) {
+                c = k ? `
+                    <h2 class="${h2}">바이브 코딩과 기존 프로그래밍 비교</h2>
+                    <div class="overflow-x-auto mb-6">
+                        <table class="w-full text-left border-collapse">
+                            <thead><tr class="bg-slate-100 dark:bg-slate-800">
+                                <th class="${th}">항목</th><th class="${th}">기존 프로그래밍</th><th class="${th}">바이브 코딩</th>
+                            </tr></thead>
+                            <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                                <tr><td class="${td} font-medium">코드 작성</td><td class="${td}">개발자가 직접 한 줄씩 작성</td><td class="${td}">AI가 생성, 개발자는 가이드</td></tr>
+                                <tr><td class="${td} font-medium">필요 역량</td><td class="${td}">알고리즘, 문법, 설계 이해</td><td class="${td}">문제 정의 및 자연어 소통</td></tr>
+                                <tr><td class="${td} font-medium">개발 속도</td><td class="${td}">수주 ~ 수개월</td><td class="${td}">수시간 ~ 수일</td></tr>
+                                <tr><td class="${td} font-medium">제어 수준</td><td class="${td}">완전한 제어</td><td class="${td}">AI 의존적</td></tr>
+                                <tr><td class="${td} font-medium">접근성</td><td class="${td}">전문 개발자 중심</td><td class="${td}">누구나 가능</td></tr>
+                                <tr><td class="${td} font-medium">디버깅</td><td class="${td}">코드를 직접 분석</td><td class="${td}">AI에게 에러 메시지 전달</td></tr>
+                                <tr><td class="${td} font-medium">유지보수</td><td class="${td}">구조적, 예측 가능</td><td class="${td}">비구조적, 도전적</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div class="${card}">
+                            <h4 class="font-semibold text-green-600 dark:text-green-400 mb-2">장점</h4>
+                            <ul class="space-y-1.5 text-sm">
+                                <li class="${li}">${dot}진입 장벽을 대폭 낮춤</li>
+                                <li class="${li}">${dot}개발 시간 60% 단축 (IBM 보고)</li>
+                                <li class="${li}">${dot}숙련 개발자의 생산성 배가</li>
+                                <li class="${li}">${dot}창의적 문제 해결에 집중 가능</li>
+                                <li class="${li}">${dot}빠른 프로토타이핑과 실험</li>
+                            </ul>
+                        </div>
+                        <div class="${card}">
+                            <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">주의점</h4>
+                            <ul class="space-y-1.5 text-sm">
+                                <li class="${li}">${dot}AI 생성 코드의 보안 취약점 (OWASP Top-10의 45%)</li>
+                                <li class="${li}">${dot}보안 취약점 비율 2.74배 높음 (CodeRabbit)</li>
+                                <li class="${li}">${dot}코드 품질 및 유지보수 과제</li>
+                                <li class="${li}">${dot}디버깅 시 구조적 이해 부족</li>
+                                <li class="${li}">${dot}"프로토타입 → 프로덕션" 갭</li>
+                            </ul>
+                        </div>
+                    </div>
+                ` : `
+                    <h2 class="${h2}">Vibe Coding vs Traditional Programming</h2>
+                    <div class="overflow-x-auto mb-6">
+                        <table class="w-full text-left border-collapse">
+                            <thead><tr class="bg-slate-100 dark:bg-slate-800">
+                                <th class="${th}">Aspect</th><th class="${th}">Traditional Programming</th><th class="${th}">Vibe Coding</th>
+                            </tr></thead>
+                            <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                                <tr><td class="${td} font-medium">Code Writing</td><td class="${td}">Developer writes line by line</td><td class="${td}">AI generates, developer guides</td></tr>
+                                <tr><td class="${td} font-medium">Skills Required</td><td class="${td}">Algorithms, syntax, design</td><td class="${td}">Problem definition, communication</td></tr>
+                                <tr><td class="${td} font-medium">Dev Speed</td><td class="${td}">Weeks to months</td><td class="${td}">Hours to days</td></tr>
+                                <tr><td class="${td} font-medium">Control</td><td class="${td}">Full control</td><td class="${td}">AI-dependent</td></tr>
+                                <tr><td class="${td} font-medium">Accessibility</td><td class="${td}">Expert developers</td><td class="${td}">Anyone</td></tr>
+                                <tr><td class="${td} font-medium">Debugging</td><td class="${td}">Analyze code directly</td><td class="${td}">Pass errors to AI</td></tr>
+                                <tr><td class="${td} font-medium">Maintenance</td><td class="${td}">Structured, predictable</td><td class="${td}">Unstructured, challenging</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div class="${card}">
+                            <h4 class="font-semibold text-green-600 dark:text-green-400 mb-2">Benefits</h4>
+                            <ul class="space-y-1.5 text-sm">
+                                <li class="${li}">${dot}Dramatically lowers barrier to entry</li>
+                                <li class="${li}">${dot}60% reduction in dev time (IBM)</li>
+                                <li class="${li}">${dot}Force multiplier for experienced devs</li>
+                                <li class="${li}">${dot}Focus on creative problem-solving</li>
+                                <li class="${li}">${dot}Rapid prototyping and experimentation</li>
+                            </ul>
+                        </div>
+                        <div class="${card}">
+                            <h4 class="font-semibold text-amber-600 dark:text-amber-400 mb-2">Cautions</h4>
+                            <ul class="space-y-1.5 text-sm">
+                                <li class="${li}">${dot}45% of AI code contains OWASP Top-10 vulns</li>
+                                <li class="${li}">${dot}2.74x higher security vulnerability rate (CodeRabbit)</li>
+                                <li class="${li}">${dot}Code quality and maintenance challenges</li>
+                                <li class="${li}">${dot}Structural understanding gap in debugging</li>
+                                <li class="${li}">${dot}Prototype-to-production gap</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            } else {
+                const toolCard = (name, desc) => '<div class="' + card + ' flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-starbucks-green dark:bg-sky-400 mt-2 flex-shrink-0"></div><div><p class="font-semibold text-slate-700 dark:text-slate-200 text-sm">' + name + '</p><p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">' + desc + '</p></div></div>';
+                c = k ? `
+                    <h2 class="${h2}">시작하기: 바이브 코딩 도구 선택</h2>
+                    <h3 class="${h3}" style="margin-top:0">풀스택 바이브 코딩 플랫폼</h3>
+                    <p class="${p}">프론트엔드, 백엔드, 배포, 호스팅을 자동으로 처리하는 올인원 플랫폼입니다.</p>
+                    <div class="space-y-2 mb-6">
+                        ${toolCard('Lovable', '비개발자도 간단한 AI 대화로 웹사이트/웹앱 구축. 코딩 경험 불필요.')}
+                        ${toolCard('Bolt', '최소한의 지시로 프로덕션급 풀스택 앱을 빠르게 생성.')}
+                        ${toolCard('Replit', '클라우드 기반 협업 환경 + AI 코딩. 팀 작업에 적합.')}
+                    </div>
+                    <h3 class="${h3}">AI 코드 에디터</h3>
+                    <p class="${p}">기존 개발 환경에 AI를 통합하여 코드 작성을 가속화합니다.</p>
+                    <div class="space-y-2 mb-6">
+                        ${toolCard('Cursor', 'AI 우선 코딩 에디터. 코드베이스를 깊이 이해하는 AI. 파워 유저 적합.')}
+                        ${toolCard('GitHub Copilot', 'VS Code 등 기존 IDE에 통합. 코드 자동완성과 AI 제안.')}
+                        ${toolCard('Claude Code', 'CLI 기반 AI 코딩 어시스턴트. 터미널에서 직접 작업.')}
+                    </div>
+                    <h3 class="${h3}">Google Cloud 도구</h3>
+                    <div class="space-y-2 mb-6">
+                        ${toolCard('Google AI Studio', '멀티모달 프롬프트(텍스트, 이미지, 스크린샷)로 앱 프로토타이핑.')}
+                        ${toolCard('Firebase Studio', '60+ 프리빌트 템플릿. 프로덕션급 풀스택 AI 앱 구축 환경.')}
+                        ${toolCard('Gemini Code Assist', '코드 완성, 생성, 디버깅, 테스트, 리팩토링, 문서화 지원.')}
+                    </div>
+                    <h3 class="${h3}">선택 가이드</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead><tr class="bg-slate-100 dark:bg-slate-800">
+                                <th class="${th}">목표</th><th class="${th}">추천 도구</th>
+                            </tr></thead>
+                            <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                                <tr><td class="${td}">빠른 프로토타입 / 아이디어 검증</td><td class="${td}">Lovable, Bolt, Google AI Studio</td></tr>
+                                <tr><td class="${td}">전문 개발 / 코드 제어</td><td class="${td}">Cursor, Claude Code, GitHub Copilot</td></tr>
+                                <tr><td class="${td}">풀스택 앱 / 팀 협업</td><td class="${td}">Firebase Studio, Replit</td></tr>
+                                <tr><td class="${td}">엔터프라이즈 / 레거시 현대화</td><td class="${td}">Gemini Code Assist, watsonx</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                ` : `
+                    <h2 class="${h2}">Getting Started: Choosing Vibe Coding Tools</h2>
+                    <h3 class="${h3}" style="margin-top:0">Full-Stack Vibe Coding Platforms</h3>
+                    <p class="${p}">All-in-one platforms that handle frontend, backend, deployment, and hosting automatically.</p>
+                    <div class="space-y-2 mb-6">
+                        ${toolCard('Lovable', 'Build websites/web apps through simple AI conversation. No coding required.')}
+                        ${toolCard('Bolt', 'Rapidly generate production-ready full-stack apps with minimal instructions.')}
+                        ${toolCard('Replit', 'Cloud-based collaborative environment + AI coding. Great for teams.')}
+                    </div>
+                    <h3 class="${h3}">AI Code Editors</h3>
+                    <p class="${p}">Integrate AI into existing development environments to accelerate code writing.</p>
+                    <div class="space-y-2 mb-6">
+                        ${toolCard('Cursor', 'AI-first code editor with deep codebase understanding. For power users.')}
+                        ${toolCard('GitHub Copilot', 'Integrates into VS Code and other IDEs. Code completion and AI suggestions.')}
+                        ${toolCard('Claude Code', 'CLI-based AI coding assistant. Work directly from the terminal.')}
+                    </div>
+                    <h3 class="${h3}">Google Cloud Tools</h3>
+                    <div class="space-y-2 mb-6">
+                        ${toolCard('Google AI Studio', 'App prototyping with multimodal prompts (text, images, screenshots).')}
+                        ${toolCard('Firebase Studio', '60+ pre-built templates. Production-quality full-stack AI app environment.')}
+                        ${toolCard('Gemini Code Assist', 'Code completion, generation, debugging, testing, refactoring, documentation.')}
+                    </div>
+                    <h3 class="${h3}">Selection Guide</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead><tr class="bg-slate-100 dark:bg-slate-800">
+                                <th class="${th}">Goal</th><th class="${th}">Recommended Tools</th>
+                            </tr></thead>
+                            <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                                <tr><td class="${td}">Quick prototyping / idea validation</td><td class="${td}">Lovable, Bolt, Google AI Studio</td></tr>
+                                <tr><td class="${td}">Professional dev / code control</td><td class="${td}">Cursor, Claude Code, GitHub Copilot</td></tr>
+                                <tr><td class="${td}">Full-stack apps / team collaboration</td><td class="${td}">Firebase Studio, Replit</td></tr>
+                                <tr><td class="${td}">Enterprise / legacy modernization</td><td class="${td}">Gemini Code Assist, watsonx</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            }
+
+            // Sources
+            const sourcesHtml = `
+                <div class="mt-10 pt-6 border-t border-slate-200 dark:border-slate-700">
+                    <h4 class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-3">${k ? '출처' : 'Sources'}</h4>
+                    <ul class="space-y-1.5 text-sm">
+                        <li><a href="https://cloud.google.com/discover/what-is-vibe-coding" target="_blank" rel="noopener" class="text-starbucks-green dark:text-sky-400 hover:underline">Google Cloud — Vibe Coding Explained: Tools and Guides</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/Vibe_coding" target="_blank" rel="noopener" class="text-starbucks-green dark:text-sky-400 hover:underline">Wikipedia — Vibe coding</a></li>
+                        <li><a href="https://www.ibm.com/think/topics/vibe-coding" target="_blank" rel="noopener" class="text-starbucks-green dark:text-sky-400 hover:underline">IBM — What is Vibe Coding?</a></li>
+                    </ul>
+                </div>`;
+
+            return `
+            <div class="min-h-screen bg-slate-50 dark:bg-slate-900">
+                <header class="sticky top-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700 z-20">
+                    <div class="px-4 sm:px-6">
+                        <div class="flex items-center justify-between h-14">
+                            <button id="homeBtn" class="flex items-center gap-1.5 hover:opacity-80 transition-opacity">
+                                <span class="text-xl font-extrabold tracking-tight text-starbucks-green dark:text-sky-400" style="font-family:'Google Sans','Noto Sans KR',sans-serif;letter-spacing:-0.5px;">${t('glossaryTitle')}</span>
+                            </button>
+                            <div class="flex items-center gap-2">
+                                <button id="langToggle" class="px-2.5 py-2 rounded-md text-sm font-semibold text-starbucks-green dark:text-sky-400 hover:bg-starbucks-green-light dark:hover:bg-slate-700 transition-colors">
+                                    ${language === 'ko' ? 'EN' : 'KO'}
+                                </button>
+                                <button id="themeToggle" class="p-2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors">
+                                    ${isDarkMode ? icons.sun : icons.moon}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="sticky top-14 z-10 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+                    <div class="max-w-4xl mx-auto flex overflow-x-auto scrollbar-thin px-4">
+                        ${tabBarHtml}
+                    </div>
+                </div>
+
+                <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+                    ${c}
+                    ${sourcesHtml}
+                </main>
+
+                <footer class="text-center py-4 text-xs text-slate-400 dark:text-slate-500 border-t border-slate-100 dark:border-slate-800">
+                    ${t('designedBy')}
+                </footer>
             </div>`;
         }
 
@@ -750,6 +1092,24 @@
                     render();
                 });
             }
+
+            // Vibe Coding info button
+            const vibeCodingBtn = document.getElementById('vibeCodingBtn');
+            if (vibeCodingBtn) {
+                vibeCodingBtn.addEventListener('click', () => {
+                    showVibeCodingInfo = true;
+                    vibeCodingTab = 0;
+                    render();
+                });
+            }
+
+            // Vibe Coding tab buttons
+            document.querySelectorAll('.vc-tab').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    vibeCodingTab = parseInt(btn.dataset.vt);
+                    render();
+                });
+            });
         }
 
         function selectTerm(ci, ti) {
@@ -770,6 +1130,7 @@
             searchTerm = '';
             gridCategory = null;
             openDropdownGroup = null;
+            showVibeCodingInfo = false;
             render();
         }
 
