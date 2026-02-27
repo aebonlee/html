@@ -49,6 +49,7 @@
         let activeCodeTab = 'html'; // 'html' | 'css' | 'js' | 'result'
         let mobileCodeOpen = false;
         let selectedGroup = 0;
+        let gridCategory = null;
 
         // ===== i18n =====
         const strings = {
@@ -230,80 +231,71 @@
             const currentGroupName = groupOrder[gi];
             const currentCats = groupMap[currentGroupName] || [];
 
-            // Group tabs
+            // Active sub-category
+            const activeCi = (gridCategory !== null && currentCats.some(c => c.ci === gridCategory))
+                ? gridCategory
+                : (currentCats.length > 0 ? currentCats[0].ci : 0);
+
+            // Group segmented control
             let groupTabsHtml = groupOrder.map((g, i) => {
                 const isActive = i === gi;
-                return '<button class="group-tab-btn flex-shrink-0 px-5 py-3 text-sm font-semibold whitespace-nowrap transition-all duration-200 border-b-2 ' +
+                return '<button class="group-tab-btn px-5 py-2 rounded-xl text-sm transition-all duration-200 whitespace-nowrap ' +
                     (isActive
-                        ? 'text-starbucks-green dark:text-sky-400 border-starbucks-green dark:border-sky-400 bg-starbucks-green/5 dark:bg-sky-400/5'
-                        : 'text-slate-500 dark:text-slate-400 border-transparent hover:text-slate-700 dark:hover:text-slate-300 hover:border-slate-300 dark:hover:border-slate-600') +
+                        ? 'bg-white dark:bg-slate-600 text-starbucks-green dark:text-sky-400 font-bold shadow-sm'
+                        : 'text-slate-400 dark:text-slate-500 font-medium hover:text-slate-600 dark:hover:text-slate-300') +
                     '" data-gi="' + i + '">' + g + '</button>';
             }).join('');
 
-            // Sub-category chips
+            // Sub-category chips with active state
             let chipsHtml = currentCats.map(({ cat, ci }) => {
                 const subName = cat.categoryName.replace(/^.*?[-–]\s*\d+\)\s*/, '');
-                return '<button class="subcategory-chip flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium border transition-all duration-200 ' +
-                    'text-slate-600 dark:text-slate-300 border-slate-300 dark:border-slate-600 ' +
-                    'hover:bg-starbucks-green hover:text-white hover:border-starbucks-green ' +
-                    'dark:hover:bg-sky-500 dark:hover:text-white dark:hover:border-sky-500' +
+                const isActive = ci === activeCi;
+                return '<button class="subcategory-chip flex-shrink-0 px-4 py-2 rounded-full text-sm transition-all duration-200 whitespace-nowrap ' +
+                    (isActive
+                        ? 'bg-starbucks-green dark:bg-sky-500 text-white font-semibold shadow-sm'
+                        : 'text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600') +
                     '" data-ci="' + ci + '">' + subName + '</button>';
             }).join('');
 
-            // Build sections
-            let sectionsHtml = '';
-            let hasResults = false;
-            currentCats.forEach(({ cat, ci }) => {
-                let terms = cat.terms.map((term, ti) => ({ ...term, ti }));
-                if (sq) {
-                    terms = terms.filter(t =>
-                        t.name.toLowerCase().includes(sq) || t.description.toLowerCase().includes(sq)
-                    );
-                }
-                if (terms.length === 0) return;
-                hasResults = true;
+            // Get terms for active category
+            const activeCat = data[activeCi];
+            let terms = activeCat ? activeCat.terms.map((t, ti) => ({ ...t, ti })) : [];
+            if (sq) {
+                terms = terms.filter(t =>
+                    t.name.toLowerCase().includes(sq) || t.description.toLowerCase().includes(sq)
+                );
+            }
 
-                const subName = cat.categoryName.replace(/^.*?[-–]\s*\d+\)\s*/, '');
-                const numMatch = cat.categoryName.match(/(\d+)\)/);
-                const num = numMatch ? numMatch[1] : '';
+            // Calculate grid layout for viewport-filling
+            const count = terms.length;
+            let cols, rows;
+            if (count === 0) { cols = 1; rows = 1; }
+            else if (count <= 5) { rows = 1; cols = count; }
+            else if (count <= 12) { rows = 2; cols = Math.ceil(count / 2); }
+            else { rows = 3; cols = Math.ceil(count / 3); }
 
-                let cardsHtml = '';
+            // Build cards
+            let cardsHtml = '';
+            if (count === 0) {
+                cardsHtml = '<div class="col-span-full flex items-center justify-center text-slate-400 dark:text-slate-500 text-sm">' + t('noTermsFound') + '</div>';
+            } else {
                 terms.forEach(term => {
-                    cardsHtml += '<div class="grid-card bg-white dark:bg-slate-800 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-gray-200 dark:border-slate-700 overflow-hidden" data-ci="' + ci + '" data-ti="' + term.ti + '">' +
-                        '<div class="p-4 flex flex-col items-center text-center h-full">' +
-                            '<div class="w-full flex justify-center items-center mb-3 text-starbucks-green dark:text-sky-400 transition-colors" style="min-height:100px;">' +
-                                (term.visualExample || '') +
-                            '</div>' +
-                            '<h4 class="text-xs font-medium text-slate-800 dark:text-slate-200 leading-snug">' + term.name + '</h4>' +
+                    cardsHtml += '<div class="grid-card bg-white dark:bg-slate-800 rounded-2xl shadow-sm hover:shadow-xl cursor-pointer border border-gray-200 dark:border-slate-700 flex flex-col items-center justify-center text-center transition-all duration-300 hover:border-starbucks-green/30 dark:hover:border-sky-400/30" data-ci="' + activeCi + '" data-ti="' + term.ti + '">' +
+                        '<div class="flex items-center justify-center text-starbucks-green dark:text-sky-400 mb-2 p-2">' +
+                            (term.visualExample || '') +
                         '</div>' +
+                        '<h4 class="text-sm font-semibold text-slate-700 dark:text-slate-200 px-3 pb-3">' + term.name + '</h4>' +
                     '</div>';
                 });
-
-                sectionsHtml += '<section class="mb-10" id="cat-section-' + ci + '" style="scroll-margin-top:10rem;">' +
-                    '<div class="flex items-center gap-3 mb-4 pb-2 border-b border-slate-200/80 dark:border-slate-700/80">' +
-                        '<span class="flex items-center justify-center w-7 h-7 rounded-lg bg-starbucks-green/10 dark:bg-sky-400/10 text-starbucks-green dark:text-sky-400 text-xs font-bold">' + num + '</span>' +
-                        '<h3 class="text-base font-semibold text-slate-700 dark:text-slate-200">' + subName + '</h3>' +
-                        '<span class="text-xs text-slate-400 dark:text-slate-500 ml-auto">' + terms.length + '</span>' +
-                    '</div>' +
-                    '<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">' +
-                        cardsHtml +
-                    '</div>' +
-                '</section>';
-            });
-
-            if (!hasResults) {
-                sectionsHtml = '<div class="text-center py-12 text-slate-500 dark:text-slate-400">' + t('noTermsFound') + '</div>';
             }
 
             return `
-            <div class="min-h-screen bg-slate-50 dark:bg-slate-900">
-                <!-- Sticky Header -->
-                <header class="sticky top-0 bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700 z-20">
+            <div class="min-h-screen lg:h-screen lg:overflow-hidden bg-slate-50 dark:bg-slate-900 flex flex-col">
+                <!-- Header -->
+                <header class="flex-shrink-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700 z-20">
                     <div class="px-4 sm:px-6">
                         <div class="flex items-center justify-between h-14">
-                            <div class="flex items-center">
-                                <span class="text-xl font-extrabold tracking-tight text-starbucks-green dark:text-sky-400" style="font-family:'Google Sans','Noto Sans KR',sans-serif;letter-spacing:-0.5px;">${t('glossaryTitle')}</span>
-                            </div>
+                            <span class="text-xl font-extrabold tracking-tight text-starbucks-green dark:text-sky-400" style="font-family:'Google Sans','Noto Sans KR',sans-serif;letter-spacing:-0.5px;">${t('glossaryTitle')}</span>
                             <div class="flex items-center gap-2">
                                 <div class="relative">
                                     <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">${icons.search}</span>
@@ -320,27 +312,33 @@
                     </div>
                 </header>
 
-                <!-- Group Tabs -->
-                <div class="sticky top-14 z-10 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
-                    <div class="flex overflow-x-auto scrollbar-thin px-4 sm:px-6">
-                        ${groupTabsHtml}
+                <!-- Navigation -->
+                <nav class="flex-shrink-0 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 z-10">
+                    <div class="flex justify-center py-3 px-4">
+                        <div class="inline-flex bg-slate-100 dark:bg-slate-700/50 rounded-2xl p-1.5 gap-1">
+                            ${groupTabsHtml}
+                        </div>
                     </div>
-                </div>
-
-                <!-- Sub-category chips -->
-                <div class="sticky top-[6.5rem] z-[9] bg-slate-50/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-slate-700 py-2.5 px-4 sm:px-6">
-                    <div class="flex gap-2 overflow-x-auto scrollbar-thin pb-0.5">
+                    <div class="flex gap-2 overflow-x-auto px-4 sm:px-6 pb-3 justify-center scrollbar-thin">
                         ${chipsHtml}
                     </div>
-                </div>
+                </nav>
 
-                <!-- Content Sections -->
-                <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-                    ${sectionsHtml}
-                    <footer class="text-center py-6 text-sm text-slate-400 dark:text-slate-500">
-                        ${t('designedBy')}
-                    </footer>
+                <!-- Content -->
+                <main class="flex-1 min-h-0 overflow-y-auto lg:overflow-hidden">
+                    <style>
+                        .card-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; padding:16px; height:auto; }
+                        @media(min-width:640px) { .card-grid { grid-template-columns:repeat(3,1fr); gap:16px; padding:20px; } }
+                        @media(min-width:1024px) { .card-grid { grid-template-columns:repeat(${cols},1fr); grid-template-rows:repeat(${rows},1fr); height:100%; gap:20px; padding:24px 32px; } }
+                    </style>
+                    <div class="card-grid">
+                        ${cardsHtml}
+                    </div>
                 </main>
+
+                <footer class="flex-shrink-0 text-center py-1.5 text-xs text-slate-400 dark:text-slate-500 border-t border-slate-100 dark:border-slate-800">
+                    ${t('designedBy')}
+                </footer>
             </div>`;
         }
 
@@ -567,17 +565,16 @@
             document.querySelectorAll('.group-tab-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     selectedGroup = parseInt(btn.dataset.gi);
+                    gridCategory = null;
                     render();
-                    window.scrollTo({ top: 0 });
                 });
             });
 
-            // Sub-category chips (scroll to section)
+            // Sub-category chips (filter to category)
             document.querySelectorAll('.subcategory-chip').forEach(btn => {
                 btn.addEventListener('click', () => {
-                    const ci = parseInt(btn.dataset.ci);
-                    const el = document.getElementById('cat-section-' + ci);
-                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    gridCategory = parseInt(btn.dataset.ci);
+                    render();
                 });
             });
 
@@ -703,6 +700,7 @@
             expandedCategoryIndex = null;
             selectedTermIndex = null;
             searchTerm = '';
+            gridCategory = null;
             render();
         }
 
