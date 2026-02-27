@@ -308,7 +308,7 @@
             '<header class="sticky top-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700 z-20">' +
                 '<div class="max-w-7xl mx-auto px-4 sm:px-6">' +
                     '<div class="flex items-center justify-between h-14">' +
-                        '<button id="homeBtn" class="flex items-center gap-1.5 hover:opacity-80 transition-opacity flex-shrink-0">' +
+                        '<button id="homeBtn" class="home-btn flex items-center gap-1.5 hover:opacity-80 transition-opacity flex-shrink-0">' +
                             '<span class="text-xl font-extrabold tracking-tight text-starbucks-green dark:text-sky-400" style="font-family:\'Google Sans\',\'Noto Sans KR\',sans-serif;letter-spacing:-0.5px;">' + t('glossaryTitle') + '</span>' +
                         '</button>' +
                         '<nav class="hidden md:flex items-center gap-1 mx-4 flex-1 min-w-0" style="overflow-x:clip;overflow-y:visible">' +
@@ -325,10 +325,10 @@
                             '<button id="searchToggle" class="p-2 rounded-full ' + (searchOpen ? 'bg-starbucks-green/10 dark:bg-sky-400/10 text-starbucks-green dark:text-sky-400' : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700') + ' transition-colors">' +
                                 icons.search +
                             '</button>' +
-                            '<button id="langToggle" class="px-2.5 py-2 rounded-md text-sm font-semibold text-starbucks-green dark:text-sky-400 hover:bg-starbucks-green-light dark:hover:bg-slate-700 transition-colors">' +
+                            '<button id="langToggle" class="lang-btn px-2.5 py-2 rounded-md text-sm font-semibold text-starbucks-green dark:text-sky-400 hover:bg-starbucks-green-light dark:hover:bg-slate-700 transition-colors">' +
                                 (language === 'ko' ? 'EN' : 'KO') +
                             '</button>' +
-                            '<button id="themeToggle" class="p-2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors">' +
+                            '<button id="themeToggle" class="theme-btn p-2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors">' +
                                 (isDarkMode ? icons.sun : icons.moon) +
                             '</button>' +
                             '<button id="hamburgerBtn" class="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">' +
@@ -397,6 +397,60 @@
                         '</div>' +
                     '</div>' +
                 '</div>';
+        }
+
+        // ===== Side Navigation (Desktop subpages) =====
+        function renderSideNav(innerContentHtml) {
+            return '<aside class="hidden md:flex flex-col w-64 flex-shrink-0 border-r border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 sticky top-0 z-10 h-screen self-start">' +
+                '<div class="px-4 py-3 border-b border-slate-200 dark:border-slate-700">' +
+                    '<button class="home-btn flex items-center gap-1.5 hover:opacity-80 transition-opacity">' +
+                        '<span class="text-lg font-extrabold tracking-tight text-starbucks-green dark:text-sky-400" style="font-family:\'Google Sans\',\'Noto Sans KR\',sans-serif;letter-spacing:-0.5px;">' + t('glossaryTitle') + '</span>' +
+                    '</button>' +
+                '</div>' +
+                '<div class="px-3 py-2 border-b border-slate-200 dark:border-slate-700">' +
+                    '<div class="relative">' +
+                        '<span class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-slate-400">' + icons.search + '</span>' +
+                        '<input id="snavSearch" type="text" value="' + searchTerm + '" placeholder="' + t('searchPlaceholder') + '" class="w-full pl-9 pr-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-800 dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-starbucks-green" />' +
+                    '</div>' +
+                '</div>' +
+                '<div class="flex-1 overflow-y-auto scrollbar-thin">' +
+                    '<div class="p-2 space-y-0.5">' +
+                        '<button id="snavVibeCoding" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ' +
+                            (showVibeCodingInfo ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700') +
+                        '">Vibe Coding</button>' +
+                        '<button id="snavWebProg" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">Web Programming</button>' +
+                    '</div>' +
+                    '<div class="border-t border-slate-200 dark:border-slate-700 mx-2"></div>' +
+                    '<nav class="p-2.5 space-y-0.5">' +
+                        innerContentHtml +
+                    '</nav>' +
+                    '<div class="border-t border-slate-200 dark:border-slate-700 mx-2"></div>' +
+                    '<div class="p-2 space-y-0.5">' +
+                        '<button id="snavQA" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">Q&amp;A</button>' +
+                        '<button id="snavEdu" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">' + t('applyEdu') + '</button>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="px-3 py-2.5 border-t border-slate-200 dark:border-slate-700 flex items-center gap-2">' +
+                    '<button class="lang-btn px-2.5 py-1.5 rounded-md text-sm font-semibold text-starbucks-green dark:text-sky-400 hover:bg-starbucks-green-light dark:hover:bg-slate-700 transition-colors">' + (language === 'ko' ? 'EN' : 'KO') + '</button>' +
+                    '<button class="theme-btn p-2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors">' + (isDarkMode ? icons.sun : icons.moon) + '</button>' +
+                '</div>' +
+            '</aside>';
+        }
+
+        // ===== Mobile Sub-Header (for subpages) =====
+        function renderMobileSubHeader() {
+            return '<header class="md:hidden sticky top-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700 z-20">' +
+                '<div class="flex items-center justify-between h-14 px-4">' +
+                    '<button class="home-btn hover:opacity-80 transition-opacity">' +
+                        '<span class="text-lg font-extrabold tracking-tight text-starbucks-green dark:text-sky-400" style="font-family:\'Google Sans\',\'Noto Sans KR\',sans-serif;letter-spacing:-0.5px;">' + t('glossaryTitle') + '</span>' +
+                    '</button>' +
+                    '<div class="flex items-center gap-1.5">' +
+                        '<button class="lang-btn px-2 py-1.5 rounded-md text-sm font-semibold text-starbucks-green dark:text-sky-400 hover:bg-starbucks-green-light dark:hover:bg-slate-700 transition-colors">' + (language === 'ko' ? 'EN' : 'KO') + '</button>' +
+                        '<button class="theme-btn p-1.5 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors">' + (isDarkMode ? icons.sun : icons.moon) + '</button>' +
+                        '<button id="hamburgerBtn" class="p-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">' + icons.menu + '</button>' +
+                    '</div>' +
+                '</div>' +
+            '</header>';
         }
 
         // ===== Grid View =====
@@ -633,7 +687,7 @@
 
             return `
             <div class="min-h-screen bg-slate-50 dark:bg-slate-900">
-                ${renderHeader()}
+                ${renderMobileSubHeader()}
                 ${renderMobileMenu()}
 
                 <!-- Mobile Dropdowns (< md) -->
@@ -646,14 +700,9 @@
                     </select>
                 </div>
 
-                <!-- 3-Panel Layout -->
+                <!-- Layout: Side Nav + Content + Code Panel -->
                 <div class="flex">
-                    <!-- Left Sidebar: Accordion Nav -->
-                    <aside class="hidden md:block w-64 flex-shrink-0 border-r border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 sticky top-14 z-10 h-[calc(100vh-3.5rem)] overflow-y-auto scrollbar-thin self-start">
-                        <nav class="p-2.5 space-y-0.5">
-                            ${sidebarHtml}
-                        </nav>
-                    </aside>
+                    ${renderSideNav(sidebarHtml)}
 
                     <!-- Center Content -->
                     <main class="flex-1 min-w-0 p-4 md:p-6 lg:px-8 lg:py-6">
@@ -665,7 +714,7 @@
 
                     <!-- Right Code Panel (lg+ Desktop) -->
                     ${selectedTerm ? `
-                    <aside class="hidden lg:block w-[580px] flex-shrink-0 border-l border-slate-200 dark:border-slate-700 sticky top-14 z-10 h-[calc(100vh-3.5rem)] self-start overflow-hidden flex flex-col">
+                    <aside class="hidden lg:block w-[580px] flex-shrink-0 border-l border-slate-200 dark:border-slate-700 sticky top-0 z-10 h-screen self-start overflow-hidden flex flex-col">
                         <div class="bg-white dark:bg-slate-800 h-full flex flex-col">
                             <div class="px-4 py-3 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">
                                 ${icons.code}
@@ -683,6 +732,13 @@
         // ===== Vibe Coding Info View =====
         function renderVibeCodingView() {
             const k = language === 'ko';
+
+            // Side nav content: group links for navigation to grid view
+            const { groupOrder: vcGroups } = getGroups();
+            let vcGroupLinks = vcGroups.map((g, i) => {
+                return '<button class="group-nav-link w-full text-left px-3 py-2 rounded-lg text-[13px] font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/60 transition-colors" data-gi="' + i + '">' + g + '</button>';
+            }).join('');
+
             const tabs = k
                 ? ['바이브 코딩이란?', '작동 방식 이해', '기존 프로그래밍 비교', '시작하기: 도구 선택']
                 : ['What is Vibe Coding?', 'How It Works', 'vs Traditional Programming', 'Getting Started: Tools'];
@@ -975,23 +1031,29 @@
 
             return `
             <div class="min-h-screen bg-slate-50 dark:bg-slate-900">
-                ${renderHeader()}
+                ${renderMobileSubHeader()}
                 ${renderMobileMenu()}
 
-                <div class="sticky top-14 z-10 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
-                    <div class="max-w-4xl mx-auto flex overflow-x-auto scrollbar-thin px-4">
-                        ${tabBarHtml}
+                <div class="flex">
+                    ${renderSideNav(vcGroupLinks)}
+
+                    <div class="flex-1 min-w-0">
+                        <div class="sticky top-14 md:top-0 z-10 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+                            <div class="max-w-4xl mx-auto flex overflow-x-auto scrollbar-thin px-4">
+                                ${tabBarHtml}
+                            </div>
+                        </div>
+
+                        <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+                            ${c}
+                            ${sourcesHtml}
+                        </main>
+
+                        <footer class="text-center py-4 text-xs text-slate-400 dark:text-slate-500 border-t border-slate-100 dark:border-slate-800">
+                            ${t('designedBy')}
+                        </footer>
                     </div>
                 </div>
-
-                <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
-                    ${c}
-                    ${sourcesHtml}
-                </main>
-
-                <footer class="text-center py-4 text-xs text-slate-400 dark:text-slate-500 border-t border-slate-100 dark:border-slate-800">
-                    ${t('designedBy')}
-                </footer>
             </div>`;
         }
 
@@ -1110,8 +1172,8 @@
                 });
             }
 
-            // Search inputs (header + mobile menu)
-            ['headerSearch', 'mobileSearch'].forEach(id => {
+            // Search inputs (header + mobile menu + side nav)
+            ['headerSearch', 'mobileSearch', 'snavSearch'].forEach(id => {
                 const el = document.getElementById(id);
                 if (!el) return;
                 let composing = false;
@@ -1146,17 +1208,14 @@
                 });
             }
 
-            // Theme toggle
-            const themeToggle = document.getElementById('themeToggle');
-            if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+            // Theme toggle (class-based for header + side nav + mobile sub-header)
+            document.querySelectorAll('.theme-btn').forEach(btn => btn.addEventListener('click', toggleTheme));
 
-            // Language toggle
-            const langToggle = document.getElementById('langToggle');
-            if (langToggle) langToggle.addEventListener('click', toggleLanguage);
+            // Language toggle (class-based)
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', toggleLanguage));
 
-            // Home button
-            const homeBtn = document.getElementById('homeBtn');
-            if (homeBtn) homeBtn.addEventListener('click', goHome);
+            // Home button (class-based)
+            document.querySelectorAll('.home-btn').forEach(btn => btn.addEventListener('click', goHome));
 
             // Hamburger menu open
             const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -1183,31 +1242,23 @@
                 });
             }
 
-            // Nav menu items — Vibe Coding
-            const navVibeCoding = document.getElementById('navVibeCoding');
-            if (navVibeCoding) {
-                navVibeCoding.addEventListener('click', () => {
-                    showVibeCodingInfo = true;
-                    vibeCodingTab = 0;
-                    selectedTerm = null;
-                    openDropdownGroup = null;
-                    render();
-                });
-            }
-            const mNavVibeCoding = document.getElementById('mNavVibeCoding');
-            if (mNavVibeCoding) {
-                mNavVibeCoding.addEventListener('click', () => {
-                    showVibeCodingInfo = true;
-                    vibeCodingTab = 0;
-                    selectedTerm = null;
-                    openDropdownGroup = null;
-                    mobileMenuOpen = false;
-                    render();
-                });
-            }
+            // Nav menu items — Vibe Coding (header + mobile menu + side nav)
+            ['navVibeCoding', 'mNavVibeCoding', 'snavVibeCoding'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.addEventListener('click', () => {
+                        showVibeCodingInfo = true;
+                        vibeCodingTab = 0;
+                        selectedTerm = null;
+                        openDropdownGroup = null;
+                        mobileMenuOpen = false;
+                        render();
+                    });
+                }
+            });
 
             // Nav menu items — Coming soon (Web Programming, Q&A, 교육신청)
-            ['navWebProg', 'navQA', 'navEdu', 'mNavWebProg', 'mNavQA', 'mNavEdu'].forEach(id => {
+            ['navWebProg', 'navQA', 'navEdu', 'mNavWebProg', 'mNavQA', 'mNavEdu', 'snavWebProg', 'snavQA', 'snavEdu'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) {
                     el.addEventListener('click', () => {
@@ -1215,6 +1266,22 @@
                         alert(t('comingSoon'));
                     });
                 }
+            });
+
+            // Side nav group links (vibe coding view → navigate to grid view)
+            document.querySelectorAll('.group-nav-link').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const gi = parseInt(btn.dataset.gi);
+                    selectedGroup = gi;
+                    gridCategory = null;
+                    openDropdownGroup = null;
+                    showVibeCodingInfo = false;
+                    selectedTerm = null;
+                    selectedCategoryIndex = null;
+                    expandedCategoryIndex = null;
+                    selectedTermIndex = null;
+                    render();
+                });
             });
 
             // Code tab buttons
