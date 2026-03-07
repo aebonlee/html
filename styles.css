@@ -204,13 +204,13 @@ body {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
   flex: 1;
   min-width: 0;
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  margin: 0 16px;
+  margin: 0 12px 0 32px;
 }
 
 .nav-links::-webkit-scrollbar {
@@ -219,8 +219,8 @@ body {
 
 .nav-link {
   position: relative;
-  padding: 8px 14px;
-  font-size: 14px;
+  padding: 8px 12px;
+  font-size: 13.5px;
   font-weight: 500;
   color: var(--text-secondary);
   background: none;
