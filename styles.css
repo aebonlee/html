@@ -110,7 +110,6 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scrollbar-gutter: stable;
 }
 
 body {
@@ -122,10 +121,8 @@ body {
 
 /* ===== 3. Glassmorphism Navbar ===== */
 .navbar {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   height: var(--navbar-height);
   z-index: 1000;
   background: rgba(255,255,255,0.75);
@@ -447,7 +444,6 @@ body {
 .hero {
   background: var(--primary-gradient);
   padding: 48px 24px 40px;
-  margin-top: var(--navbar-height);
   position: relative;
   overflow: hidden;
 }
@@ -1601,13 +1597,7 @@ mark {
 
 /* ===== 21. Page Transition ===== */
 .page-content {
-  margin-top: var(--navbar-height);
-  min-height: calc(100vh - var(--navbar-height));
-}
-
-/* No hero pages */
-.page-content.no-hero {
-  margin-top: var(--navbar-height);
+  min-height: 100vh;
 }
 
 /* ===== 22. Vibe Coding / Info Pages ===== */
