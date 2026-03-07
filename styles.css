@@ -110,6 +110,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -1545,24 +1546,18 @@ mark {
 
 .mobile-tabs-row {
   display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.mobile-tabs-row::-webkit-scrollbar {
-  display: none;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .mobile-tab {
-  flex-shrink: 0;
-  padding: 8px 16px;
+  padding: 7px 14px;
   border-radius: var(--radius-sm);
-  border: none;
+  border: 1px solid var(--border-color);
   font-size: 13px;
   font-weight: 500;
   color: var(--text-muted);
-  background: none;
+  background: var(--bg-card);
   cursor: pointer;
   white-space: nowrap;
   transition: all var(--transition-fast);
@@ -1571,12 +1566,12 @@ mark {
 .mobile-tab.active {
   background: var(--primary-gradient);
   color: var(--text-inverse);
+  border-color: var(--primary);
   font-weight: 600;
 }
 
 .mobile-chip {
-  flex-shrink: 0;
-  padding: 6px 14px;
+  padding: 6px 12px;
   border-radius: var(--radius-full);
   border: 1px solid var(--border-color);
   font-size: 12px;
