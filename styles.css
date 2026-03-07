@@ -1319,7 +1319,7 @@ mark {
 }
 
 /* ===== 18. Utility Classes ===== */
-.container {
+.content-wrap {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 24px;
@@ -1473,7 +1473,7 @@ mark {
   .sidebar {
     display: none;
   }
-  .container {
+  .content-wrap {
     padding: 0 16px;
   }
   .section-spacing {
@@ -1515,7 +1515,7 @@ mark {
     font-size: 12px;
     line-height: 1.4;
   }
-  .container {
+  .content-wrap {
     padding: 0 12px;
   }
   .section-spacing {
