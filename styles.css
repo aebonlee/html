@@ -1270,6 +1270,183 @@ mark {
   flex-shrink: 0;
 }
 
+/* ===== 15.1 Education Detail View ===== */
+.edu-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  margin-bottom: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.edu-back-btn:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+  background: rgba(var(--primary-rgb), 0.05);
+}
+
+.edu-detail-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.edu-detail-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 12px 0 12px;
+}
+
+.edu-detail-desc {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.edu-detail-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  margin-bottom: 24px;
+}
+
+.edu-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.edu-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.edu-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.edu-info-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(var(--primary-rgb), 0.08);
+}
+
+.edu-info-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.edu-info-value {
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.edu-curriculum-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.edu-week-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all var(--transition-normal);
+}
+
+.edu-week-card:hover {
+  box-shadow: var(--shadow-sm);
+  border-color: rgba(var(--primary-rgb), 0.3);
+}
+
+.edu-week-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.edu-week-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.edu-week-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .edu-detail-title {
+    font-size: 22px;
+  }
+  .edu-detail-desc {
+    font-size: 14px;
+  }
+  .edu-detail-section {
+    padding: 20px;
+  }
+  .edu-curriculum-grid {
+    grid-template-columns: 1fr;
+  }
+  .edu-week-card {
+    padding: 16px;
+  }
+  .edu-info-icon {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .edu-detail-title {
+    font-size: 20px;
+  }
+  .edu-detail-section {
+    padding: 16px;
+  }
+  .edu-section-title {
+    font-size: 16px;
+  }
+}
+
 /* ===== 16. Scroll Animations ===== */
 .fade-up {
   opacity: 0;

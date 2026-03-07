@@ -54,6 +54,7 @@
         let colorPickerOpen = false;
         let familySiteOpen = false;
         let currentPage = 'home'; // 'home' | 'vibecoding' | 'webprog' | 'qa' | 'edu' | 'detail'
+        let selectedEduCourse = null; // null | 0 | 1 | 2
 
         // ===== Cookie Helpers =====
         function setCookie(name, value, days) {
@@ -957,26 +958,129 @@
         }
 
         // ===== Education View =====
+        function getEduCourses() {
+            const k = language === 'ko';
+            return k ? [
+                {
+                    badge: '입문', title: '바이브 코딩 기초',
+                    desc: 'AI를 활용한 코드 생성의 기초를 배우고, 간단한 웹 애플리케이션을 만들어봅니다.',
+                    features: ['AI 도구 소개 및 설정', '프롬프트 엔지니어링 기초', '웹 앱 프로토타이핑', '실습 프로젝트 1개'],
+                    duration: '4주 (주 2회, 회당 2시간)',
+                    target: '프로그래밍 경험이 없는 입문자, AI 도구를 활용해 빠르게 웹 앱을 만들고 싶은 분',
+                    prerequisite: '없음 (컴퓨터 기본 사용 능력만 필요)',
+                    outcome: '간단한 웹 애플리케이션을 AI 도구로 독립적으로 제작할 수 있는 역량',
+                    curriculum: [
+                        { week: '1주차', title: 'AI 코딩 도구의 이해', topics: ['바이브 코딩이란?', 'AI 코딩 도구 종류 및 특징 (Claude, ChatGPT, Copilot)', '개발 환경 설정 (VS Code + AI 확장)', '첫 번째 프롬프트로 코드 생성하기'] },
+                        { week: '2주차', title: '프롬프트 엔지니어링 기초', topics: ['효과적인 프롬프트 작성법', '컨텍스트 제공과 명확한 지시', 'HTML/CSS 기초 구조 이해', 'AI로 랜딩 페이지 만들기'] },
+                        { week: '3주차', title: '웹 앱 프로토타이핑', topics: ['JavaScript 기초 개념', 'AI와 함께 인터랙티브 요소 추가', '반응형 디자인 기초', '투두 리스트 앱 만들기'] },
+                        { week: '4주차', title: '실습 프로젝트', topics: ['개인 포트폴리오 사이트 제작', 'AI 활용 디버깅 방법', '배포 (GitHub Pages)', '프로젝트 발표 및 피드백'] }
+                    ]
+                },
+                {
+                    badge: '중급', title: 'UI/UX 디자인 with AI',
+                    desc: '사용자 중심 설계 원칙과 AI 도구를 활용한 효율적인 UI/UX 디자인 방법을 학습합니다.',
+                    features: ['UX 리서치 및 사용자 분석', 'UI 컴포넌트 설계 패턴', 'AI 기반 디자인 워크플로', '반응형 디자인 실습'],
+                    duration: '6주 (주 2회, 회당 3시간)',
+                    target: '기초 웹 개발 지식이 있는 분, UI/UX 디자인에 관심 있는 개발자 또는 디자이너',
+                    prerequisite: 'HTML/CSS 기초 지식, 바이브 코딩 기초 과정 수료 또는 동등 수준',
+                    outcome: '사용자 중심의 인터페이스를 설계하고 AI 도구로 효율적으로 구현할 수 있는 역량',
+                    curriculum: [
+                        { week: '1주차', title: 'UX 리서치 기초', topics: ['사용자 경험(UX)이란?', '사용자 페르소나 설계', '사용자 여정 맵 작성', 'AI를 활용한 리서치 데이터 분석'] },
+                        { week: '2주차', title: 'UI 디자인 원칙', topics: ['시각 계층 구조', '컬러 이론과 타이포그래피', '레이아웃 그리드 시스템', 'AI로 디자인 시안 생성'] },
+                        { week: '3주차', title: 'UI 컴포넌트 패턴', topics: ['디자인 시스템의 이해', 'CSS 변수 기반 테마 시스템', '재사용 가능한 컴포넌트 설계', 'AI 활용 컴포넌트 라이브러리 구축'] },
+                        { week: '4주차', title: '인터랙션 디자인', topics: ['마이크로 인터랙션', 'CSS 애니메이션과 트랜지션', 'JavaScript 이벤트 핸들링', 'AI로 인터랙티브 프로토타입 제작'] },
+                        { week: '5주차', title: '반응형 디자인', topics: ['모바일 퍼스트 설계', '미디어 쿼리와 브레이크포인트', '유연한 레이아웃 (Flexbox/Grid)', '다양한 디바이스 테스트'] },
+                        { week: '6주차', title: '종합 프로젝트', topics: ['실제 서비스 UI/UX 리디자인', '사용성 테스트 실시', '피드백 반영 및 개선', '포트폴리오 정리 및 발표'] }
+                    ]
+                },
+                {
+                    badge: '고급', title: '풀스택 AI 개발',
+                    desc: '프론트엔드부터 백엔드, 배포까지 AI를 활용한 전체 개발 프로세스를 마스터합니다.',
+                    features: ['프론트엔드 프레임워크 활용', 'API 설계 및 구현', '클라우드 배포 실습', '팀 프로젝트 협업'],
+                    duration: '8주 (주 3회, 회당 3시간)',
+                    target: '웹 개발 중급 이상 경험자, AI를 활용한 풀스택 개발에 관심 있는 개발자',
+                    prerequisite: 'HTML/CSS/JavaScript 중급 수준, UI/UX 과정 수료 또는 동등 수준 권장',
+                    outcome: 'AI를 활용하여 풀스택 웹 애플리케이션을 설계, 개발, 배포할 수 있는 역량',
+                    curriculum: [
+                        { week: '1주차', title: '프론트엔드 프레임워크', topics: ['React/Vue 기초 개념', 'AI로 컴포넌트 설계 및 생성', '상태 관리 패턴', 'SPA 라우팅 구현'] },
+                        { week: '2주차', title: '고급 프론트엔드', topics: ['커스텀 훅/컴포저블 설계', '성능 최적화 기법', '테스트 코드 작성 (AI 활용)', '접근성(a11y) 적용'] },
+                        { week: '3주차', title: 'API 설계', topics: ['RESTful API 설계 원칙', 'API 명세서 작성 (OpenAPI)', 'AI로 API 코드 생성', '인증/인가 시스템 (JWT)'] },
+                        { week: '4주차', title: '백엔드 개발', topics: ['Node.js/Express 서버 구축', '데이터베이스 설계 및 연동', 'AI 활용 CRUD 구현', '에러 핸들링 및 로깅'] },
+                        { week: '5주차', title: '통합 및 테스트', topics: ['프론트엔드-백엔드 통합', 'API 테스트 (Postman/Jest)', 'E2E 테스트 자동화', 'CI/CD 파이프라인 구축'] },
+                        { week: '6주차', title: '클라우드 배포', topics: ['클라우드 서비스 비교 (AWS/GCP/Vercel)', 'Docker 컨테이너화', '환경 변수 및 보안 설정', '도메인 및 SSL 설정'] },
+                        { week: '7~8주차', title: '팀 프로젝트', topics: ['실전 서비스 기획 및 설계', 'Git 브랜치 전략 (Git Flow)', 'AI 활용 협업 워크플로', '코드 리뷰 및 최종 발표'] }
+                    ]
+                }
+            ] : [
+                {
+                    badge: 'Beginner', title: 'Vibe Coding Basics',
+                    desc: 'Learn the fundamentals of AI-powered code generation and build simple web applications.',
+                    features: ['AI tool introduction & setup', 'Prompt engineering basics', 'Web app prototyping', '1 hands-on project'],
+                    duration: '4 weeks (2 sessions/week, 2 hours each)',
+                    target: 'Complete beginners with no programming experience who want to quickly build web apps using AI tools',
+                    prerequisite: 'None (basic computer skills only)',
+                    outcome: 'Ability to independently create simple web applications using AI coding tools',
+                    curriculum: [
+                        { week: 'Week 1', title: 'Understanding AI Coding Tools', topics: ['What is Vibe Coding?', 'AI coding tools overview (Claude, ChatGPT, Copilot)', 'Development environment setup (VS Code + AI extensions)', 'Generating code with your first prompt'] },
+                        { week: 'Week 2', title: 'Prompt Engineering Basics', topics: ['Writing effective prompts', 'Providing context and clear instructions', 'Understanding HTML/CSS structure', 'Building a landing page with AI'] },
+                        { week: 'Week 3', title: 'Web App Prototyping', topics: ['JavaScript fundamentals', 'Adding interactive elements with AI', 'Responsive design basics', 'Building a to-do list app'] },
+                        { week: 'Week 4', title: 'Hands-on Project', topics: ['Personal portfolio site creation', 'Debugging with AI assistance', 'Deployment (GitHub Pages)', 'Project presentation & feedback'] }
+                    ]
+                },
+                {
+                    badge: 'Intermediate', title: 'UI/UX Design with AI',
+                    desc: 'Learn user-centered design principles and efficient UI/UX design methods using AI tools.',
+                    features: ['UX research & user analysis', 'UI component design patterns', 'AI-based design workflow', 'Responsive design practice'],
+                    duration: '6 weeks (2 sessions/week, 3 hours each)',
+                    target: 'Developers or designers with basic web development knowledge interested in UI/UX design',
+                    prerequisite: 'Basic HTML/CSS knowledge, Vibe Coding Basics completion or equivalent',
+                    outcome: 'Ability to design user-centered interfaces and efficiently implement them with AI tools',
+                    curriculum: [
+                        { week: 'Week 1', title: 'UX Research Fundamentals', topics: ['What is User Experience (UX)?', 'Creating user personas', 'User journey mapping', 'Analyzing research data with AI'] },
+                        { week: 'Week 2', title: 'UI Design Principles', topics: ['Visual hierarchy', 'Color theory and typography', 'Layout grid systems', 'Generating design mockups with AI'] },
+                        { week: 'Week 3', title: 'UI Component Patterns', topics: ['Understanding design systems', 'CSS variable-based theming', 'Reusable component design', 'Building component libraries with AI'] },
+                        { week: 'Week 4', title: 'Interaction Design', topics: ['Micro-interactions', 'CSS animations and transitions', 'JavaScript event handling', 'Interactive prototyping with AI'] },
+                        { week: 'Week 5', title: 'Responsive Design', topics: ['Mobile-first design', 'Media queries and breakpoints', 'Flexible layouts (Flexbox/Grid)', 'Multi-device testing'] },
+                        { week: 'Week 6', title: 'Capstone Project', topics: ['Real service UI/UX redesign', 'Usability testing', 'Feedback-driven improvements', 'Portfolio preparation & presentation'] }
+                    ]
+                },
+                {
+                    badge: 'Advanced', title: 'Full-Stack AI Development',
+                    desc: 'Master the entire development process using AI, from frontend to backend and deployment.',
+                    features: ['Frontend framework utilization', 'API design & implementation', 'Cloud deployment practice', 'Team project collaboration'],
+                    duration: '8 weeks (3 sessions/week, 3 hours each)',
+                    target: 'Developers with intermediate+ web development experience interested in full-stack AI development',
+                    prerequisite: 'Intermediate HTML/CSS/JavaScript skills, UI/UX course completion recommended',
+                    outcome: 'Ability to design, develop, and deploy full-stack web applications using AI',
+                    curriculum: [
+                        { week: 'Week 1', title: 'Frontend Frameworks', topics: ['React/Vue fundamentals', 'Component design & generation with AI', 'State management patterns', 'SPA routing implementation'] },
+                        { week: 'Week 2', title: 'Advanced Frontend', topics: ['Custom hooks/composables design', 'Performance optimization techniques', 'Writing test code (with AI)', 'Accessibility (a11y) implementation'] },
+                        { week: 'Week 3', title: 'API Design', topics: ['RESTful API design principles', 'API specification (OpenAPI)', 'Generating API code with AI', 'Authentication/Authorization (JWT)'] },
+                        { week: 'Week 4', title: 'Backend Development', topics: ['Node.js/Express server setup', 'Database design & integration', 'CRUD implementation with AI', 'Error handling & logging'] },
+                        { week: 'Week 5', title: 'Integration & Testing', topics: ['Frontend-backend integration', 'API testing (Postman/Jest)', 'E2E test automation', 'CI/CD pipeline setup'] },
+                        { week: 'Week 6', title: 'Cloud Deployment', topics: ['Cloud service comparison (AWS/GCP/Vercel)', 'Docker containerization', 'Environment variables & security', 'Domain & SSL configuration'] },
+                        { week: 'Weeks 7-8', title: 'Team Project', topics: ['Service planning & architecture', 'Git branch strategy (Git Flow)', 'AI-powered collaboration workflow', 'Code review & final presentation'] }
+                    ]
+                }
+            ];
+        }
+
         function renderEduView() {
             const k = language === 'ko';
-            const courses = k ? [
-                { badge: '입문', title: '바이브 코딩 기초', desc: 'AI를 활용한 코드 생성의 기초를 배우고, 간단한 웹 애플리케이션을 만들어봅니다.', features: ['AI 도구 소개 및 설정', '프롬프트 엔지니어링 기초', '웹 앱 프로토타이핑', '실습 프로젝트 1개'] },
-                { badge: '중급', title: 'UI/UX 디자인 with AI', desc: '사용자 중심 설계 원칙과 AI 도구를 활용한 효율적인 UI/UX 디자인 방법을 학습합니다.', features: ['UX 리서치 및 사용자 분석', 'UI 컴포넌트 설계 패턴', 'AI 기반 디자인 워크플로', '반응형 디자인 실습'] },
-                { badge: '고급', title: '풀스택 AI 개발', desc: '프론트엔드부터 백엔드, 배포까지 AI를 활용한 전체 개발 프로세스를 마스터합니다.', features: ['프론트엔드 프레임워크 활용', 'API 설계 및 구현', '클라우드 배포 실습', '팀 프로젝트 협업'] },
-            ] : [
-                { badge: 'Beginner', title: 'Vibe Coding Basics', desc: 'Learn the fundamentals of AI-powered code generation and build simple web applications.', features: ['AI tool introduction & setup', 'Prompt engineering basics', 'Web app prototyping', '1 hands-on project'] },
-                { badge: 'Intermediate', title: 'UI/UX Design with AI', desc: 'Learn user-centered design principles and efficient UI/UX design methods using AI tools.', features: ['UX research & user analysis', 'UI component design patterns', 'AI-based design workflow', 'Responsive design practice'] },
-                { badge: 'Advanced', title: 'Full-Stack AI Development', desc: 'Master the entire development process using AI, from frontend to backend and deployment.', features: ['Frontend framework utilization', 'API design & implementation', 'Cloud deployment practice', 'Team project collaboration'] },
-            ];
+            const courses = getEduCourses();
 
-            const coursesHtml = courses.map(course => {
+            if (selectedEduCourse !== null) {
+                return renderEduDetailView(courses[selectedEduCourse], selectedEduCourse);
+            }
+
+            const coursesHtml = courses.map((course, idx) => {
                 const featuresList = course.features.map(f => '<li>' + f + '</li>').join('');
                 return '<div class="edu-card fade-up">' +
                     '<div class="edu-card-badge">' + course.badge + '</div>' +
                     '<h3>' + course.title + '</h3>' +
                     '<p>' + course.desc + '</p>' +
                     '<ul class="edu-card-features">' + featuresList + '</ul>' +
-                    '<button class="btn btn-outline" style="width:100%">' + (k ? '자세히 보기' : 'Learn More') + '</button>' +
+                    '<button class="btn btn-outline edu-detail-btn" data-edu="' + idx + '" style="width:100%">' + (k ? '자세히 보기' : 'Learn More') + '</button>' +
                 '</div>';
             }).join('');
 
@@ -1003,13 +1107,93 @@
             '</div>';
         }
 
+        function renderEduDetailView(course, courseIdx) {
+            const k = language === 'ko';
+            const levelColors = ['#059669', '#0046C8', '#7C3AED'];
+            const levelColor = levelColors[courseIdx];
+
+            const curriculumHtml = course.curriculum.map(week => {
+                const topicsList = week.topics.map(t =>
+                    '<li style="display:flex;align-items:flex-start;gap:8px;padding:3px 0;font-size:13px;color:var(--text-secondary);line-height:1.6">' +
+                        '<span style="color:var(--primary);margin-top:4px;flex-shrink:0">&#10003;</span> ' + t +
+                    '</li>'
+                ).join('');
+                return '<div class="edu-week-card fade-up">' +
+                    '<div class="edu-week-header">' +
+                        '<span class="edu-week-badge" style="background:' + levelColor + '">' + week.week + '</span>' +
+                        '<span class="edu-week-title">' + week.title + '</span>' +
+                    '</div>' +
+                    '<ul style="list-style:none;padding:0;margin:0">' + topicsList + '</ul>' +
+                '</div>';
+            }).join('');
+
+            const infoItems = [
+                { icon: '<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>', label: k ? '교육 기간' : 'Duration', value: course.duration },
+                { icon: '<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>', label: k ? '대상' : 'Target Audience', value: course.target },
+                { icon: '<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>', label: k ? '선수 조건' : 'Prerequisites', value: course.prerequisite },
+                { icon: '<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>', label: k ? '수료 후 역량' : 'Learning Outcome', value: course.outcome },
+            ];
+
+            const infoHtml = infoItems.map(item =>
+                '<div class="edu-info-row fade-up">' +
+                    '<div class="edu-info-icon" style="color:' + levelColor + '">' + item.icon + '</div>' +
+                    '<div class="edu-info-content">' +
+                        '<div class="edu-info-label">' + item.label + '</div>' +
+                        '<div class="edu-info-value">' + item.value + '</div>' +
+                    '</div>' +
+                '</div>'
+            ).join('');
+
+            return '<div class="page-content no-hero">' +
+                renderNavbar() +
+                renderSearchModal() +
+                renderMobileDrawer() +
+                '<div class="info-page" style="max-width:920px">' +
+                    '<button class="edu-back-btn fade-up" id="eduBackBtn">' +
+                        '<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> ' +
+                        (k ? '교육과정 목록' : 'Course List') +
+                    '</button>' +
+                    '<div class="edu-detail-header fade-up">' +
+                        '<div class="edu-card-badge" style="background:' + levelColor + '1a;color:' + levelColor + ';font-size:13px;padding:5px 16px">' + course.badge + '</div>' +
+                        '<h2 class="edu-detail-title">' + course.title + '</h2>' +
+                        '<p class="edu-detail-desc">' + course.desc + '</p>' +
+                    '</div>' +
+                    '<div class="edu-detail-section fade-up">' +
+                        '<h3 class="edu-section-title">' +
+                            '<svg width="22" height="22" fill="none" stroke="' + levelColor + '" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> ' +
+                            (k ? '과정 정보' : 'Course Information') +
+                        '</h3>' +
+                        '<div class="edu-info-grid">' + infoHtml + '</div>' +
+                    '</div>' +
+                    '<div class="edu-detail-section fade-up">' +
+                        '<h3 class="edu-section-title">' +
+                            '<svg width="22" height="22" fill="none" stroke="' + levelColor + '" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg> ' +
+                            (k ? '커리큘럼' : 'Curriculum') +
+                        '</h3>' +
+                        '<div class="edu-curriculum-grid">' + curriculumHtml + '</div>' +
+                    '</div>' +
+                    '<div class="info-card fade-up" style="padding:28px;margin-top:32px">' +
+                        '<h3 style="font-size:18px;font-weight:700;color:var(--text-primary);margin-bottom:8px">' + t('eduContact') + '</h3>' +
+                        '<p style="font-size:14px;color:var(--text-secondary);margin-bottom:20px">' + t('eduContactDesc') + '</p>' +
+                        '<div style="display:flex;flex-direction:column;gap:12px">' +
+                            '<div style="display:flex;align-items:center;gap:10px;color:var(--text-secondary)">' + icons.mail + ' <span>aebon@dreamitbiz.com</span></div>' +
+                            '<div style="display:flex;align-items:center;gap:10px;color:var(--text-secondary)">' + icons.phone + ' <span>010-3700-0629</span></div>' +
+                            '<div style="display:flex;align-items:center;gap:10px;color:var(--text-secondary)"><svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg> <span>' + (k ? '카카오톡: aebon' : 'KakaoTalk: aebon') + '</span></div>' +
+                            '<div style="display:flex;align-items:center;gap:10px;color:var(--text-muted);font-size:13px"><svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> <span>' + (k ? '평일: 09:00 ~ 18:00' : 'Weekdays: 09:00 ~ 18:00') + '</span></div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+                renderFooter() +
+            '</div>';
+        }
+
         // ===== URL Hash Routing =====
         function updateHash() {
             let hash = '';
             if (currentPage === 'vibecoding') hash = '#page=vibecoding';
             else if (currentPage === 'webprog') hash = '#page=webprog';
             else if (currentPage === 'qa') hash = '#page=qa';
-            else if (currentPage === 'edu') hash = '#page=edu';
+            else if (currentPage === 'edu') hash = selectedEduCourse !== null ? '#page=edu&course=' + selectedEduCourse : '#page=edu';
             else if (selectedTerm && selectedCategoryIndex !== null && selectedTermIndex !== null) {
                 hash = '#term=' + encodeURIComponent(selectedTerm.name);
             }
@@ -1034,6 +1218,10 @@
                 if (valid.includes(params.page)) {
                     currentPage = params.page;
                     if (params.page === 'vibecoding') showVibeCodingInfo = true;
+                    if (params.page === 'edu' && params.course !== undefined) {
+                        const ci = parseInt(params.course);
+                        if (ci >= 0 && ci <= 2) selectedEduCourse = ci;
+                    }
                 }
             } else if (params.term) {
                 const allTerms = getAllTermsFlat();
@@ -1337,6 +1525,23 @@
                 });
             });
 
+            // Education detail buttons
+            document.querySelectorAll('.edu-detail-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectedEduCourse = parseInt(btn.dataset.edu);
+                    window.scrollTo(0, 0);
+                    render();
+                });
+            });
+            const eduBackBtn = document.getElementById('eduBackBtn');
+            if (eduBackBtn) {
+                eduBackBtn.addEventListener('click', () => {
+                    selectedEduCourse = null;
+                    window.scrollTo(0, 0);
+                    render();
+                });
+            }
+
             // Family site dropdown
             const familySiteBtn = document.getElementById('familySiteBtn');
             if (familySiteBtn) {
@@ -1357,6 +1562,7 @@
             mobileMenuOpen = false;
             searchModalOpen = false;
             searchTerm = '';
+            selectedEduCourse = null;
             if (page === 'vibecoding') {
                 showVibeCodingInfo = true;
                 vibeCodingTab = 0;
@@ -1392,6 +1598,7 @@
             searchOpen = false;
             searchModalOpen = false;
             mobileMenuOpen = false;
+            selectedEduCourse = null;
             window.scrollTo(0, 0);
             render();
         }
