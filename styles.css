@@ -874,9 +874,14 @@ body {
   margin-top: 40px;
   padding: 20px 0;
   border-top: 1px solid rgba(255,255,255,0.08);
-  text-align: center;
   font-size: 13px;
   color: #64748B;
+}
+
+.footer-bottom-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
   display: flex;
   flex-wrap: wrap;
   gap: 6px 0;
@@ -1368,14 +1373,16 @@ mark {
   .footer-brand {
     grid-column: 1 / -1;
   }
-  .footer-bottom {
+  .footer-bottom-inner {
     gap: 4px 0;
+    padding: 0 20px;
   }
   .footer-bottom-item {
     white-space: normal;
+    font-size: 12px;
   }
   .footer-bottom-sep {
-    margin: 0 8px;
+    margin: 0 6px;
   }
 }
 
@@ -1402,17 +1409,19 @@ mark {
     grid-template-columns: 1fr;
     gap: 24px;
   }
-  .footer-bottom {
+  .footer-bottom-inner {
     flex-direction: column;
     gap: 6px;
     text-align: left;
     align-items: flex-start;
+    padding: 0 16px;
   }
   .footer-bottom-sep {
     display: none;
   }
   .footer-bottom-item {
     white-space: normal;
+    font-size: 12px;
     line-height: 1.6;
   }
   .sidebar {
