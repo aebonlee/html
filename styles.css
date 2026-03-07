@@ -1318,15 +1318,15 @@ mark {
   scrollbar-width: none;
 }
 
-/* ===== 18. Utility Classes ===== */
-.content-wrap {
+/* ===== 18. Main Section (Card Area) ===== */
+.main-section {
+  padding: 32px 0;
+}
+
+.main-section-inner {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 24px;
-}
-
-.section-spacing {
-  padding: 32px 24px;
 }
 
 .text-gradient {
@@ -1473,11 +1473,11 @@ mark {
   .sidebar {
     display: none;
   }
-  .content-wrap {
-    padding: 0 16px;
+  .main-section {
+    padding: 24px 0;
   }
-  .section-spacing {
-    padding: 24px 16px;
+  .main-section-inner {
+    padding: 0 16px;
   }
   .content-card-header {
     padding: 20px;
@@ -1515,11 +1515,11 @@ mark {
     font-size: 12px;
     line-height: 1.4;
   }
-  .content-wrap {
-    padding: 0 12px;
+  .main-section {
+    padding: 20px 0;
   }
-  .section-spacing {
-    padding: 20px 12px;
+  .main-section-inner {
+    padding: 0 12px;
   }
   .subnav-inner {
     padding: 0 12px;

@@ -641,12 +641,14 @@
                 renderSubNav() +
                 renderMobileTabs() +
 
-                '<div class="content-wrap section-spacing">' +
-                    '<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">' +
-                        '<h2 style="font-size:18px;font-weight:700;color:var(--text-primary)">' + activeSubName + '</h2>' +
-                        '<span class="badge">' + terms.length + '</span>' +
+                '<div class="main-section">' +
+                    '<div class="main-section-inner">' +
+                        '<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">' +
+                            '<h2 style="font-size:18px;font-weight:700;color:var(--text-primary)">' + activeSubName + '</h2>' +
+                            '<span class="badge">' + terms.length + '</span>' +
+                        '</div>' +
+                        '<div class="card-grid">' + cardsHtml + '</div>' +
                     '</div>' +
-                    '<div class="card-grid">' + cardsHtml + '</div>' +
                 '</div>' +
 
                 renderFooter() +
