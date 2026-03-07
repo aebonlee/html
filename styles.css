@@ -877,6 +877,20 @@ body {
   text-align: center;
   font-size: 13px;
   color: #64748B;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-bottom-item {
+  white-space: nowrap;
+}
+
+.footer-bottom-sep {
+  margin: 0 12px;
+  opacity: 0.4;
 }
 
 /* ===== 11. Search Modal ===== */
@@ -1354,6 +1368,15 @@ mark {
   .footer-brand {
     grid-column: 1 / -1;
   }
+  .footer-bottom {
+    gap: 4px 0;
+  }
+  .footer-bottom-item {
+    white-space: normal;
+  }
+  .footer-bottom-sep {
+    margin: 0 8px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1378,6 +1401,19 @@ mark {
   .footer-inner {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+    align-items: flex-start;
+  }
+  .footer-bottom-sep {
+    display: none;
+  }
+  .footer-bottom-item {
+    white-space: normal;
+    line-height: 1.6;
   }
   .sidebar {
     display: none;
