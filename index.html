@@ -98,7 +98,7 @@
                 quickLinks: '바로가기',
                 contactInfo: '연락처',
                 familySite: 'Family Site',
-                copyright: '© 2025 DreamIT. All rights reserved.',
+                copyright: '© 2025 드림아이티비즈(DreamIT Biz). All rights reserved.',
                 searchModalPlaceholder: '용어를 검색하세요... (Ctrl+K)',
                 webProgTitle: 'Web Programming 기초',
                 webProgSubtitle: '웹 프로그래밍의 핵심 기술과 바이브 코딩의 관계',
@@ -139,7 +139,7 @@
                 quickLinks: 'Quick Links',
                 contactInfo: 'Contact',
                 familySite: 'Family Site',
-                copyright: '© 2025 DreamIT. All rights reserved.',
+                copyright: '© 2025 드림아이티비즈(DreamIT Biz). All rights reserved.',
                 searchModalPlaceholder: 'Search terms... (Ctrl+K)',
                 webProgTitle: 'Web Programming Basics',
                 webProgSubtitle: 'Core web technologies and their relationship with Vibe Coding',
@@ -462,13 +462,28 @@
                     '</div>' +
                     '<div>' +
                         '<h4 class="footer-heading">' + t('contactInfo') + '</h4>' +
-                        '<div class="footer-contact-item">' + icons.mail + '<span>info@dreamit.example.com</span></div>' +
-                        '<div class="footer-contact-item">' + icons.phone + '<span>02-1234-5678</span></div>' +
-                        '<div class="footer-contact-item">' + icons.location + '<span>' + (k ? '서울특별시 강남구' : 'Gangnam-gu, Seoul, Korea') + '</span></div>' +
+                        '<div class="footer-contact-item">' + icons.mail + '<span>aebon@dreamitbiz.com</span></div>' +
+                        '<div class="footer-contact-item">' + icons.phone + '<span>010-3700-0629</span></div>' +
+                        '<div class="footer-contact-item" style="gap:10px">' +
+                            '<svg class="w-[18px] h-[18px] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>' +
+                            '<span>' + (k ? '카카오톡: aebon' : 'KakaoTalk: aebon') + '</span>' +
+                        '</div>' +
+                        '<div class="footer-contact-item" style="margin-top:4px;font-size:13px;opacity:0.8">' +
+                            '<svg class="w-[18px] h-[18px] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>' +
+                            '<span>' + (k ? '평일: 09:00 ~ 18:00' : 'Weekdays: 09:00 ~ 18:00') + '</span>' +
+                        '</div>' +
                     '</div>' +
                 '</div>' +
-                '<div class="footer-bottom">' +
-                    t('copyright') + ' · ' + t('designedBy') +
+                '<div class="footer-bottom" style="text-align:left;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:center">' +
+                    '<span>' + t('copyright') + '</span>' +
+                    '<span style="opacity:0.5">|</span>' +
+                    '<span>' + (k ? '대표이사: 이애본' : 'CEO: Aebon Lee') + '</span>' +
+                    '<span style="opacity:0.5">|</span>' +
+                    '<span>' + (k ? '사업자등록번호: 601-45-20154' : 'Business Reg: 601-45-20154') + '</span>' +
+                    '<span style="opacity:0.5">|</span>' +
+                    '<span>' + (k ? '통신판매신고번호: 제2024-수원팔달-0584호' : 'E-Commerce Reg: 2024-Suwon Paldal-0584') + '</span>' +
+                    '<span style="opacity:0.5">|</span>' +
+                    '<span>' + (k ? '출판사 신고번호: 제2026-000026호' : 'Publisher Reg: 2026-000026') + '</span>' +
                 '</div>' +
             '</footer>';
         }
@@ -971,8 +986,10 @@
                         '<h3 style="font-size:18px;font-weight:700;color:var(--text-primary);margin-bottom:8px">' + t('eduContact') + '</h3>' +
                         '<p style="font-size:14px;color:var(--text-secondary);margin-bottom:20px">' + t('eduContactDesc') + '</p>' +
                         '<div style="display:flex;flex-direction:column;gap:12px">' +
-                            '<div style="display:flex;align-items:center;gap:10px;color:var(--text-secondary)">' + icons.mail + ' <span>edu@dreamit.example.com</span></div>' +
-                            '<div style="display:flex;align-items:center;gap:10px;color:var(--text-secondary)">' + icons.phone + ' <span>02-1234-5678</span></div>' +
+                            '<div style="display:flex;align-items:center;gap:10px;color:var(--text-secondary)">' + icons.mail + ' <span>aebon@dreamitbiz.com</span></div>' +
+                            '<div style="display:flex;align-items:center;gap:10px;color:var(--text-secondary)">' + icons.phone + ' <span>010-3700-0629</span></div>' +
+                            '<div style="display:flex;align-items:center;gap:10px;color:var(--text-secondary)"><svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg> <span>' + (k ? '카카오톡: aebon' : 'KakaoTalk: aebon') + '</span></div>' +
+                            '<div style="display:flex;align-items:center;gap:10px;color:var(--text-muted);font-size:13px"><svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> <span>' + (k ? '평일: 09:00 ~ 18:00' : 'Weekdays: 09:00 ~ 18:00') + '</span></div>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
